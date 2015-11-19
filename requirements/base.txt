@@ -6,3 +6,4 @@ requests
 six
 pytz
 wheel
+gunicorn

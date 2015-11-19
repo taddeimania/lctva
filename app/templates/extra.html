@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title">
+            <div id="friends_graph"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/plotly-latest.min.js' %}"></script>
+  <script type="application/javascript">
+    $( document ).ready(function() {
+        $.get( "/api/graph/friends/", function(data) {
+          var data = [{
+            x: data.dataX,
+            y: data.dataY,
+            type: 'bar',
+            name: 'Friends'
+          }];
+
+          Plotly.newPlot('friends_graph', data);
+        });
+      });
+  </script>
+{% endblock %}

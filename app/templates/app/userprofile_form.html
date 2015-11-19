@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Step One</span>
+          <p>Go to your livecoding.tv profile page and select the "edit" button.  While your page is in an editable mode, paste the following token into the bottom of your "Stream description" text box.</p>
+        </div>
+        <div class="card-action">
+          <pre>lctva={{ request.user.userprofile.token }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Step Two</span>
+          <p>Enter your livecoding.tv streamer name into the text box below and click "Verify".</p>
+        </div>
+        <div class="card-action">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn waves-effect waves-light dark-primary-color" type="submit" name="action">Verify
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+

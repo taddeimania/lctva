@@ -1,0 +1,10 @@
+.direnv/
+__pycache__/
+.DS_Store
+.ipynb_checkpoints/
+db.sqlite3
+celerybeat-schedule
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

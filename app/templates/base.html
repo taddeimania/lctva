@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+</head>
+<body class="dark-primary-color">
+  <header>
+    <nav class="default-primary-color">
+      <div class="container">
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if request.user.id %}
+            <li><a href="{% url 'account_verify' request.user.userprofile.pk %}">Help!</a></li>
+            <li><a href="{% url 'index_view' %}">{{ request.user.username }}</a></li>
+            <li><a href="{% url 'extra_view' %}">Extra</a></li>
+            <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+    <br/>
+      {% block content %}
+      {% endblock %}
+    </div>
+    <br/>
+    <br/>
+  </main>
+
+  <footer class="page-footer default-primary-color">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text"></h5>
+          <p class="grey-text text-lighten-4">This app was built with the sole purpose of allowing streamers on livecoding.tv to visualize their viewership counts over time.
+          It is not intended to be harmful in any way and in fact i'd much rather see this kind of feature brought into livecoding.tv itself so I don't have to maintain this anymore.
+          So if you're one of the founders... drop me a line :)</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Find Joel</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="http://github.com/taddeimania">Github</a></li>
+            <li><a class="grey-text text-lighten-3" href="http://twitter.com/taddeimania">Twitter</a></li>
+            <li><a class="grey-text text-lighten-3" href="http://livecoding.tv/taddeimania">Livecoding.tv</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      <a class="grey-text text-lighten-4 right" href="#!">Donate!</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js"></script>
+  {% block script %}
+  {% endblock %}
+</body>
+</html>

@@ -2,9 +2,7 @@ Django<1.9
 beautifulsoup4
 pandas
 numpy
-scipy
 requests
 six
-sklearn
 pytz
 wheel

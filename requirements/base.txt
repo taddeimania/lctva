@@ -1,7 +1,5 @@
 Django<1.9
 beautifulsoup4
-pandas
-numpy
 requests
 six
 pytz

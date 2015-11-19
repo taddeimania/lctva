@@ -11,8 +11,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.util import ErrorList
 
-import numpy as np
-import pandas as pd
+# import pandas as pd
 
 from app.models import Node, UserProfile, Friends
 
@@ -37,10 +36,10 @@ class IndexView(TemplateView):
         new_context = {}
         if all_nodes:
 
-            df = pd.DataFrame([(obj.timestamp, obj.current_total) for obj in all_nodes], columns=["timestamp", "viewers"])
-            df.index = pd.to_datetime(df.pop("timestamp"), format="%Y-%m-%d %H:%M:%S.%f+00:00")
-            df = df.resample('D', how=["mean", "max", "count"]).dropna().loc[:, "viewers"]
-            df["count"] = df["count"] * 5 / 60
+        #     df = pd.DataFrame([(obj.timestamp, obj.current_total) for obj in all_nodes], columns=["timestamp", "viewers"])
+        #     df.index = pd.to_datetime(df.pop("timestamp"), format="%Y-%m-%d %H:%M:%S.%f+00:00")
+        #     df = df.resample('D', how=["mean", "max", "count"]).dropna().loc[:, "viewers"]
+        #     df["count"] = df["count"] * 5 / 60
 
             current_node = all_nodes.last()
             data = Node.objects.get_plottable_eight_minutes(self.request.user)
@@ -54,7 +53,7 @@ class IndexView(TemplateView):
             new_context = {
                 "trending": trending_pattern,
                 "current_node": current_node,
-                "breakdown": df.to_html(),
+                # "breakdown": df.to_html(),
                 "max_viewer_count": max_viewer_count}
 
         return dict(**context, **new_context)

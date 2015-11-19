@@ -6,4 +6,5 @@ requests
 six
 pytz
 wheel
+celery
 gunicorn

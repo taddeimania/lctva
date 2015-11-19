@@ -1,10 +1,9 @@
 Django<1.9
 beautifulsoup4
-numpy
 pandas
-requests
-scikit-learn
+numpy
 scipy
+requests
 six
 sklearn
 pytz

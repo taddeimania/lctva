@@ -91,15 +91,7 @@
             mode: 'lines',
             name: 'User Counts'
           };
-          var trace2 = {
-            x: [data.dataX[0], data.dataX[data.dataX.length-1]],
-            y: data.trending_line[1],
-            type: 'scatter',
-            mode: 'lines',
-            name: 'Trend'
-          };
-
-          var data = [trace1, trace2];
+          var data = [trace1];
 
           Plotly.newPlot('myDiv', data);
           $(".current_viewers").html(data.current_count);

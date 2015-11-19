@@ -10,22 +10,11 @@ from django.views.generic import TemplateView, View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.util import ErrorList
-from sklearn.linear_model import LinearRegression
 
 import numpy as np
 import pandas as pd
 
 from app.models import Node, UserProfile, Friends
-
-
-def trending_data(count):
-    if len(count) < 5:
-        return ([0, 5], [[1] * 5])
-    lr = LinearRegression()
-    reshaped_counts = np.array(range(len(count))).reshape((-1, 1))
-    lr.fit(reshaped_counts, count)
-    fn = lambda x: lr.predict(x)[0]
-    return ([0, len(count)], [fn(_) for _ in [0, len(count)]])
 
 
 def trending(data):
@@ -123,7 +112,6 @@ class GraphView(View):
         if last_node:
             current_count = last_node.current_total
         context = {"trending": trending(dataY),
-                   "trending_line": trending_data(dataY),
                    "dataX": dataX,
                    "dataY": dataY,
                    "current_count": current_count}

@@ -6,3 +6,4 @@ pytz
 wheel
 celery
 gunicorn
+psycopg2

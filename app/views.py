@@ -33,13 +33,11 @@ class IndexView(TemplateView):
     def get_context_data(self):
         context = super().get_context_data()
         all_nodes = Node.objects.get_all_user_nodes(self.request.user)
-        new_context = {}
         if all_nodes:
-
-        #     df = pd.DataFrame([(obj.timestamp, obj.current_total) for obj in all_nodes], columns=["timestamp", "viewers"])
-        #     df.index = pd.to_datetime(df.pop("timestamp"), format="%Y-%m-%d %H:%M:%S.%f+00:00")
-        #     df = df.resample('D', how=["mean", "max", "count"]).dropna().loc[:, "viewers"]
-        #     df["count"] = df["count"] * 5 / 60
+            # df = pd.DataFrame([(obj.timestamp, obj.current_total) for obj in all_nodes], columns=["timestamp", "viewers"])
+            # df.index = pd.to_datetime(df.pop("timestamp"), format="%Y-%m-%d %H:%M:%S.%f+00:00")
+            # df = df.resample('D', how=["mean", "max", "count"]).dropna().loc[:, "viewers"]
+            # df["count"] = df["count"] * 5 / 60
 
             current_node = all_nodes.last()
             data = Node.objects.get_plottable_eight_minutes(self.request.user)

@@ -7,3 +7,4 @@ wheel
 celery
 gunicorn
 psycopg2
+flower

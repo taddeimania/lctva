@@ -5,9 +5,9 @@ set :stage, :production
 # Supports bulk-adding hosts to roles, the primary
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
-role :app, %w{ubuntu@lctva.joel.io}
-role :web, %w{ubuntu@lctva.joel.io}
-role :db,  %w{ubuntu@lctva.joel.io}
+role :app, %w{ubuntu@52.91.148.5}
+role :web, %w{ubuntu@52.91.148.5}
+role :db,  %w{ubuntu@52.91.148.5}
 
 # Extended Server Syntax
 # ======================
@@ -15,10 +15,10 @@ role :db,  %w{ubuntu@lctva.joel.io}
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-server 'lctva.joel.io', user: 'ubuntu', roles: %w{web app}, my_property: :my_value
+server '52.91.148.5', user: 'ubuntu', roles: %w{web app}, my_property: :my_value
 
 set :ssh_options, {
-    keys: %w(/Users/taddeimania/keys/lctva.pem),
+    keys: %w(/Users/taddeimania/keys/engage.pem),
     forward_agent: false,
     auth_methods: %w(publickey)
 }

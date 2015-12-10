@@ -8,3 +8,4 @@ celerybeat-schedule
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+dbpass.py

@@ -50,13 +50,11 @@ class IndexView(TemplateView):
                 max_viewer_count = max([_[1] for _ in data])
                 trending_pattern = trending(dataY)
 
-            new_context = {
-                "trending": trending_pattern,
-                "current_node": current_node,
-                # "breakdown": df.to_html(),
-                "max_viewer_count": max_viewer_count}
+            context["trending"] = trending_pattern
+            context["current_node"] = current_node
+            context["max_viewer_count"] = max_viewer_count
 
-        return dict(**context, **new_context)
+        return context
 
 
 class ExtraView(TemplateView):

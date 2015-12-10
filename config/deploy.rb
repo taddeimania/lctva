@@ -10,6 +10,7 @@ set :deploy_to, '/var/www/lctva'
 set :wsgi_file, 'watcher.wsgi'
 set :stage, :production
 set :django_settings, 'dev'
+set :celery_name, 'lctva'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 

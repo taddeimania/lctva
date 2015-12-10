@@ -8,6 +8,7 @@ set :stage, :production
 role :app, %w{ubuntu@52.91.148.5}
 role :web, %w{ubuntu@52.91.148.5}
 role :db,  %w{ubuntu@52.91.148.5}
+role :jobs,  %w{ubuntu@52.91.148.5}
 
 # Extended Server Syntax
 # ======================

@@ -19,7 +19,7 @@ def get_friend_count(username, url):
 def get_current_stream_usernames():
     body = requests.get("https://www.livecoding.tv/livestreams/").content
     souper = BeautifulSoup(body, "html.parser")
-    return {element.text.strip() for element in souper.findAll("span", {"class": "browse-main-videos--username"})}
+    return {element.text.strip().lower() for element in souper.findAll("span", {"class": "browse-main-videos--username"})}
 
 
 def get_verified_usernames():

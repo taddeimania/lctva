@@ -82,7 +82,7 @@ class UserProfile(models.Model):
         return bool(is_streaming)
 
     def activate(self, username):
-        body = requests.get("https://livecoding.tv/{}/".format(username)).content
+        body = requests.get("https://livecoding.tv/{}/".format(username.lower())).content
         bs = BeautifulSoup(body, "html.parser")
         if "lctva={}".format(self.token) in bs.find("div", {"class": "stream-desc-info--desc"}).text:
             self.active = True
@@ -91,7 +91,7 @@ class UserProfile(models.Model):
             raise Exception("woops")
 
     def verify(self, username):
-        body = requests.get("https://livecoding.tv/{}/".format(username)).content
+        body = requests.get("https://livecoding.tv/{}/".format(username.lower())).content
         bs = BeautifulSoup(body, "html.parser")
         result = bs.find("div", {"class": "stream-desc-info--desc"})
         if result:

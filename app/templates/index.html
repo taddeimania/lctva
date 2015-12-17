@@ -4,6 +4,7 @@
 {% block content %}
   {% if request.user.userprofile.verified %}
     <div class="row">
+        {% if request.user.userprofile.active %}
         <div class="card">
           <div class="card-content">
             <div class="card-title">
@@ -22,6 +23,35 @@
             </ul>
           </div>
         </div>
+        <div class="card">
+          <div class="card-content">
+            <div id="myDiv"></div>
+            <form action="{% url 'stream_deactivate' %}" method="post">
+              {% csrf_token %}
+              <br/>
+              <button class="btn waves-effect waves-light dark-primary-color" type="submit" name="action">I'm done streaming
+              </button>
+            </form>
+          </div>
+        </div>
+        {% else %}
+        <div class="card">
+          <div class="card-content">
+            <div class="card-title">
+            {{ request.user.userprofile.livetvusername }} Livecoding.tv Analytics
+            </div>
+            <p>You aren't currently tracking your stream. Start tracking by clicking below.</p>
+            <br>
+
+            <form action="{% url 'stream_activate' %}" method="post">
+              {% csrf_token %}
+              <button class="btn waves-effect waves-light dark-primary-color" type="submit" name="action">Activate
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {% endif %}
         <div class="card">
           <div class="card-content">
             <ul class="collection">

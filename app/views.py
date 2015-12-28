@@ -88,22 +88,6 @@ class AccountActivateView(UpdateView):
         return HttpResponseRedirect(reverse("index_view"))
 
 
-class StreamActivateView(View):
-
-    def post(self, request):
-        request.user.userprofile.active = True
-        request.user.userprofile.save()
-        return HttpResponseRedirect(reverse("index_view"))
-
-
-class StreamDeactivateView(View):
-
-    def post(self, request):
-        request.user.userprofile.active = False
-        request.user.userprofile.save()
-        return HttpResponseRedirect(reverse("index_view"))
-
-
 class GraphView(View):
 
     def get(self, request):

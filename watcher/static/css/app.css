@@ -9,6 +9,10 @@
 .secondary-text-color  { color: #727272; }
 .divider-color         { border-color: #B6B6B6; }
 
+.btn:hover, .btn-large:hover {
+    background-color: #455A64;
+}
+
 footer {
     background-color: #607D8B!important;
 }
@@ -17,8 +21,13 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
 }
 
 main {
     flex: 1 0 auto;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
 }

@@ -12,9 +12,9 @@
             <br>
             <div class="row center">
               {% if request.user.id %}
-                <a href="{% url 'dashboard_view' %}" id="download-button" class="btn-large waves-effect default-primary-color">Dashboard</a>
+                <a href="{% url 'dashboard_view' %}" id="dashboard-button" class="btn-large waves-effect default-primary-color">Dashboard</a>
               {% else %}
-                <a href="{% url 'login' %}" id="download-button" class="btn-large waves-effect default-primary-color">Login</a>
+                <a href="{% url 'login' %}" id="login-button" class="btn-large waves-effect default-primary-color">Login</a>
                 <br><br>
                 or <a href="{% url 'account_create' %}">Sign Up</a>
               {% endif %}

@@ -2,20 +2,22 @@
 <html>
 
 <head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
-
+  <link href='https://fonts.googleapis.com/css?family=Montserrat|Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body class="dark-primary-color">
   <header>
     <nav class="default-primary-color">
       <div class="container">
       <div class="nav-wrapper">
+        <a href="{% url 'index_view' %}" class="brand-logo title">LCTVA</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           {% if request.user.id %}
-            <li><a href="{% url 'account_verify' request.user.userprofile.pk %}">Help!</a></li>
-            <li><a href="{% url 'index_view' %}">{{ request.user.username }}</a></li>
+            <li><a href="{% url 'dashboard_view' %}">Dashboard</a></li>
             <li><a href="{% url 'extra_view' %}">Extra</a></li>
+            <li><a href="{% url 'account_verify' request.user.userprofile.pk %}">Help!</a></li>
             <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
           {% else %}
             <li><a href="{% url 'login' %}">Login</a></li>

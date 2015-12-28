@@ -2,114 +2,63 @@
 {% load staticfiles %}
 
 {% block content %}
-  {% if request.user.userprofile.verified %}
-    <div class="row">
-        {% if request.user.userprofile.active %}
         <div class="card">
           <div class="card-content">
-            <div class="card-title">
-            {{ request.user.userprofile.livetvusername }} Livecoding.tv Analytics
+            <br><br>
+            <h1 class="header center title">LCTVA</h1>
+            <div class="row center">
+              <h5 class="header col s12 light">Analytics Dashboard for Livecoding.tv</h5>
             </div>
-            <ul class="collection">
-              <li class="collection-item">
-                Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
-              </li>
-              <li class="collection-item">
-                Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
-              </li>
-              <li class="collection-item">
-                Trending Up? <span class="trending">{{ trending }}</span>
-              </li>
-            </ul>
-            <div id="myDiv"></div>
-          </div>
-        </div>
-        {% else %}
-        <div class="card">
-          <div class="card-content">
-            <div class="card-title">
-            {{ request.user.userprofile.livetvusername }} Livecoding.tv Analytics
+            <br>
+            <div class="row center">
+              {% if request.user.id %}
+                <a href="{% url 'dashboard_view' %}" id="download-button" class="btn-large waves-effect default-primary-color">Dashboard</a>
+              {% else %}
+                <a href="{% url 'login' %}" id="download-button" class="btn-large waves-effect default-primary-color">Login</a>
+                <br><br>
+                or <a href="{% url 'account_create' %}">Sign Up</a>
+              {% endif %}
             </div>
-            <p>You aren't currently tracking your stream. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
+            <br>
+
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center primary-text-color"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Speeds up development</h5>
+
+            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
           </div>
         </div>
 
-        {% endif %}
-        <div class="card">
-          <div class="card-content">
-            <ul class="collection">
-              <li class="collection-item">
-                Daily Breakdown
-                  <table>
-                    <thead>
-                      <tr>
-                          <th data-field="date">Date</th>
-                          <th data-field="mean">Mean Viewers</th>
-                          <th data-field="max">Max Viewers</th>
-                          <th data-field="max">Minutes Streamed</th>
-                      </tr>
-                    </thead>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center primary-text-color"><i class="material-icons">group</i></h2>
+            <h5 class="center">User Experience Focused</h5>
 
-                    <tbody>
-                      {% for day in daily_breakdown %}
-                        <tr>
-                          <td>{{ day.day }}</td>
-                          <td>{{ day.mean }}</td>
-                          <td>{{ day.max }}</td>
-                          <td>{{ day.minutes }}</td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-              </li>
-            </ul>
+            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
           </div>
         </div>
-    </div>
-  </div>
-  {% else %}
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel">
-          <span class="black-text">
-            It doesn't look like you've set up a livecoding.tv username / token pair. If you would like to verify
-            your stream on this site you need to <a href="{% url 'account_verify' request.user.userprofile.pk %}">click here to begin the process.</a>
-          </span>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center primary-text-color"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Easy to work with</h5>
+
+            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+          </div>
         </div>
       </div>
+
     </div>
-  {% endif %}
+    <br><br>
+
+    <div class="section">
+
+    </div>
+    </div>
+  </div>
 {% endblock %}
 
-{% block script %}
-  {% if request.user.userprofile.active %}
-  <script src="{% static 'js/plotly-latest.min.js' %}"></script>
-  <script type="application/javascript">
-    $( document ).ready(function() {
-      var data = [];
-      var graphDiv = Plotly.newPlot('myDiv', data);
-      var getData = function(graphDiv){
-        $.get( "api/graph/", function(data) {
-          var data = [{
-            x: data.dataX,
-            y: data.dataY,
-            type: 'scatter',
-            mode: 'lines',
-            name: 'User Counts',
-            showLink: false
-          }];
-          var graphDiv = document.getElementById('myDiv');
-          graphDiv.data = data;
-          Plotly.redraw(graphDiv);
-          $(".current_viewers").html(data.current_count);
-          $(".trending").html(data.trending);
-          setTimeout(function(){
-            getData(graphDiv);
-          }, 5000);
-        });
-      }
-      getData();
-    });
-  </script>
-  {% endif %}
-{% endblock %}

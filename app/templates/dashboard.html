@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  {% if request.user.userprofile.verified %}
+    <div class="row">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-title">
+            {{ request.user.userprofile.livetvusername }} analytics:
+            </div>
+            {% if request.user.userprofile.active %}
+            <ul class="collection">
+              <li class="collection-item">
+                Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
+              </li>
+              <li class="collection-item">
+                Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
+              </li>
+              <li class="collection-item">
+                Trending Up? <span class="trending">{{ trending }}</span>
+              </li>
+            </ul>
+            <div id="myDiv"></div>
+            {% else %}
+            <p>You aren't currently tracking your stream. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <ul class="collection">
+              <li class="collection-item">
+                Daily Breakdown
+                  <table>
+                    <thead>
+                      <tr>
+                          <th data-field="date">Date</th>
+                          <th data-field="mean">Mean Viewers</th>
+                          <th data-field="max">Max Viewers</th>
+                          <th data-field="max">Minutes Streamed</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for day in daily_breakdown %}
+                        <tr>
+                          <td>{{ day.day }}</td>
+                          <td>{{ day.mean }}</td>
+                          <td>{{ day.max }}</td>
+                          <td>{{ day.minutes }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+  {% else %}
+    <div class="row">
+      <div class="col s12 m12">
+        <div class="card-panel">
+          <span class="black-text">
+            It doesn't look like you've set up a livecoding.tv username / token pair. If you would like to verify
+            your stream on this site you need to <a href="{% url 'account_verify' request.user.userprofile.pk %}">click here to begin the process.</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block script %}
+  {% if request.user.userprofile.active %}
+  <script src="{% static 'js/plotly-latest.min.js' %}"></script>
+  <script type="application/javascript">
+    $( document ).ready(function() {
+      var data = [];
+      var graphDiv = Plotly.newPlot('myDiv', data);
+      var getData = function(graphDiv){
+        $.get( "api/graph/", function(data) {
+          var data = [{
+            x: data.dataX,
+            y: data.dataY,
+            type: 'scatter',
+            mode: 'lines',
+            name: 'User Counts',
+            showLink: false
+          }];
+          var graphDiv = document.getElementById('myDiv');
+          graphDiv.data = data;
+          Plotly.redraw(graphDiv);
+          $(".current_viewers").html(data.current_count);
+          $(".trending").html(data.trending);
+          setTimeout(function(){
+            getData(graphDiv);
+          }, 5000);
+        });
+      }
+      getData();
+    });
+  </script>
+  {% endif %}
+{% endblock %}

@@ -31,6 +31,10 @@ def unzip_data(data):
 class IndexView(TemplateView):
     template_name = "index.html"
 
+
+class DashboardView(TemplateView):
+    template_name = "dashboard.html"
+
     def get_context_data(self):
         context = super().get_context_data()
         all_nodes = Node.objects.get_all_user_nodes(self.request.user)

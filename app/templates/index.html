@@ -39,7 +39,28 @@
           <div class="card-content">
             <ul class="collection">
               <li class="collection-item">
-                Daily Breakdown {% autoescape off %}{{ breakdown }}{% endautoescape %}
+                Daily Breakdown
+                  <table>
+                    <thead>
+                      <tr>
+                          <th data-field="date">Date</th>
+                          <th data-field="mean">Mean Viewers</th>
+                          <th data-field="max">Max Viewers</th>
+                          <th data-field="max">Minutes Streamed</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for day in daily_breakdown %}
+                        <tr>
+                          <td>{{ day.day }}</td>
+                          <td>{{ day.mean }}</td>
+                          <td>{{ day.max }}</td>
+                          <td>{{ day.minutes }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
               </li>
             </ul>
           </div>
@@ -65,22 +86,25 @@
   <script src="{% static 'js/plotly-latest.min.js' %}"></script>
   <script type="application/javascript">
     $( document ).ready(function() {
-      var getData = function(){
+      var data = [];
+      var graphDiv = Plotly.newPlot('myDiv', data);
+      var getData = function(graphDiv){
         $.get( "api/graph/", function(data) {
-          var trace1 = {
+          var data = [{
             x: data.dataX,
             y: data.dataY,
             type: 'scatter',
             mode: 'lines',
-            name: 'User Counts'
-          };
-          var data = [trace1];
-
-          Plotly.newPlot('myDiv', data);
+            name: 'User Counts',
+            showLink: false
+          }];
+          var graphDiv = document.getElementById('myDiv');
+          graphDiv.data = data;
+          Plotly.redraw(graphDiv);
           $(".current_viewers").html(data.current_count);
           $(".trending").html(data.trending);
           setTimeout(function(){
-            getData();
+            getData(graphDiv);
           }, 5000);
         });
       }

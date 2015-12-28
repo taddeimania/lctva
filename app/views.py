@@ -14,6 +14,7 @@ from django.forms.util import ErrorList
 # import pandas as pd
 
 from app.models import Node, UserProfile, Friends
+from app.utils import daily_aggregator
 
 
 def trending(data):
@@ -51,6 +52,7 @@ class IndexView(TemplateView):
             context["trending"] = trending_pattern
             context["current_node"] = current_node
             context["max_viewer_count"] = max_viewer_count
+            context["daily_breakdown"] = daily_aggregator(all_nodes)
 
         return context
 

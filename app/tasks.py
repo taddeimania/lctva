@@ -6,7 +6,7 @@ from app.models import Node, UserProfile, Friends
 
 
 def get_viewer_count(username, url):
-    data = requests.get(url.format(username)).json()
+    data = requests.get(url.format(username).lower()).json()
     return int(data.get("views_live"))
 
 

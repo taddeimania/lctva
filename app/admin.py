@@ -6,8 +6,10 @@ from django.contrib.auth.models import User
 from app.models import Node, UserProfile
 
 
+@admin.register(Node)
 class NodeAdmin(admin.ModelAdmin):
     ordering = ('-timestamp', )
+    list_display = ('livetvusername', 'timestamp', 'current_total')
 
 
 class UserProfileInline(admin.StackedInline):
@@ -20,6 +22,5 @@ class UserAdmin(AuthUserAdmin):
     inlines = [UserProfileInline]
 
 
-admin.site.register(Node, NodeAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

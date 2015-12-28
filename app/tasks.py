@@ -23,7 +23,7 @@ def get_current_stream_usernames():
 
 
 def get_verified_usernames():
-    return set(map(str.lower, UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True)))
+    return set(UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True))
 
 
 @app.task
@@ -38,11 +38,13 @@ def watch_viewers():
 @app.task
 def check_streamers():
     verified_usernames = get_verified_usernames()
+    lowered_verified = set(map(str.lower, verified_usernames))
     current_streamers = get_current_stream_usernames()
-    inter = verified_usernames.intersection(current_streamers)
-    outer = verified_usernames.difference(current_streamers)
+    inter = lowered_verified.intersection(current_streamers)
+    outer = lowered_verified.difference(current_streamers)
+    update_usernames = [username for username in verified_usernames if username.lower() in lowered_verified]
     # VV Set non-active flagged streamers that are streaming as active
-    UserProfile.objects.filter(livetvusername__in=inter, active=False).update(active=True)
+    UserProfile.objects.filter(livetvusername__in=update_usernames, active=False).update(active=True)
     UserProfile.objects.filter(livetvusername__in=outer, active=True).update(active=False)
     # get a list of all current stream account names
     # get a list of all current registered lctva streamer account names

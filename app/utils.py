@@ -15,3 +15,14 @@ def daily_aggregator(queryset):
             aggregated_collection[day].append(result.current_total)
     return [day_stats(date_str, round(mean(values), 2), max(values), round(len(values) * 5 / 60, 2))
             for date_str, values in aggregated_collection.items()]
+
+
+def trending(data):
+    if len(data) < 5:
+        return False
+    half = len(data) // 2 + 1
+    return mean(data[half:]) > mean(data[:half])
+
+
+def unzip_data(data):
+    return [node[1] for node in data], [node[0] for node in data]

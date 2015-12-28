@@ -23,7 +23,7 @@ def get_current_stream_usernames():
 
 
 def get_verified_usernames():
-    return set(UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True))
+    return set(map(str.lower, UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True)))
 
 
 @app.task

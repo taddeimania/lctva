@@ -42,10 +42,11 @@ def check_streamers():
     current_streamers = get_current_stream_usernames()
     inter = lowered_verified.intersection(current_streamers)
     outer = lowered_verified.difference(current_streamers)
-    update_usernames = [username for username in verified_usernames if username.lower() in lowered_verified]
+    update_inter_usernames = [username for username in verified_usernames if username.lower() in inter]
+    update_outer_usernames = [username for username in verified_usernames if username.lower() in outer]
     # VV Set non-active flagged streamers that are streaming as active
-    UserProfile.objects.filter(livetvusername__in=update_usernames, active=False).update(active=True)
-    UserProfile.objects.filter(livetvusername__in=outer, active=True).update(active=False)
+    UserProfile.objects.filter(livetvusername__in=update_inter_usernames, active=False).update(active=True)
+    UserProfile.objects.filter(livetvusername__in=update_outer_usernames, active=True).update(active=False)
     # get a list of all current stream account names
     # get a list of all current registered lctva streamer account names
     # get intersection and mark all users as active

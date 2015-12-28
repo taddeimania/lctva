@@ -106,4 +106,4 @@ CELERYBEAT_SCHEDULE = {
         'schedule': (60 * 60) * 24,
     },
 }
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/dashboard/"

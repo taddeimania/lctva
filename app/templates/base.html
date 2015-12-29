@@ -20,6 +20,7 @@
             <li><a href="{% url 'account_verify' request.user.userprofile.pk %}">Setup</a></li>
             <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
           {% else %}
+            <li><a href="{% url 'about_view' %}">About</a></li>
             <li><a href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </ul>

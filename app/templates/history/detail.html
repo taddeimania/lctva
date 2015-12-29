@@ -8,6 +8,23 @@
     <br>
     <a href="{% url 'dashboard_view' %}">Back to Live Dashboard</a>
     <div id="historyGraph"></div>
+    <table>
+      <thead>
+        <tr>
+            <th data-field="mean">Mean Viewers</th>
+            <th data-field="max">Max Viewers</th>
+            <th data-field="max">Minutes Streamed</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>{{ breakdown.mean }}</td>
+          <td>{{ breakdown.max }}</td>
+          <td>{{ breakdown.minutes }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 {% endblock %}
@@ -16,14 +33,26 @@
 <script src="{% static 'js/plotly-latest.min.js' %}"></script>
 <script type="application/javascript">
   $(document).ready(function() {
+    var layout = {
+      yaxis: {
+        range: [0, {{ max_y }} * 1.1],
+      }
+    };
+
+    var meanYData=[],b={{ y_data }}.length;while(b--)meanYData[b]={{ breakdown.mean }};
     var data = [{
       x: {% autoescape off %}{{ x_data }}{% endautoescape %},
       y: {{ y_data }},
       type: 'scatter',
       mode: 'lines',
-      name: 'History'
+      name: 'User Count'
+    }, {
+      x: {% autoescape off %}{{ x_data }}{% endautoescape %},
+      y: meanYData,
+      mode: 'lines',
+      name: "Mean"
     }];
-    var graphDiv = Plotly.newPlot('historyGraph', data);
+    var graphDiv = Plotly.newPlot('historyGraph', data, layout);
   });
 </script>
 {% endblock %}

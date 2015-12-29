@@ -1,0 +1,21 @@
+<table>
+  <thead>
+    <tr>
+        <th data-field="date">Date</th>
+        <th data-field="mean">Mean Viewers</th>
+        <th data-field="max">Max Viewers</th>
+        <th data-field="max">Minutes Streamed</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for day in daily_breakdown %}
+      <tr>
+        <td><a href="{% url 'history_detail_view' day.day %}">{{ day.day }}</a></td>
+        <td>{{ day.mean }}</td>
+        <td>{{ day.max }}</td>
+        <td>{{ day.minutes }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

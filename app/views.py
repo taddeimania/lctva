@@ -103,6 +103,8 @@ class HistoryDetailView(TemplateView):
         livetvusername = self.request.user.userprofile.livetvusername
         day_nodes = Node.objects.filter(livetvusername=livetvusername, timestamp__contains=datetime.datetime.strptime(datestamp, "%Y-%m-%d").date())
         y_data, x_data = unzip_data(prepare_data_for_plot(day_nodes.values_list("timestamp", "current_total")))
+        context["breakdown"] = daily_aggregator(day_nodes)[0]
         context["y_data"] = y_data
         context["x_data"] = x_data
+        context["max_y"] = max(y_data)
         return context

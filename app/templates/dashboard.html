@@ -81,7 +81,7 @@
       var data = [];
       var graphDiv = Plotly.newPlot('myDiv', data);
       var getData = function(graphDiv){
-        $.get( "api/graph/", function(data) {
+        $.get( "/api/graph/", function(data) {
           var data = [{
             x: data.dataX,
             y: data.dataY,

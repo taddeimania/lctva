@@ -59,12 +59,18 @@
   <script type="application/javascript">
     $( document ).ready(function() {
       var data = [];
+      var layout = {
+        yaxis: {
+          range: [0, 20],
+        }
+      };
+
       var graphDiv = Plotly.newPlot('myDiv', data);
       var getData = function(graphDiv){
-        $.get( "/api/graph/", function(data) {
+        $.get( "/api/graph/", function(inData) {
           var data = [{
-            x: data.dataX,
-            y: data.dataY,
+            x: inData.dataX,
+            y: inData.dataY,
             type: 'scatter',
             mode: 'lines',
             name: 'User Counts',
@@ -72,9 +78,11 @@
           }];
           var graphDiv = document.getElementById('myDiv');
           graphDiv.data = data;
+          graphDiv.layout = {yaxis: { range: [0, inData.maxY * 1.1], autorange: false }};
           Plotly.redraw(graphDiv);
-          $(".current_viewers").html(data.current_count);
-          $(".trending").html(data.trending);
+          $(".current_viewers").html(inData.current_count);
+          $(".max_viewer_count").html(inData.maxY);
+          $(".trending").html(inData.trending);
           setTimeout(function(){
             getData(graphDiv);
           }, 5000);

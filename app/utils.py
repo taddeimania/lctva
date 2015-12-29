@@ -26,3 +26,7 @@ def trending(data):
 
 def unzip_data(data):
     return [node[1] for node in data], [node[0] for node in data]
+
+
+def clean_usernames(usernames):
+    return set(map(str.lower, usernames))

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 from watcher.celery import app
 from app.models import Node, UserProfile, Friends
+from app.utils import clean_usernames
 
 
 def get_viewer_count(username, url):
@@ -38,26 +39,16 @@ def watch_viewers():
 @app.task
 def check_streamers():
     verified_usernames = get_verified_usernames()
-    lowered_verified = set(map(str.lower, verified_usernames))
-    current_streamers = get_current_stream_usernames()
-    inter = lowered_verified.intersection(current_streamers)
-    outer = lowered_verified.difference(current_streamers)
-    update_inter_usernames = [username for username in verified_usernames if username.lower() in inter]
-    update_outer_usernames = [username for username in verified_usernames if username.lower() in outer]
-    # VV Set non-active flagged streamers that are streaming as active
-    UserProfile.objects.filter(livetvusername__in=update_inter_usernames, active=False).update(active=True)
-    UserProfile.objects.filter(livetvusername__in=update_outer_usernames, active=True).update(active=False)
-    # get a list of all current stream account names
-    # get a list of all current registered lctva streamer account names
-    # get intersection and mark all users as active
-    # get difference and mark all registered lctva users as inactive
-    # for profile in UserProfile.objects.filter(active=True):
-    #     if profile.is_user_currently_streaming and not profile.active:
-    #         profile.active = True
-    #         profile.save()
-    #     elif not profile.is_user_currently_streaming and profile.active:
-    #         profile.active = False
-    #         profile.save()
+    cleaned_usernames = clean_usernames(verified_usernames)
+    current_streamers = get_current_stream_usernames()  # scraped from livecoding.tv
+
+    to_activate_usernames = [username for username in verified_usernames
+                             if username.lower() in cleaned_usernames.intersection(current_streamers)]
+    to_deactivate_usernames = [username for username in verified_usernames
+                               if username.lower() in cleaned_usernames.difference(current_streamers)]
+
+    UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
+    UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)
 
 
 @app.task

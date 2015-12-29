@@ -1,14 +1,12 @@
 import datetime
 
 from django.test import TestCase
-from django.contrib.auth.models import User
 
-from app.models import Node, UserProfile
+from app.models import Node
 from app.utils import daily_aggregator
-from app.tasks import get_verified_usernames
 
 
-class DailyBreakdownTestCase(TestCase):
+class DailyAggregatorTestCase(TestCase):
 
     def setUp(self):
         self.day_one = datetime.datetime(year=2015, month=11, day=25, hour=12, minute=10)
@@ -60,6 +58,7 @@ class DailyBreakdownTestCase(TestCase):
         self.assertEqual(aggregate_total[1].max, 6)
         self.assertEqual(aggregate_total[1].day, '2015-11-25')
 
+    # TODO: COME BACK!
     # def test_daily_aggregator_only_returns_5_days_starting_with_most_recent_day(self):
     #     self.create_node(self.day_one, total=6)
     #     self.create_node(self.day_two, total=1)
@@ -71,22 +70,3 @@ class DailyBreakdownTestCase(TestCase):
     #     aggregate_total = daily_aggregator(qs)
     #     self.assertEqual(len(aggregate_total), 5)
     #     self.assertEqual(aggregate_total[0].day, '2015-11-30')
-
-
-class TaskTests(TestCase):
-
-    def test_get_verified_usernames_returns_verified_usernames_in_lowercase(self):
-        user_one = User.objects.create(username="blah")
-        user_two = User.objects.create(username="blahblah")
-
-        profile_one = UserProfile.objects.get(user=user_one)
-        profile_one.livetvusername = "BlahBlahLolWhat"
-        profile_one.verified = True
-        profile_one.save()
-
-        profile_two = UserProfile.objects.get(user=user_two)
-        profile_two.livetvusername = "wwwwwXxXU"
-        profile_two.verified = True
-        profile_two.save()
-        users = get_verified_usernames()
-        self.assertEqual(users, {'blahblahlolwhat', 'wwwwwxxxu'})

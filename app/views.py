@@ -1,4 +1,5 @@
 
+import datetime
 import json
 
 from django import forms
@@ -10,7 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms.util import ErrorList
 
 from app.models import Node, UserProfile, Friends
-from app.utils import daily_aggregator, trending, unzip_data
+from app.utils import daily_aggregator, trending, unzip_data, prepare_data_for_plot
 
 
 class IndexView(TemplateView):
@@ -91,3 +92,17 @@ class FriendsGraphView(View):
         context = {"dataX": dataX,
                    "dataY": dataY}
         return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+class HistoryDetailView(TemplateView):
+    template_name = "history/detail.html"
+
+    def get_context_data(self, datestamp):
+        # year, month, day = map(int, [year, month, day])
+        context = super().get_context_data()
+        livetvusername = self.request.user.userprofile.livetvusername
+        day_nodes = Node.objects.filter(livetvusername=livetvusername, timestamp__contains=datetime.datetime.strptime(datestamp, "%Y-%m-%d").date())
+        y_data, x_data = unzip_data(prepare_data_for_plot(day_nodes.values_list("timestamp", "current_total")))
+        context["y_data"] = y_data
+        context["x_data"] = x_data
+        return context

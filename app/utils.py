@@ -1,4 +1,5 @@
 
+import datetime
 from collections import namedtuple, OrderedDict
 from statistics import mean
 
@@ -30,3 +31,12 @@ def unzip_data(data):
 
 def clean_usernames(usernames):
     return set(map(str.lower, usernames))
+
+
+def adjust_time(timestamp):
+    return timestamp - datetime.timedelta(hours=5)
+
+
+def prepare_data_for_plot(nodes):
+    return [(adjust_time(node[0]).strftime("%Y-%m-%d %H:%M:%S"), node[1])
+            for node in nodes]

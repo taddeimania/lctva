@@ -45,7 +45,7 @@
                     <tbody>
                       {% for day in daily_breakdown %}
                         <tr>
-                          <td>{{ day.day }}</td>
+                          <td><a href="{% url 'history_detail_view' day.day %}">{{ day.day }}</a></td>
                           <td>{{ day.mean }}</td>
                           <td>{{ day.max }}</td>
                           <td>{{ day.minutes }}</td>

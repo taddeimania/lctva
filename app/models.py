@@ -8,9 +8,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 import requests
 
-
-def adjust_time(timestamp):
-    return timestamp - datetime.timedelta(hours=5)
+from app.utils import adjust_time, prepare_data_for_plot
 
 
 class NodeManager(models.Manager):
@@ -34,8 +32,7 @@ class NodeManager(models.Manager):
 
     def get_all_plottable_user_nodes(self, user):
         nodes = self.get_all_user_nodes(user).values_list('timestamp', 'current_total')
-        return [(adjust_time(node[0]).strftime("%Y-%m-%d %H:%M:%S"), node[1])
-                for node in nodes]
+        return prepare_data_for_plot(nodes)
 
 
 class NodeAbstract(models.Model):

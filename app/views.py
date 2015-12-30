@@ -86,6 +86,7 @@ class GraphView(View):
         if last_node:
             current_count = last_node.current_total
         context = {"trending": trending(dataY),
+                   "frontpaged": request.user.userprofile.frontpaged,
                    "maxY": max(dataY),
                    "dataX": dataX,
                    "dataY": dataY,

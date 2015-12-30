@@ -1,16 +1,22 @@
 
 import datetime
 import json
+import uuid
+from base64 import b64encode
 
 from django import forms
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, View
+from django.views.generic.base import RedirectView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.util import ErrorList
 
-from app.models import Node, UserProfile, Friends
+import requests
+from requests.auth import HTTPBasicAuth
+
+from app.models import Node, UserProfile, Friends, ApiKey, ApiAccessToken
 from app.utils import daily_aggregator, trending, unzip_data, prepare_data_for_plot
 
 
@@ -25,6 +31,46 @@ class AboutView(TemplateView):
         context = super().get_context_data()
         context["is_joel_live"] = UserProfile.objects.get(livetvusername="taddeimania").active
         return context
+
+
+class AuthorizeAPIView(RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        if ApiAccessToken.objects.filter(user=self.request.user):
+            return reverse("live_view")
+        state = uuid.uuid1()
+        base_redirect_url = "https://www.livecoding.tv/o/authorize/?scope=read&state={}&redirect_uri={}&response_type=code&client_id={}"
+        key = ApiKey.objects.get()  # do a .get() to ensure only 1 record ever in the DB
+        return base_redirect_url.format(state, key.redirect_url, key.client_id)
+
+
+class AuthorizePostBackAPIView(View):
+
+    def get(self, request):
+        state = uuid.uuid1()
+        key = ApiKey.objects.get()  # do a .get() to ensure only 1 record ever in the DB
+        code = request.GET.get("code")
+        url = "https://www.livecoding.tv/o/token/"
+        basic_auth_header_val = b64encode(str.encode("{}:{}".format(key.client_id, key.client_secret)))
+        payload = "code={}&grant_type=authorization_code&redirect_uri={}&client_id={}&client_secret={}".format(
+            code,
+            key.redirect_url,
+            key.client_id,
+            key.client_secret
+        )
+        headers = {
+            'authorization': "Basic " + basic_auth_header_val.decode("utf-8"),
+            'cache-control': "no-cache",
+            'postman-token': str(state),
+            'content-type': "application/x-www-form-urlencoded"
+        }
+        response = requests.post(url, data=payload, headers=headers).json()
+        ApiAccessToken.objects.create(
+            user=request.user,
+            access_code=code,
+            access_token=response['access_token'],
+            refresh_token=response['refresh_token'])
+        return HttpResponseRedirect(reverse("live_view"))
 
 
 class LiveView(TemplateView):

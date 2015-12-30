@@ -66,6 +66,22 @@ class Viewers(NodeAbstract):
     pass
 
 
+class ApiKey(models.Model):
+    client_id = models.TextField()
+    client_secret = models.TextField()
+    redirect_url = models.TextField()
+
+    def __str__(self):
+        return self.redirect_url
+
+
+class ApiAccessToken(models.Model):
+    user = models.OneToOneField(User, related_name="token")
+    access_code = models.TextField()
+    access_token = models.TextField()
+    refresh_token = models.TextField()
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     livetvusername = models.CharField(max_length=40, blank=True)

@@ -48,12 +48,15 @@
   </div>
   {% else %}
     <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel">
-          <span class="black-text">
-            It doesn't look like you've set up a livecoding.tv username / token pair. If you would like to verify
-            your stream on this site you need to <a href="{% url 'account_verify' %}">click here to begin the process.</a>
-          </span>
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title">
+            IMPORTANT NOTICE!
+          </div>
+          <p>LCTVA is migrating over to the Livecoding.tv API!!! So what does this mean?</p>
+          <blockquote>1. This means that you can completely remove the "lctva=" token from your description.<br/>
+            2. You NEED to link your LCTVA account to the Livecoding.tv API asap. This is a very easy process. Just <a href="{% url 'account_verify' %}">click this link </a> and follow the steps. <br>
+            3. This notification will go away after you've verified with the Livecoding.tv API. </blockquote>
         </div>
       </div>
     </div>

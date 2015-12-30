@@ -15,8 +15,8 @@
         <a href="{% url 'index_view' %}" class="brand-logo title">LCTVA</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           {% if request.user.id %}
-            <li><a href="{% url 'dashboard_view' %}">Live</a></li>
-            <li><a href="{% url 'extra_view' %}">History</a></li>
+            <li><a href="{% url 'live_view' %}">Live</a></li>
+            <li><a href="{% url 'history_list_view' %}">History</a></li>
             <li><a href="{% url 'account_verify' request.user.userprofile.pk %}">Setup</a></li>
             <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
           {% else %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">Your Daily History</span>
+    <br>
+    {% include 'includes/daily_breakdown_table.html' %}
+  </div>
+</div>
+{% endblock %}
+

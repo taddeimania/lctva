@@ -4,39 +4,30 @@
 {% block content %}
   {% if request.user.userprofile.verified %}
     <div class="row">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-title">
-            {{ request.user.userprofile.livetvusername }} live analytics:
-            </div>
-            {% if request.user.userprofile.active %}
-            <ul class="collection">
-              <li class="collection-item">
-                Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
-              </li>
-              <li class="collection-item">
-                Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
-              </li>
-              <li class="collection-item">
-                Trending Up? <span class="trending">{{ trending }}</span>
-              </li>
-            </ul>
-            <div id="myDiv"></div>
-            {% else %}
-            <p>You aren't currently streaming. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
-            {% endif %}
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title">
+          {{ request.user.userprofile.livetvusername }} live analytics:
           </div>
+          {% if request.user.userprofile.active %}
+          <ul class="collection">
+            <li class="collection-item">
+              Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
+            </li>
+            <li class="collection-item">
+              Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
+            </li>
+            <li class="collection-item">
+              Trending Up? <span class="trending">{{ trending }}</span>
+            </li>
+          </ul>
+          <div id="myDiv"></div>
+          {% else %}
+          <p>You aren't currently streaming. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
+          {% include 'includes/daily_breakdown_table.html' %}
+          {% endif %}
         </div>
-        <div class="card">
-          <div class="card-content">
-            <ul class="collection">
-              <li class="collection-item">
-                Daily Breakdown
-                {% include "includes/daily_breakdown_table.html" %}
-              </li>
-            </ul>
-          </div>
-        </div>
+      </div>
     </div>
   </div>
   {% else %}

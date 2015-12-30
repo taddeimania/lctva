@@ -27,8 +27,8 @@ class AboutView(TemplateView):
         return context
 
 
-class DashboardView(TemplateView):
-    template_name = "dashboard.html"
+class LiveView(TemplateView):
+    template_name = "live.html"
 
     def get_context_data(self):
         context = super().get_context_data()
@@ -46,7 +46,6 @@ class DashboardView(TemplateView):
             context["trending"] = trending_pattern
             context["current_node"] = current_node
             context["max_viewer_count"] = max_viewer_count
-            context["daily_breakdown"] = daily_aggregator(all_nodes)
 
         return context
 
@@ -102,6 +101,16 @@ class FriendsGraphView(View):
         context = {"dataX": dataX,
                    "dataY": dataY}
         return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+class HistoryListView(TemplateView):
+    template_name = "history/list.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        all_nodes = Node.objects.get_all_user_nodes(self.request.user)
+        context["daily_breakdown"] = daily_aggregator(all_nodes)
+        return context
 
 
 class HistoryDetailView(TemplateView):

@@ -56,7 +56,11 @@ def set_frontpaged_user(verified_usernames):
         still_frontpaged = UserProfile.objects.filter(livetvusername=frontpaged_streamer, frontpaged=True)
         if not still_frontpaged:
             UserProfile.objects.filter(frontpaged=True).update(frontpaged=False)
-            UserProfile.objects.get(livetvusername=frontpaged_streamer).update(frontpaged=True)
+            user = UserProfile.objects.get(livetvusername=frontpaged_streamer)
+            user.frontpaged = True
+            user.save()
+    else:
+        UserProfile.objects.filter(frontpaged=True).update(frontpaged=False)
 
 
 @app.task
@@ -73,7 +77,7 @@ def check_streamers():
     UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
     UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)
 
-    # set_frontpaged_user()
+    set_frontpaged_user()
 
 
 @app.task

@@ -35,6 +35,12 @@ def get_verified_usernames():
     return set(UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True))
 
 
+def get_frontpaged_streamer():
+    body = requests.get("https://www.livecoding.tv/").content
+    souper = BeautifulSoup(body, "html.parser")
+    return souper.find("h2", {"class": "video-home-stream--title"}).find('span').text
+
+
 @app.task
 def watch_viewers():
     url = "https://www.livecoding.tv/livestreams/{}/stats.json"
@@ -42,6 +48,15 @@ def watch_viewers():
         Node.objects.create(
             current_total=get_viewer_count(profile.livetvusername, url),
             livetvusername=profile.livetvusername)
+
+
+def set_frontpaged_user(verified_usernames):
+    frontpaged_streamer = get_frontpaged_streamer()
+    if frontpaged_streamer in verified_usernames:
+        still_frontpaged = UserProfile.objects.filter(livetvusername=frontpaged_streamer, frontpaged=True)
+        if not still_frontpaged:
+            UserProfile.objects.filter(frontpaged=True).update(frontpaged=False)
+            UserProfile.objects.get(livetvusername=frontpaged_streamer).update(frontpaged=True)
 
 
 @app.task
@@ -57,6 +72,8 @@ def check_streamers():
 
     UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
     UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)
+
+    # set_frontpaged_user()
 
 
 @app.task

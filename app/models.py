@@ -72,6 +72,7 @@ class UserProfile(models.Model):
     verified = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     token = models.UUIDField(default=uuid.uuid4, editable=False)
+    frontpaged = models.BooleanField(default=False)
 
     @property
     def is_user_currently_streaming(self):

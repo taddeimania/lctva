@@ -99,7 +99,8 @@ class FriendsGraphView(View):
         friend_info = Friends.objects.get_all_plottable_user_nodes(request.user)
         dataY, dataX = unzip_data(friend_info)
         context = {"dataX": dataX,
-                   "dataY": dataY}
+                   "dataY": dataY,
+                   "maxY": max(dataY)}
         return HttpResponse(json.dumps(context), content_type="application/json")
 
 

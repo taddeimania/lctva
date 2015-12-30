@@ -93,16 +93,20 @@ STATIC_ROOT = BASE_DIR + '/static'
 
 
 CELERYBEAT_SCHEDULE = {
-    'add-every-5-seconds': {
+    'watch-viewers-every-5-seconds': {
         'task': 'app.tasks.watch_viewers',
         'schedule': 5,
     },
-    'add-every-1-minutes': {
+    'check-streamers-every-1-minutes': {
         'task': 'app.tasks.check_streamers',
         'schedule': 60,
     },
-    'add-every-day': {
+    'check-friends-every-day': {
         'task': 'app.tasks.check_friends',
+        'schedule': (60 * 60) * 24,
+    },
+    'check-total-viewers-every-day': {
+        'task': 'app.tasks.check_total_viewers',
         'schedule': (60 * 60) * 24,
     },
 }

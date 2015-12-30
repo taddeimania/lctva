@@ -6,9 +6,17 @@ from app.models import Node, UserProfile, Friends
 from app.utils import clean_usernames
 
 
-def get_viewer_count(username, url):
+def _get_count(username, url, field):
     data = requests.get(url.format(username).lower()).json()
-    return int(data.get("views_live"))
+    return int(data.get(field))
+
+
+def get_viewer_count(username, url):
+    return _get_count(username, url, "views_live")
+
+
+def get_total_viewer_count(username, url):
+    return _get_count(username, url, "views_overall")
 
 
 def get_friend_count(username, url):
@@ -57,5 +65,15 @@ def check_friends():
     for profile in UserProfile.objects.filter(verified=True):
         Friends.objects.create(
             current_total=get_friend_count(profile.livetvusername, url),
+            livetvusername=profile.livetvusername
+        )
+
+
+@app.task
+def check_total_viewers():
+    url = "https://www.livecoding.tv/{}/"
+    for profile in UserProfile.objects.filter(verified=True):
+        Friends.objects.create(
+            current_total=get_total_viewer_count(profile.livetvusername, url),
             livetvusername=profile.livetvusername
         )

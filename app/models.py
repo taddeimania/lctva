@@ -62,6 +62,10 @@ class Friends(NodeAbstract):
     pass
 
 
+class Viewers(NodeAbstract):
+    pass
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     livetvusername = models.CharField(max_length=40, blank=True)

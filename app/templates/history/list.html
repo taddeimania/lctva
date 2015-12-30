@@ -4,10 +4,40 @@
 {% block content %}
 <div class="card">
   <div class="card-content">
-    <span class="card-title">Your Daily History</span>
+    <span class="card-title">Your Viewer History</span>
     <br>
     {% include 'includes/daily_breakdown_table.html' %}
+    <br/>
+    <hr/>
+    <span class="card-title">Your Friends</span>
+    <div id="friends_graph"></div>
+    <br/>
+    <hr/>
+    <span class="card-title">Your Total Views</span>
+    <div id="views_graph"></div>
   </div>
 </div>
 {% endblock %}
 
+{% block script %}
+  <script src="{% static 'js/plotly-latest.min.js' %}"></script>
+  <script type="application/javascript">
+    $( document ).ready(function() {
+        $.get( "/api/graph/friends/", function(inData) {
+          var layout = {
+            yaxis: {
+              range: [0, inData.maxY * 1.1],
+            }
+          };
+          var data = [{
+            x: inData.dataX,
+            y: inData.dataY,
+            type: 'scatter',
+            name: 'Friends'
+          }];
+
+          Plotly.newPlot('friends_graph', data, layout);
+        });
+      });
+  </script>
+{% endblock %}

@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from watcher.celery import app
-from app.models import Node, UserProfile, Friends
+from app.models import Node, UserProfile, Friends, Viewers
 from app.utils import clean_usernames
 
 
@@ -73,7 +73,7 @@ def check_friends():
 def check_total_viewers():
     url = "https://www.livecoding.tv/{}/"
     for profile in UserProfile.objects.filter(verified=True):
-        Friends.objects.create(
+        Viewers.objects.create(
             current_total=get_total_viewer_count(profile.livetvusername, url),
             livetvusername=profile.livetvusername
         )

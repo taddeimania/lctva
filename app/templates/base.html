@@ -17,7 +17,7 @@
           {% if request.user.id %}
             <li><a href="{% url 'live_view' %}">Live</a></li>
             <li><a href="{% url 'history_list_view' %}">History</a></li>
-            <li><a href="{% url 'account_verify' request.user.userprofile.pk %}">Setup</a></li>
+            <li><a href="{% url 'account_verify' %}">Setup</a></li>
             <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
           {% else %}
             <li><a href="{% url 'about_view' %}">About</a></li>

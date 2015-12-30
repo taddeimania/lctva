@@ -95,8 +95,14 @@ class UserProfile(models.Model):
     livetvusername = models.CharField(max_length=40, blank=True)
     verified = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
-    token = models.UUIDField(default=uuid.uuid4, editable=False)
     frontpaged = models.BooleanField(default=False)
+
+    @property
+    def is_authorized(self):
+        try:
+            return bool(self.user.token)
+        except ApiAccessToken.DoesNotExist:
+            return False
 
     @property
     def is_user_currently_streaming(self):
@@ -106,29 +112,6 @@ class UserProfile(models.Model):
             "class": "browse-main-videos--thumbnail",
             "href": "/{}/".format(self.livetvusername)})
         return bool(is_streaming)
-
-    def activate(self, username):
-        body = requests.get("https://livecoding.tv/{}/".format(username.lower())).content
-        bs = BeautifulSoup(body, "html.parser")
-        if "lctva={}".format(self.token) in bs.find("div", {"class": "stream-desc-info--desc"}).text:
-            self.active = True
-            self.save()
-        else:
-            raise Exception("woops")
-
-    def verify(self, username):
-        body = requests.get("https://livecoding.tv/{}/".format(username.lower())).content
-        bs = BeautifulSoup(body, "html.parser")
-        result = bs.find("div", {"class": "stream-desc-info--desc"})
-        if result:
-            if "lctva={}".format(self.token) in result.text:
-                self.verified = True
-                self.save()
-                return True
-        else:
-            self.verified = False
-            self.save()
-            return False
 
 
 @receiver(post_save, sender=User)

@@ -18,6 +18,7 @@ from requests.auth import HTTPBasicAuth
 
 from app.models import Node, UserProfile, Friends, ApiKey, ApiAccessToken
 from app.utils import daily_aggregator, trending, unzip_data, prepare_data_for_plot
+from app.client import LiveCodingClient
 
 
 class IndexView(TemplateView):
@@ -63,11 +64,16 @@ class AuthorizePostBackAPIView(View):
             'content-type': "application/x-www-form-urlencoded"
         }
         response = requests.post(url, data=payload, headers=headers).json()
-        ApiAccessToken.objects.create(
+        token = ApiAccessToken.objects.create(
             user=request.user,
             access_code=code,
             access_token=response['access_token'],
             refresh_token=response['refresh_token'])
+        livetvuser = LiveCodingClient.get_user_from_token(token)
+        user = self.request.user
+        user.userprofile.livetvusername = livetvuser.username
+        user.userprofile.verified = True
+        user.userprofile.save()
         return HttpResponseRedirect(reverse("live_view"))
 
 
@@ -108,19 +114,20 @@ class AccountCreateView(CreateView):
         return reverse("index_view")
 
 
-class AccountActivateView(UpdateView):
+class AccountActivateView(TemplateView):
     model = UserProfile
-    fields = ["livetvusername"]
+    template_name = "app/userprofile_form.html"
+    # fields = ["livetvusername"]
 
-    def form_valid(self, form):
-        verify_result = form.instance.verify(form.cleaned_data.get("livetvusername"))
-        if not verify_result:
-            form._errors[forms.forms.NON_FIELD_ERRORS] = ErrorList([
-                "We couldn't find the LCTVA access token in your profile description. Please add it or check the username is correct."
-            ])
-            return self.form_invalid(form)
+    # def form_valid(self, form):
+    #     verify_result = form.instance.verify(form.cleaned_data.get("livetvusername"))
+    #     if not verify_result:
+    #         form._errors[forms.forms.NON_FIELD_ERRORS] = ErrorList([
+    #             "We couldn't find the LCTVA access token in your profile description. Please add it or check the username is correct."
+    #         ])
+    #         return self.form_invalid(form)
 
-        return HttpResponseRedirect(reverse("index_view"))
+    #     return HttpResponseRedirect(reverse("index_view"))
 
 
 class GraphView(View):

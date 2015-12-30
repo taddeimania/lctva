@@ -46,6 +46,8 @@ class LiveView(TemplateView):
             context["trending"] = trending_pattern
             context["current_node"] = current_node
             context["max_viewer_count"] = max_viewer_count
+            if not self.request.user.userprofile.active:
+                context["daily_breakdown"] = daily_aggregator(all_nodes)
 
         return context
 
@@ -105,6 +107,9 @@ class FriendsGraphView(View):
         return HttpResponse(json.dumps(context), content_type="application/json")
 
 
+# TODO: Total viewers graph view
+
+
 class HistoryListView(TemplateView):
     template_name = "history/list.html"
 
@@ -119,7 +124,6 @@ class HistoryDetailView(TemplateView):
     template_name = "history/detail.html"
 
     def get_context_data(self, datestamp):
-        # year, month, day = map(int, [year, month, day])
         context = super().get_context_data()
         livetvusername = self.request.user.userprofile.livetvusername
         day_nodes = Node.objects.filter(livetvusername=livetvusername, timestamp__contains=datetime.datetime.strptime(datestamp, "%Y-%m-%d").date())

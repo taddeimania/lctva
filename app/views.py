@@ -38,16 +38,14 @@ class AuthorizeAPIView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         if ApiAccessToken.objects.filter(user=self.request.user):
             return reverse("live_view")
-        state = uuid.uuid1()
         base_redirect_url = "https://www.livecoding.tv/o/authorize/?scope=read&state={}&redirect_uri={}&response_type=code&client_id={}"
         key = ApiKey.objects.get()  # do a .get() to ensure only 1 record ever in the DB
-        return base_redirect_url.format(state, key.redirect_url, key.client_id)
+        return base_redirect_url.format(key.state, key.redirect_url, key.client_id)
 
 
 class AuthorizePostBackAPIView(View):
 
     def get(self, request):
-        state = uuid.uuid1()
         key = ApiKey.objects.get()  # do a .get() to ensure only 1 record ever in the DB
         code = request.GET.get("code")
         url = "https://www.livecoding.tv/o/token/"
@@ -61,7 +59,7 @@ class AuthorizePostBackAPIView(View):
         headers = {
             'authorization': "Basic " + basic_auth_header_val.decode("utf-8"),
             'cache-control': "no-cache",
-            'postman-token': str(state),
+            'postman-token': key.state,
             'content-type': "application/x-www-form-urlencoded"
         }
         response = requests.post(url, data=payload, headers=headers).json()

@@ -74,12 +74,20 @@ class ApiKey(models.Model):
     def __str__(self):
         return self.redirect_url
 
+    @property
+    def state(self):
+        return str(uuid.uuid1())
+
 
 class ApiAccessToken(models.Model):
     user = models.OneToOneField(User, related_name="token")
     access_code = models.TextField()
     access_token = models.TextField()
     refresh_token = models.TextField()
+
+    @property
+    def state(self):
+        return str(uuid.uuid1())
 
 
 class UserProfile(models.Model):

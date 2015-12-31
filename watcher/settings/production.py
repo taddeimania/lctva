@@ -2,6 +2,8 @@ import os
 
 from watcher.settings.dev import *
 
+DEBUG = False
+
 
 def get_db_pass():
     from watcher.settings.dbpass import password

@@ -89,6 +89,9 @@ class ApiAccessToken(models.Model):
     def state(self):
         return str(uuid.uuid1())
 
+    def __str__(self):
+        return "{}'s API Token".format(self.user)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)

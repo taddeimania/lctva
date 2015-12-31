@@ -15,7 +15,6 @@
         <p class="red text">If you have already verified in the old "token=" way, you shouldn't see any issues - but if you're a new user who has not authenticated with livecoding.tv's API - you may have to wait a few hours.</p>
       </div>
     </div>
-  </div>
 
   {% if request.user.userprofile.verified %}
     {% if not request.user.userprofile.is_authorized %}

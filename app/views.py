@@ -97,18 +97,19 @@ class LiveView(TemplateView):
         if all_nodes:
             current_node = all_nodes.last()
             data = Node.objects.get_plottable_eight_minutes(self.request.user)
-            dataX, dataY, siteY = unzip_data(data)
-            max_viewer_count = 0
-            trending_pattern = False
             if data:
-                max_viewer_count = max([_[1] for _ in data])
-                trending_pattern = trending(dataY)
+                dataX, dataY, siteY = unzip_data(data)
+                max_viewer_count = 0
+                trending_pattern = False
+                if data:
+                    max_viewer_count = max([_[1] for _ in data])
+                    trending_pattern = trending(dataY)
 
-            context["trending"] = trending_pattern
-            context["current_node"] = current_node
-            context["max_viewer_count"] = max_viewer_count
-            if not self.request.user.userprofile.active:
-                context["daily_breakdown"] = daily_aggregator(all_nodes)
+                context["trending"] = trending_pattern
+                context["current_node"] = current_node
+                context["max_viewer_count"] = max_viewer_count
+                if not self.request.user.userprofile.active:
+                    context["daily_breakdown"] = daily_aggregator(all_nodes)
 
         return context
 

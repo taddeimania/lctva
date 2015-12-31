@@ -3,7 +3,7 @@ import datetime
 from django.test import TestCase
 
 from app.models import Node
-from app.utils import daily_aggregator
+from app.utils import daily_aggregator, unzip_data
 
 
 class DailyAggregatorTestCase(TestCase):
@@ -20,6 +20,7 @@ class DailyAggregatorTestCase(TestCase):
         node = Node.objects.create(
             livetvusername="taddeimania",
             current_total=total,
+            total_site_streamers=1
         )
         node.timestamp = timestamp
         node.save()
@@ -70,3 +71,8 @@ class DailyAggregatorTestCase(TestCase):
     #     aggregate_total = daily_aggregator(qs)
     #     self.assertEqual(len(aggregate_total), 5)
     #     self.assertEqual(aggregate_total[0].day, '2015-11-30')
+
+    def test_unzip_data_will_transpose_n_shaped_matrices(self):
+        data = [(5, 6), (9, 0), (4, 1)]
+        unzipped_data = unzip_data(data)
+        self.assertEqual(unzipped_data, [[5, 9, 4], [6, 0, 1]])

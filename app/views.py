@@ -86,7 +86,7 @@ class LiveView(TemplateView):
         if all_nodes:
             current_node = all_nodes.last()
             data = Node.objects.get_plottable_eight_minutes(self.request.user)
-            dataY, dataX = unzip_data(data)
+            dataX, dataY, siteY = unzip_data(data)
             max_viewer_count = 0
             trending_pattern = False
             if data:
@@ -117,23 +117,12 @@ class AccountCreateView(CreateView):
 class AccountActivateView(TemplateView):
     model = UserProfile
     template_name = "app/userprofile_form.html"
-    # fields = ["livetvusername"]
-
-    # def form_valid(self, form):
-    #     verify_result = form.instance.verify(form.cleaned_data.get("livetvusername"))
-    #     if not verify_result:
-    #         form._errors[forms.forms.NON_FIELD_ERRORS] = ErrorList([
-    #             "We couldn't find the LCTVA access token in your profile description. Please add it or check the username is correct."
-    #         ])
-    #         return self.form_invalid(form)
-
-    #     return HttpResponseRedirect(reverse("index_view"))
 
 
 class GraphView(View):
 
     def get(self, request):
-        dataY, dataX = unzip_data(Node.objects.get_plottable_eight_minutes(request.user))
+        dataX, dataY, siteY = unzip_data(Node.objects.get_plottable_eight_minutes(request.user))
         last_node = Node.objects.filter(livetvusername=request.user.userprofile.livetvusername).last()
         current_count = 0
         if last_node:
@@ -141,8 +130,10 @@ class GraphView(View):
         context = {"trending": trending(dataY),
                    "frontpaged": request.user.userprofile.frontpaged,
                    "maxY": max(dataY),
+                   "maxSiteY": max(siteY),
                    "dataX": dataX,
                    "dataY": dataY,
+                   "siteY": siteY,
                    "current_count": current_count}
         return HttpResponse(json.dumps(context), content_type="application/json")
 

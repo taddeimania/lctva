@@ -26,23 +26,27 @@
           {{ request.user.userprofile.livetvusername }} live analytics:
           </div>
           {% if request.user.userprofile.active %}
-          <ul class="collection">
-            <li class="collection-item">
-              Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
-            </li>
-            <li class="collection-item">
-              Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
-            </li>
-            <li class="collection-item">
-              Trending Up? <span class="trending">{{ trending }}</span>
-            </li>
-          </ul>
-          <div id="frontpaged" class="center"></div>
-          <div id="myDiv"></div>
+                <ul class="collection">
+                  <li class="collection-item">
+                    Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
+                  </li>
+                  <li class="collection-item">
+                    Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
+                  </li>
+                  <li class="collection-item">
+                    Trending Up? <span class="trending">{{ trending }}</span>
+                  </li>
+                </ul>
+              </div>
+            <div id="frontpaged" class="center"></div>
+            <div id="myDiv"></div>
+            <div id="percentPieGraph" class="center"></div>
           {% else %}
-          <p>You aren't currently streaming. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
-          {% include 'includes/daily_breakdown_table.html' %}
+            <p>You aren't currently streaming. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
+            {% include 'includes/daily_breakdown_table.html' %}
           {% endif %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -69,6 +73,24 @@
   <script src="{% static 'js/plotly-latest.min.js' %}"></script>
   <script type="application/javascript">
     $( document ).ready(function() {
+
+      var createPieGraph = function() {
+        var data = [{
+          values: [{{ current_node.current_total }}, {{ current_node.total_site_streamers }}],
+          labels: ['You', 'Livecoding.tv'],
+          type: 'pie'
+        }];
+
+        var layout = {
+          height: 400,
+          width: 500
+        };
+
+        Plotly.newPlot('percentPieGraph', data, layout);
+
+      }
+      createPieGraph();
+
       var data = [];
       var layout = {
         yaxis: {
@@ -86,10 +108,18 @@
             mode: 'lines',
             name: 'User Counts',
             showLink: false
+          }, {
+            x: inData.dataX,
+            y: inData.siteY,
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Livecoding.tv Total Users',
+            showLink: false
           }];
           var graphDiv = document.getElementById('myDiv');
           graphDiv.data = data;
-          graphDiv.layout = {yaxis: { range: [0, inData.maxY * 1.1], autorange: false }};
+          // max Y should be toggleable between maxSiteY and maxY
+          graphDiv.layout = {yaxis: { range: [0, inData.maxSiteY * 1.1], autorange: false }};
           Plotly.redraw(graphDiv);
           $(".current_viewers").html(inData.current_count);
           $(".max_viewer_count").html(inData.maxY);

@@ -11,8 +11,9 @@ import requests
 from app.utils import adjust_time, prepare_data_for_plot
 
 
-class NodeManager(models.Manager):
+class NodeBaseManager(models.Manager):
 
+    # TODO: could be majorly optimized
     def get_plottable_eight_minutes(self, user):
         return self.get_plottable_last_hour(user)[-100:]
 
@@ -40,7 +41,7 @@ class NodeAbstract(models.Model):
     current_total = models.IntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    objects = NodeManager()
+    objects = NodeBaseManager()
 
     class Meta:
         abstract = True
@@ -54,8 +55,17 @@ class NodeAbstract(models.Model):
         return "{} - {}".format(self.time, self.current_total)
 
 
+class NodeManager(NodeBaseManager):
+
+    def get_plottable_last_hour(self, user):
+        return [(adjust_time(node[0]).strftime("%Y-%m-%d %H:%M:%S"), node[1], node[2])
+                for node in self.get_last_hour(user).values_list('timestamp', 'current_total', 'total_site_streamers')]
+
+
 class Node(NodeAbstract):
     total_site_streamers = models.IntegerField()
+
+    objects = NodeManager()
 
     @property
     def percent(self):

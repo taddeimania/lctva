@@ -43,4 +43,3 @@ class LiveCodingClient:
     def get_onair_streams(self):
         stream_details = requests.get("{}/v1/livestreams/onair/".format(self.host), headers=self.headers).json()
         return self._data_factory("stream", stream_details)
-

@@ -48,9 +48,12 @@ def get_frontpaged_streamer():
 @app.task
 def watch_viewers():
     url = "https://www.livecoding.tv/livestreams/{}/stats.json"
+    total_streamers = sum([stream["viewers_live"] for stream in LiveCodingClient("taddeimania").get_onair_streams().results])
     for profile in UserProfile.objects.filter(active=True):
+        viewer_count = get_viewer_count(profile.livetvusername, url)
         Node.objects.create(
-            current_total=get_viewer_count(profile.livetvusername, url),
+            current_total=viewer_count,
+            total_site_streamers=total_streamers,
             livetvusername=profile.livetvusername)
 
 

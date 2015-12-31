@@ -55,7 +55,11 @@ class NodeAbstract(models.Model):
 
 
 class Node(NodeAbstract):
-    pass
+    total_site_streamers = models.IntegerField()
+
+    @property
+    def percent(self):
+        return (self.current_total / self.total_site_streamers) * 100
 
 
 class Friends(NodeAbstract):

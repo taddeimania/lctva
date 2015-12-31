@@ -119,7 +119,7 @@
           var graphDiv = document.getElementById('myDiv');
           graphDiv.data = data;
           // max Y should be toggleable between maxSiteY and maxY
-          graphDiv.layout = {yaxis: { range: [0, inData.maxSiteY * 1.1], autorange: false }};
+          graphDiv.layout = {yaxis: { range: [0, inData.maxY * 1.1], autorange: false }};
           Plotly.redraw(graphDiv);
           $(".current_viewers").html(inData.current_count);
           $(".max_viewer_count").html(inData.maxY);

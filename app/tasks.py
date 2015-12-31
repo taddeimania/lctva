@@ -13,10 +13,10 @@ def _get_count(username, url, field):
 
 
 def get_viewer_count(username, url):
-    try:
-        return LiveCodingClient(username).get_stream_details().viewers_live
-    except ApiAccessToken.DoesNotExist:
-        return _get_count(username, url, "views_live")
+    # try:
+    #     return LiveCodingClient(username).get_stream_details().viewers_live
+    # except ApiAccessToken.DoesNotExist:
+    return _get_count(username, url, "views_live")
 
 
 def get_total_viewer_count(username, url):

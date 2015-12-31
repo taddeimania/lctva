@@ -44,6 +44,14 @@ class AuthorizeAPIView(RedirectView):
         return base_redirect_url.format(key.state, key.redirect_url, key.client_id)
 
 
+class RelinkAPIView(AuthorizeAPIView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        print("here deleting stuff")
+        ApiAccessToken.objects.filter(user=self.request.user).delete()
+        return super().get_redirect_url(*args, **kwargs)
+
+
 class AuthorizePostBackAPIView(View):
 
     def get(self, request):
@@ -71,9 +79,12 @@ class AuthorizePostBackAPIView(View):
             refresh_token=response['refresh_token'])
         livetvuser = LiveCodingClient.get_user_from_token(token)
         user = self.request.user
-        user.userprofile.livetvusername = livetvuser.username
-        user.userprofile.verified = True
-        user.userprofile.save()
+        try:
+            user.userprofile.livetvusername = livetvuser.username
+            user.userprofile.verified = True
+            user.userprofile.save()
+        except AttributeError:
+            return HttpResponseRedirect("{}?api_error={}".format(reverse("account_verify"), livetvuser.detail))
         return HttpResponseRedirect(reverse("live_view"))
 
 

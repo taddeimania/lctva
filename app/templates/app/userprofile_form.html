@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+  {% if request.GET.api_error %}
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card">
+          <div class="card-content">
+            <span class="card-title">Woops!</span>
+            <p class="red-text darken-4">ERROR: {{ request.GET.api_error }}</p>
+            {% if not request.user.userprofile.verified %}
+            <p>It looks like this error has kept you from verifying your livecoding.tv account with LCTVA. Please send me an email at jtaddei@gmail.com with the contents of the red text above.</p>
+            {% endif %}
+          </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
   <div class="row">
     <div class="col s12 m12">
       <div class="card">
@@ -16,9 +32,20 @@
             </form>
           </div>
           {% else %}
-          <div class="card-content">
-            <span class="card-title">Hey! Awesome... you're authorized and everything <i>should</i> be working fine.</span>
-            <p>Why are you still reading this. Go back and stream!</p>
+            <div class="card-content">
+            {% if not request.user.userprofile.verified %}
+              <span class="card-title">Uh Oh!</span>
+              <p>Your account is linked with the livecoding.tv API but for some reason we weren't able to confirm your account name (due to an error). Re-linking may fix the issue. If this message doesn't go away, send me an email at jtaddei@gmail.com.</p>
+            {% else %}
+              <span class="card-title">Congratulations!</span>
+              <p>That was easy wasn't it. If you would like to (or have been instructed to) re-link to the livecoding.tv API - click the button below.</p>
+            {% endif %}
+          </div>
+          <div class="card-action">
+            <form action="{% url 'relink_api_view' %}" method="get">
+              {% csrf_token %}
+              <button class="btn waves-effect waves-light dark-primary-color" type="submit" name="action">Re-Link</button>
+            </form>
           </div>
           {% endif %}
       </div>

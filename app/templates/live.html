@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block content %}
+{% block content %}>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">
+          Read
+        </div>
+        <p>Since livecoding.tv's API is in beta they are encountering a number
+        of little bugs that we have to work through.  One of those bugs is
+        currently affecting our ability to authenticate with their service.  I
+        have filled a support ticket and hope it is taken care of quicky.
+        Thanks for your patience.</p>
+        <p class="red text">If you have already verified in the old "token=" way, you shouldn't see any issues - but if you're a new user who has not authenticated with livecoding.tv's API - you may have to wait a few hours.</p>
+      </div>
+    </div>
+  </div>
+
   {% if request.user.userprofile.verified %}
     {% if not request.user.userprofile.is_authorized %}
       <div class="row">

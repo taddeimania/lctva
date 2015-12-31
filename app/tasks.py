@@ -2,8 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 from watcher.celery import app
-from app.models import Node, UserProfile, Friends, Viewers
+from app.models import Node, UserProfile, Friends, Viewers, ApiAccessToken
 from app.utils import clean_usernames
+from app.client import LiveCodingClient
 
 
 def _get_count(username, url, field):
@@ -12,7 +13,10 @@ def _get_count(username, url, field):
 
 
 def get_viewer_count(username, url):
-    return _get_count(username, url, "views_live")
+    try:
+        return LiveCodingClient(username).get_stream_details().viewers_live
+    except ApiAccessToken.DoesNotExist:
+        return _get_count(username, url, "views_live")
 
 
 def get_total_viewer_count(username, url):

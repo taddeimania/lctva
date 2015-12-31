@@ -3,6 +3,7 @@ import os
 from watcher.settings.dev import *
 
 DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 
 def get_db_pass():

@@ -12,15 +12,6 @@ def _get_count(username, url, field):
     return int(data.get(field))
 
 
-def get_viewer_count(username, url):
-    # VVV This is a terrible way to do this btw. It can be done in just one API call, not * users
-    # try:
-    #     return LiveCodingClient(username).get_stream_details().viewers_live
-    # except ApiAccessToken.DoesNotExist:
-    # ^^^ This is a terrible way to do this btw. It can be done in just one API call, not * users
-    return _get_count(username, url, "views_live")
-
-
 def get_total_viewer_count(username, url):
     return _get_count(username, url, "views_overall")
 
@@ -49,13 +40,14 @@ def get_frontpaged_streamer():
 
 @app.task
 def watch_viewers():
-    url = "https://www.livecoding.tv/livestreams/{}/stats.json"
-    # total_streamers = sum([stream["viewers_live"] for stream in LiveCodingClient("taddeimania").get_onair_streams().results])
-    for profile in UserProfile.objects.filter(active=True):
-        viewer_count = get_viewer_count(profile.livetvusername, url)
+    streams = LiveCodingClient("taddeimania").get_onair_streams().results
+    streamers = dict([(stream['user__slug'], stream['viewers_live']) for stream in streams])
+    total_viewers = sum(streamers.values())
+    for profile in UserProfile.objects.filter(active=True, verified=True):
+        viewer_count = streamers[profile.livetvusername.lower()]
         Node.objects.create(
             current_total=viewer_count,
-            total_site_streamers=1,
+            total_site_streamers=total_viewers,
             livetvusername=profile.livetvusername)
 
 

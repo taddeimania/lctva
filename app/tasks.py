@@ -28,10 +28,6 @@ def get_current_stream_usernames():
     return {element.text.strip().lower() for element in souper.findAll("span", {"class": "browse-main-videos--username"})}
 
 
-def get_verified_usernames():
-    return set(UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True))
-
-
 def get_frontpaged_streamer():
     body = requests.get("https://www.livecoding.tv/").content
     souper = BeautifulSoup(body, "html.parser")
@@ -43,12 +39,12 @@ def watch_viewers():
     streams = LiveCodingClient("taddeimania").get_onair_streams().results
     streamers = dict([(stream['user__slug'], stream['viewers_live']) for stream in streams])
     total_viewers = sum(streamers.values())
-    for profile in UserProfile.objects.filter(active=True, verified=True):
-        viewer_count = streamers[profile.livetvusername.lower()]
+    for livetvusername in streamers.keys():
+        viewer_count = streamers[livetvusername]
         Node.objects.create(
             current_total=viewer_count,
             total_site_streamers=total_viewers,
-            livetvusername=profile.livetvusername)
+            livetvusername=livetvusername)
 
 
 def set_frontpaged_user(verified_usernames):
@@ -62,23 +58,6 @@ def set_frontpaged_user(verified_usernames):
             user.save()
     else:
         UserProfile.objects.filter(frontpaged=True).update(frontpaged=False)
-
-
-@app.task
-def check_streamers():
-    verified_usernames = get_verified_usernames()
-    cleaned_usernames = clean_usernames(verified_usernames)
-    current_streamers = get_current_stream_usernames()  # scraped from livecoding.tv
-
-    to_activate_usernames = [username for username in verified_usernames
-                             if username.lower() in cleaned_usernames.intersection(current_streamers)]
-    to_deactivate_usernames = [username for username in verified_usernames
-                               if username.lower() in cleaned_usernames.difference(current_streamers)]
-
-    UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
-    UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)
-
-    set_frontpaged_user()
 
 
 @app.task

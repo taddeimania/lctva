@@ -61,7 +61,7 @@ class AuthorizePostBackAPIView(View):
 
         user = self.request.user
         try:
-            user.userprofile.livetvusername = livetvuser.username
+            user.userprofile.livetvusername = livetvuser.username.lower()
             user.userprofile.verified = True
             user.userprofile.save()
         except AttributeError:

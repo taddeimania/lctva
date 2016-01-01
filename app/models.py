@@ -112,7 +112,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     livetvusername = models.CharField(max_length=40, blank=True)
     verified = models.BooleanField(default=False)
-    active = models.BooleanField(default=False)
     frontpaged = models.BooleanField(default=False)
 
     @property
@@ -121,15 +120,6 @@ class UserProfile(models.Model):
             return bool(self.user.token)
         except ApiAccessToken.DoesNotExist:
             return False
-
-    @property
-    def is_user_currently_streaming(self):
-        body = requests.get("https://www.livecoding.tv/livestreams/").content
-        souper = BeautifulSoup(body, "html.parser")
-        is_streaming = souper.find("a", {
-            "class": "browse-main-videos--thumbnail",
-            "href": "/{}/".format(self.livetvusername)})
-        return bool(is_streaming)
 
 
 @receiver(post_save, sender=User)

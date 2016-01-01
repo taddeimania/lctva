@@ -32,9 +32,9 @@ class LiveCodingClient:
         response = requests.get(request_url, headers=self.headers)
         # if 401 (auth not provided, lets get a new token and retry?)
         if response.status_code == 401:
-            self.access = LiveCodingAuthClient(code=self.access.access_code).get_auth_token(self.access.user)
-            response = requests.get(request_url, headers=self.headers)
-            print("REMADE TOKEN FROM RESPONSE: ", response)
+            self.access = LiveCodingAuthClient(code=self.access.access_code, refresh=True).get_auth_token(self.access.user)
+            headers = self._build_headers(self.access)
+            response = requests.get(request_url, headers=headers)
         return response.json()
 
     @classmethod
@@ -60,13 +60,16 @@ class LiveCodingClient:
 class LiveCodingAuthClient:
 
     auth_url = "https://www.livecoding.tv/o/token/"
+    payload_body = "code={}&grant_type={}&redirect_uri={}&client_id={}&client_secret={}"
 
-    def __init__(self, code):
+    def __init__(self, code, refresh=False):
+        self.refresh = refresh
         self.code = code
         self.key = ApiKey.objects.get(provider="livecodingtv")
         self.basic_auth_header_val = b64encode(str.encode("{}:{}".format(self.key.client_id, self.key.client_secret)))
-        self.payload = "code={}&grant_type=authorization_code&redirect_uri={}&client_id={}&client_secret={}".format(
+        self.payload = self.payload_body.format(
             code,
+            "authorization_code",
             self.key.redirect_url,
             self.key.client_id,
             self.key.client_secret
@@ -74,16 +77,21 @@ class LiveCodingAuthClient:
         self.headers = {
             'authorization': "Basic " + self.basic_auth_header_val.decode("utf-8"),
             'cache-control': "no-cache",
-            'postman-token': self.key.state,
             'content-type': "application/x-www-form-urlencoded"
         }
 
     def get_auth_token(self, user):
-        response = requests.post(self.auth_url, data=self.payload, headers=self.headers).json()
-        print(self.auth_url)
-        print(self.payload)
-        print(self.headers)
-        print(response)
+        payload = self.payload
+        if self.refresh:
+            token = ApiAccessToken.objects.get(user=user)
+            payload = self.payload_body.format(
+                self.code,
+                "refresh_token",
+                self.key.redirect_url,
+                self.key.client_id,
+                self.key.client_secret
+            ) + "&refresh_token={}".format(token.refresh_token)
+        response = requests.post(self.auth_url, data=payload, headers=self.headers).json()
         token, _ = ApiAccessToken.objects.get_or_create(user=user)
         token.access_code = self.code
         token.access_token = response['access_token']

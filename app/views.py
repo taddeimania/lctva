@@ -56,7 +56,7 @@ class AuthorizePostBackAPIView(View):
     def get(self, request):
         code = request.GET.get("code")
         client = LiveCodingAuthClient(code)
-        token = client.get_auth_tokens(request.user)
+        token = client.get_auth_token(request.user)
         livetvuser = LiveCodingClient.get_user_from_token(token)
 
         user = self.request.user

@@ -80,10 +80,13 @@ class LiveCodingAuthClient:
 
     def get_auth_token(self, user):
         response = requests.post(self.auth_url, data=self.payload, headers=self.headers).json()
+        print(self.auth_url)
+        print(self.payload)
+        print(self.headers)
         print(response)
-        ApiAccessToken.objects.filter(user=user).delete()
-        return ApiAccessToken.objects.create(
-            user=user,
-            access_code=self.code,
-            access_token=response['access_token'],
-            refresh_token=response['refresh_token'])
+        token, _ = ApiAccessToken.objects.get_or_create(user=user)
+        token.access_code = self.code
+        token.access_token = response['access_token']
+        token.refresh_token = response['refresh_token']
+        token.save()
+        return token

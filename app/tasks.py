@@ -13,9 +13,11 @@ def _get_count(username, url, field):
 
 
 def get_viewer_count(username, url):
+    # VVV This is a terrible way to do this btw. It can be done in just one API call, not * users
     # try:
     #     return LiveCodingClient(username).get_stream_details().viewers_live
     # except ApiAccessToken.DoesNotExist:
+    # ^^^ This is a terrible way to do this btw. It can be done in just one API call, not * users
     return _get_count(username, url, "views_live")
 
 

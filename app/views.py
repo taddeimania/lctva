@@ -18,7 +18,7 @@ from requests.auth import HTTPBasicAuth
 
 from app.models import Node, UserProfile, Friends, ApiKey, ApiAccessToken
 from app.utils import daily_aggregator, trending, unzip_data, prepare_data_for_plot
-from app.client import LiveCodingClient
+from app.client import LiveCodingClient, LiveCodingAuthClient
 
 
 class IndexView(TemplateView):
@@ -40,14 +40,13 @@ class AuthorizeAPIView(RedirectView):
         if ApiAccessToken.objects.filter(user=self.request.user):
             return reverse("live_view")
         base_redirect_url = "https://www.livecoding.tv/o/authorize/?scope=read&state={}&redirect_uri={}&response_type=code&client_id={}"
-        key = ApiKey.objects.get()  # do a .get() to ensure only 1 record ever in the DB
+        key = ApiKey.objects.get(provider="livecodingtv")
         return base_redirect_url.format(key.state, key.redirect_url, key.client_id)
 
 
 class RelinkAPIView(AuthorizeAPIView):
 
     def get_redirect_url(self, *args, **kwargs):
-        print("here deleting stuff")
         ApiAccessToken.objects.filter(user=self.request.user).delete()
         return super().get_redirect_url(*args, **kwargs)
 
@@ -55,29 +54,11 @@ class RelinkAPIView(AuthorizeAPIView):
 class AuthorizePostBackAPIView(View):
 
     def get(self, request):
-        key = ApiKey.objects.get()  # do a .get() to ensure only 1 record ever in the DB
         code = request.GET.get("code")
-        url = "https://www.livecoding.tv/o/token/"
-        basic_auth_header_val = b64encode(str.encode("{}:{}".format(key.client_id, key.client_secret)))
-        payload = "code={}&grant_type=authorization_code&redirect_uri={}&client_id={}&client_secret={}".format(
-            code,
-            key.redirect_url,
-            key.client_id,
-            key.client_secret
-        )
-        headers = {
-            'authorization': "Basic " + basic_auth_header_val.decode("utf-8"),
-            'cache-control': "no-cache",
-            'postman-token': key.state,
-            'content-type': "application/x-www-form-urlencoded"
-        }
-        response = requests.post(url, data=payload, headers=headers).json()
-        token = ApiAccessToken.objects.create(
-            user=request.user,
-            access_code=code,
-            access_token=response['access_token'],
-            refresh_token=response['refresh_token'])
+        client = LiveCodingAuthClient(code)
+        token = client.get_auth_tokens(request.user)
         livetvuser = LiveCodingClient.get_user_from_token(token)
+
         user = self.request.user
         try:
             user.userprofile.livetvusername = livetvuser.username

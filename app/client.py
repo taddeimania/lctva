@@ -28,7 +28,6 @@ class LiveCodingClient:
         return namedtuple(name, data.keys())(**data)
 
     def _make_request(self, url):
-        self.key.increment()
         request_url = "{}{}{}".format(self.host, self.version, url)
         response = requests.get(request_url, headers=self.headers)
         # if 401 (auth not provided, lets get a new token and retry?)
@@ -37,6 +36,7 @@ class LiveCodingClient:
                 code=self.access.access_code, refresh=True).get_auth_token(self.access.user)
             headers = self._build_headers(self.access)
             response = requests.get(request_url, headers=headers)
+        self.key.increment()
         return response.json()
 
     @classmethod

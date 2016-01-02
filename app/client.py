@@ -32,7 +32,8 @@ class LiveCodingClient:
         response = requests.get(request_url, headers=self.headers)
         # if 401 (auth not provided, lets get a new token and retry?)
         if response.status_code == 401:
-            self.access = LiveCodingAuthClient(code=self.access.access_code, refresh=True).get_auth_token(self.access.user)
+            self.access = LiveCodingAuthClient(
+                code=self.access.access_code, refresh=True).get_auth_token(self.access.user)
             headers = self._build_headers(self.access)
             response = requests.get(request_url, headers=headers)
         return response.json()
@@ -49,7 +50,8 @@ class LiveCodingClient:
 
     def get_stream_details(self):
         # No permission with only 'read' scope
-        stream_details = requests.get("{}/v1/livestreams/{}/".format(self.host, self.livetvusername), headers=self.headers).json()
+        stream_details = requests.get(
+            "{}/v1/livestreams/{}/".format(self.host, self.livetvusername), headers=self.headers).json()
         return self._data_factory("stream", stream_details)
 
     def get_onair_streams(self):

@@ -112,6 +112,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     livetvusername = models.CharField(max_length=40, blank=True)
     verified = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)
     frontpaged = models.BooleanField(default=False)
 
     @property

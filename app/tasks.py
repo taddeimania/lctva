@@ -47,11 +47,10 @@ def legacy_check_streamers():
     to_deactivate_usernames = [username for username in verified_usernames
                                if username.lower() in cleaned_usernames.difference(current_streamers)]
 
-    print(to_activate_usernames)
-    print(to_deactivate_usernames)
-
     UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
     UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)
+    set_frontpaged_user(verified_usernames)
+
 
 # @app.task
 # def watch_viewers():

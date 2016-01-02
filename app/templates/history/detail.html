@@ -6,7 +6,11 @@
   <div class="card-content">
     <span class="card-title">Daily Breakdown</span>
     <br>
-    <a href="{% url 'history_list_view' %}">Back to History</a>
+    {% if admin_viewing %}
+      <a href="{% url 'admin_peek_list_view' admin_viewing_user %}">Back to History</a>
+    {% else %}
+      <a href="{% url 'history_list_view' %}">Back to History</a>
+    {% endif %}
     <div id="historyGraph"></div>
     <table>
       <thead>

@@ -1,8 +1,9 @@
 from django.conf.urls import url
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-from app.views import IndexView, AboutView, LiveView, GraphView, FriendsGraphView, HistoryListView, \
-    HistoryDetailView, AuthorizeAPIView, AuthorizePostBackAPIView, RelinkAPIView
+from app.views import IndexView, AboutView, LiveView, GraphView, HistoryListView, \
+    HistoryDetailView, AuthorizeAPIView, AuthorizePostBackAPIView, RelinkAPIView, AdminPeekListView, \
+    AdminPeekDetailView
 
 
 urlpatterns = [
@@ -15,5 +16,6 @@ urlpatterns = [
     url(r'^relink-api/$', login_required(RelinkAPIView.as_view()), name="relink_api_view"),
     url(r'^authorize-api/postback/', AuthorizePostBackAPIView.as_view(), name="authorize_api_postback_view"),
     url(r'^api/graph/$', GraphView.as_view(), name="graph_view"),
-    url(r'^api/graph/friends/$', FriendsGraphView.as_view(), name="friends_graph_view"),
+    url(r'^a/(?P<user_slug>[a-z0-9-]+)/$', login_required(AdminPeekListView.as_view()), name="admin_peek_list_view"),
+    url(r'^a/(?P<user_slug>[a-z0-9-]+)/(?P<datestamp>\d{4}-\d{2}-\d{2})/$', login_required(AdminPeekDetailView.as_view()), name="admin_peek_detail_view"),
 ]

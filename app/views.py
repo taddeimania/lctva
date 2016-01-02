@@ -1,20 +1,16 @@
 
 import datetime
 import json
-import uuid
-from base64 import b64encode
 
-from django import forms
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import user_passes_test
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, View
 from django.views.generic.base import RedirectView
-from django.views.generic.edit import CreateView, UpdateView
-from django.contrib.auth.forms import UserCreationForm
-from django.forms.util import ErrorList
-
-import requests
-from requests.auth import HTTPBasicAuth
+from django.views.generic.edit import CreateView
 
 from app.models import Node, UserProfile, Friends, ApiKey, ApiAccessToken
 from app.utils import daily_aggregator, trending, unzip_data, prepare_data_for_plot
@@ -95,6 +91,54 @@ class LiveView(TemplateView):
         return context
 
 
+class AdminPeekListView(TemplateView):
+    template_name = "history/list.html"
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_context_data(self, user_slug):
+        if not self.request.user.is_superuser:
+            return {}
+
+        context = super().get_context_data()
+        user = User.objects.get(userprofile__livetvusername=user_slug)
+        all_nodes = Node.objects.get_all_user_nodes(user)
+        context["daily_breakdown"] = daily_aggregator(all_nodes)
+        friend_info = Friends.objects.get_all_plottable_user_nodes(user)
+        dataX, dataY = unzip_data(friend_info)
+        context["friendDataX"] = dataX
+        context["friendDataY"] = dataY
+        context["friendMaxY"] = max(dataY)
+        context["admin_viewing"] = True
+        context["admin_viewing_user"] = user_slug
+        return context
+
+
+class AdminPeekDetailView(TemplateView):
+    template_name = "history/detail.html"
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_context_data(self, user_slug, datestamp):
+        if not self.request.user.is_superuser:
+            return HttpResponseRedirect(reverse("index_view"))
+
+        context = super().get_context_data()
+        day_nodes = Node.objects.filter(livetvusername=user_slug, timestamp__contains=datetime.datetime.strptime(datestamp, "%Y-%m-%d").date())
+        x_data, y_data = unzip_data(prepare_data_for_plot(day_nodes.values_list("timestamp", "current_total")))
+        context["breakdown"] = daily_aggregator(day_nodes)[0]
+        context["y_data"] = y_data
+        context["x_data"] = x_data
+        context["max_y"] = max(y_data)
+        context["admin_viewing"] = True
+        context["admin_viewing_user"] = user_slug
+        return context
+
+
 class ExtraView(TemplateView):
     template_name = "extra.html"
 
@@ -131,17 +175,6 @@ class GraphView(View):
         return HttpResponse(json.dumps(context), content_type="application/json")
 
 
-class FriendsGraphView(View):
-
-    def get(self, request):
-        friend_info = Friends.objects.get_all_plottable_user_nodes(request.user)
-        dataX, dataY = unzip_data(friend_info)
-        context = {"dataX": dataX,
-                   "dataY": dataY,
-                   "maxY": max(dataY)}
-        return HttpResponse(json.dumps(context), content_type="application/json")
-
-
 # TODO: Total viewers graph view
 
 
@@ -151,7 +184,12 @@ class HistoryListView(TemplateView):
     def get_context_data(self):
         context = super().get_context_data()
         all_nodes = Node.objects.get_all_user_nodes(self.request.user)
+        friend_info = Friends.objects.get_all_plottable_user_nodes(self.request.user)
+        dataX, dataY = unzip_data(friend_info)
         context["daily_breakdown"] = daily_aggregator(all_nodes)
+        context["friendDataX"] = dataX
+        context["friendDataY"] = dataY
+        context["friendMaxY"] = max(dataY)
         return context
 
 

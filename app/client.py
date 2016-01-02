@@ -21,7 +21,6 @@ class LiveCodingClient:
         return {
             'authorization': "Bearer {}".format(token.access_token),
             'cache-control': "no-cache",
-            'postman-token': token.state
         }
 
     def _data_factory(self, name, data):

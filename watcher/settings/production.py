@@ -2,7 +2,7 @@ import os
 
 from watcher.settings.dev import *
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 

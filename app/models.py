@@ -85,9 +85,14 @@ class ApiKey(models.Model):
     client_secret = models.TextField()
     redirect_url = models.TextField()
     provider = models.CharField(max_length=100, unique=True)
+    request_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.redirect_url
+
+    def increment(self):
+        self.request_count += 1
+        self.save()
 
     @property
     def state(self):

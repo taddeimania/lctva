@@ -14,6 +14,7 @@ class LiveCodingClient:
     def __init__(self, livetvusername):
         self.livetvusername = livetvusername
         self.access = ApiAccessToken.objects.get(user__userprofile__livetvusername=livetvusername)
+        self.key = ApiKey.objects.get(provider="livecodingtv")
         self.headers = self._build_headers(self.access)
 
     @staticmethod
@@ -27,6 +28,7 @@ class LiveCodingClient:
         return namedtuple(name, data.keys())(**data)
 
     def _make_request(self, url):
+        self.key.increment()
         request_url = "{}{}{}".format(self.host, self.version, url)
         response = requests.get(request_url, headers=self.headers)
         # if 401 (auth not provided, lets get a new token and retry?)
@@ -54,7 +56,7 @@ class LiveCodingClient:
         return self._data_factory("stream", stream_details)
 
     def get_onair_streams(self):
-        stream_details = requests.get("{}/v1/livestreams/onair/".format(self.host), headers=self.headers).json()
+        stream_details = self._make_request("/livestreams/onair/")
         return self._data_factory("stream", stream_details)
 
 

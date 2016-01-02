@@ -97,9 +97,9 @@ CELERYBEAT_SCHEDULE = {
         'task': 'app.tasks.legacy_watch_viewers',
         'schedule': 5,
     },
-    'watch-viewers-every-5-seconds': {
+    'check-streamers-every-1-minute': {
         'task': 'app.tasks.legacy_check_streamers',
-        'schedule': 5,
+        'schedule': 60,
     },
     'check-friends-every-day': {
         'task': 'app.tasks.check_friends_and_total_viewers',

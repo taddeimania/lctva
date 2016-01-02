@@ -18,6 +18,8 @@ def legacy_watch_viewers():
     # total_streamers = sum([stream["viewers_live"] for stream in LiveCodingClient("taddeimania").get_onair_streams().results])
     for profile in UserProfile.objects.filter(active=True):
         viewer_count = legacy_get_viewer_count(profile.livetvusername, url)
+        print(profile)
+        print(viewer_count)
         Node.objects.create(
             current_total=viewer_count,
             total_site_streamers=1,
@@ -44,6 +46,9 @@ def legacy_check_streamers():
                              if username.lower() in cleaned_usernames.intersection(current_streamers)]
     to_deactivate_usernames = [username for username in verified_usernames
                                if username.lower() in cleaned_usernames.difference(current_streamers)]
+
+    print(to_activate_usernames)
+    print(to_deactivate_usernames)
 
     UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
     UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)

@@ -12,18 +12,18 @@ def legacy_get_viewer_count(username, url):
     return _get_count(username, url, "views_live")
 
 
-@app.task
-def legacy_watch_viewers():
-    url = "https://www.livecoding.tv/livestreams/{}/stats.json"
-    # total_streamers = sum([stream["viewers_live"] for stream in LiveCodingClient("taddeimania").get_onair_streams().results])
-    for profile in UserProfile.objects.filter(active=True):
-        viewer_count = legacy_get_viewer_count(profile.livetvusername, url)
-        print(profile)
-        print(viewer_count)
-        Node.objects.create(
-            current_total=viewer_count,
-            total_site_streamers=1,
-            livetvusername=profile.livetvusername)
+# @app.task
+# def legacy_watch_viewers():
+#     url = "https://www.livecoding.tv/livestreams/{}/stats.json"
+#     # total_streamers = sum([stream["viewers_live"] for stream in LiveCodingClient("taddeimania").get_onair_streams().results])
+#     for profile in UserProfile.objects.filter(active=True):
+#         viewer_count = legacy_get_viewer_count(profile.livetvusername, url)
+#         print(profile)
+#         print(viewer_count)
+#         Node.objects.create(
+#             current_total=viewer_count,
+#             total_site_streamers=1,
+#             livetvusername=profile.livetvusername)
 
 
 def get_current_stream_usernames():
@@ -36,33 +36,33 @@ def get_verified_usernames():
     return set(UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True))
 
 
-@app.task
-def legacy_check_streamers():
-    verified_usernames = get_verified_usernames()
-    cleaned_usernames = clean_usernames(verified_usernames)
-    current_streamers = get_current_stream_usernames()  # scraped from livecoding.tv
-
-    to_activate_usernames = [username for username in verified_usernames
-                             if username.lower() in cleaned_usernames.intersection(current_streamers)]
-    to_deactivate_usernames = [username for username in verified_usernames
-                               if username.lower() in cleaned_usernames.difference(current_streamers)]
-
-    UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
-    UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)
-    set_frontpaged_user(verified_usernames)
-
-
 # @app.task
-# def watch_viewers():
-#     streams = LiveCodingClient("taddeimania").get_onair_streams().results
-#     streamers = dict([(stream['user__slug'], stream['viewers_live']) for stream in streams])
-#     total_viewers = sum(streamers.values())
-#     for livetvusername in streamers.keys():
-#         viewer_count = streamers[livetvusername]
-#         Node.objects.create(
-#             current_total=viewer_count,
-#             total_site_streamers=total_viewers,
-#             livetvusername=livetvusername)
+# def legacy_check_streamers():
+#     verified_usernames = get_verified_usernames()
+#     cleaned_usernames = clean_usernames(verified_usernames)
+#     current_streamers = get_current_stream_usernames()  # scraped from livecoding.tv
+
+#     to_activate_usernames = [username for username in verified_usernames
+#                              if username.lower() in cleaned_usernames.intersection(current_streamers)]
+#     to_deactivate_usernames = [username for username in verified_usernames
+#                                if username.lower() in cleaned_usernames.difference(current_streamers)]
+
+#     UserProfile.objects.filter(livetvusername__in=to_activate_usernames, active=False).update(active=True)
+#     UserProfile.objects.filter(livetvusername__in=to_deactivate_usernames, active=True).update(active=False)
+#     set_frontpaged_user(verified_usernames)
+
+
+@app.task
+def watch_viewers():
+    streams = LiveCodingClient("taddeimania").get_onair_streams().results
+    streamers = dict([(stream['user__slug'], stream['viewers_live']) for stream in streams])
+    total_viewers = sum(streamers.values())
+    for livetvusername in streamers.keys():
+        viewer_count = streamers[livetvusername]
+        Node.objects.create(
+            current_total=viewer_count,
+            total_site_streamers=total_viewers,
+            livetvusername=livetvusername)
 
 
 def get_frontpaged_streamer():

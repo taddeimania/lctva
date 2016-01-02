@@ -135,7 +135,7 @@ class FriendsGraphView(View):
 
     def get(self, request):
         friend_info = Friends.objects.get_all_plottable_user_nodes(request.user)
-        dataY, dataX = unzip_data(friend_info)
+        dataX, dataY = unzip_data(friend_info)
         context = {"dataX": dataX,
                    "dataY": dataY,
                    "maxY": max(dataY)}

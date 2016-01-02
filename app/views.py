@@ -107,10 +107,11 @@ class AdminPeekListView(TemplateView):
         all_nodes = Node.objects.get_all_user_nodes(user)
         context["daily_breakdown"] = daily_aggregator(all_nodes)
         friend_info = Friends.objects.get_all_plottable_user_nodes(user)
-        dataX, dataY = unzip_data(friend_info)
-        context["friendDataX"] = dataX
-        context["friendDataY"] = dataY
-        context["friendMaxY"] = max(dataY)
+        if friend_info:
+            dataX, dataY = unzip_data(friend_info)
+            context["friendDataX"] = dataX
+            context["friendDataY"] = dataY
+            context["friendMaxY"] = max(dataY)
         context["admin_viewing"] = True
         context["admin_viewing_user"] = user_slug
         return context

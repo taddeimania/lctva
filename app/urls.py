@@ -1,9 +1,12 @@
 from django.conf.urls import url
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 
-from app.views import IndexView, AboutView, LiveView, GraphView, HistoryListView, \
-    HistoryDetailView, AuthorizeAPIView, AuthorizePostBackAPIView, RelinkAPIView, AdminPeekListView, \
-    AdminPeekDetailView
+from app.views.admin import AdminPeekListView, AdminPeekDetailView
+from app.views.api import GraphView
+from app.views.auth import AuthorizeAPIView, AuthorizePostBackAPIView, RelinkAPIView
+from app.views.history import HistoryListView, HistoryDetailView
+from app.views.live import LiveView
+from app.views.public import IndexView, AboutView
 
 
 urlpatterns = [

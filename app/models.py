@@ -29,7 +29,7 @@ class NodeBaseManager(models.Manager):
         return self.get_x_time_ago(user, datetime.timedelta(hours=1))
 
     def get_all_user_nodes(self, user):
-        return self.filter(livetvusername=user.userprofile.livetvusername)
+        return self.filter(livetvusername=user)
 
     def get_all_plottable_user_nodes(self, user):
         nodes = self.get_all_user_nodes(user).values_list('timestamp', 'current_total')

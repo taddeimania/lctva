@@ -15,11 +15,12 @@ class HistoryListView(TemplateView):
         livetvusername = self.request.user.userprofile.livetvusername
         all_nodes = Node.objects.get_all_user_nodes(livetvusername)
         friend_info = Friends.objects.get_all_plottable_user_nodes(livetvusername)
-        dataX, dataY = unzip_data(friend_info)
         context["daily_breakdown"] = daily_aggregator(all_nodes)
-        context["friendDataX"] = dataX
-        context["friendDataY"] = dataY
-        context["friendMaxY"] = max(dataY)
+        if friend_info:
+            dataX, dataY = unzip_data(friend_info)
+            context["friendDataX"] = dataX
+            context["friendDataY"] = dataY
+            context["friendMaxY"] = max(dataY)
         return context
 
 

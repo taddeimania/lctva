@@ -2,7 +2,7 @@ import datetime
 from statistics import mean
 
 from app.client import LiveCodingClient
-from app.models import Node, UserProfile, Friends, Viewers
+from app.models import Node, UserProfile, Friends, Viewers, ApiKey
 from app.utils import clean_usernames, unzip_data
 from watcher.celery import app
 
@@ -113,6 +113,20 @@ def check_friends_and_total_viewers():
             current_total=get_total_viewer_count(profile.livetvusername, url),
             livetvusername=profile.livetvusername
         )
+
+
+@app.task
+def send_email(to_name, to_address, subject, text):
+    # Usage:
+    # send_email.delay("Joel Taddei", "jtaddei@gmail.com", "Put Subject Here", "Body of message")
+    key = ApiKey.objects.get(provider="mailgun")
+    return requests.post(
+        key.redirect_url,
+        auth=("api", key.client_secret),
+        data={"from": "LCTVA <noreply@lctva.joel.io>",
+              "to": "{} <{}>".format(to_name, to_address),
+              "subject": subject,
+              "text": text})
 
 
 def get_today():

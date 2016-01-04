@@ -1,11 +1,13 @@
-import requests
-from bs4 import BeautifulSoup
-
-from watcher.celery import app
-from app.models import Node, UserProfile, Friends, Viewers
-from app.utils import clean_usernames
+import datetime
+from statistics import mean
 
 from app.client import LiveCodingClient
+from app.models import Node, UserProfile, Friends, Viewers
+from app.utils import clean_usernames, unzip_data
+from watcher.celery import app
+
+from bs4 import BeautifulSoup
+import requests
 
 
 def legacy_get_viewer_count(username, url):
@@ -112,3 +114,16 @@ def check_friends_and_total_viewers():
             livetvusername=profile.livetvusername
         )
 
+
+def get_today():
+    return datetime.date.today()
+
+
+def lower_resolution():
+    today = get_today()
+    two_months_ago = today + datetime.timedelta(days=-60)
+    old_data = Node.objects.filter(timestamp__gte=two_months_ago).values_list('livetvusername', 'current_total')
+    data_x, data_y = unzip_data(old_data)
+    unique_users = set(data_x)
+
+    pass

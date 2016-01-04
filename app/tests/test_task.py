@@ -1,9 +1,10 @@
+import datetime
 from unittest import mock
 
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from app.models import UserProfile
+from app.models import UserProfile, Node
 from app import tasks
 
 
@@ -57,3 +58,16 @@ class TaskTests(TestCase):
 
         active_streamers = UserProfile.objects.filter(frontpaged=True)
         self.assertEqual(active_streamers.count(), 0)
+
+    @mock.patch("app.tasks.get_today")
+    def test_lower_resolution_task_will_average_out_nodes_based_on_mean_minute_data(self, get_today):
+        today = datetime.datetime(year=2015, month=6, day=18)
+        get_today.return_value = today
+        two_months_ago = today + datetime.timedelta(days=-61)
+        Node.objects.create(livetvusername="philanselmo", current_total=7, timestamp=today - two_months_ago, total_site_streamers=1)
+        Node.objects.create(livetvusername="philanselmo", current_total=6, timestamp=today - two_months_ago, total_site_streamers=1)
+        Node.objects.create(livetvusername="philanselmo", current_total=8, timestamp=today - two_months_ago, total_site_streamers=1)
+        tasks.lower_resolution()
+        results = Node.objects.all()
+        self.assertEqual(results.count(), 1)
+        self.assertAlmostEqual(results.current_total, 7.0)

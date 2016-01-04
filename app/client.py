@@ -59,6 +59,24 @@ class LiveCodingClient:
         stream_details = self._make_request("/livestreams/onair/")
         return self._data_factory("stream", stream_details)
 
+    def _get_more_videos(self, stream_details):
+        api_calls = 0
+        yield [self._data_factory("video", video) for video in stream_details["results"]]
+        while stream_details["next"]:
+            next_url = stream_details["next"]
+            next_params = next_url[next_url.index("?"):]
+            print(next_params, api_calls)
+            stream_details = self._make_request("/videos/{}".format(next_params))
+            api_calls += 1
+            yield [self._data_factory("video", video) for video in stream_details["results"]]
+
+    def get_all_videos(self):
+        stream_details = self._make_request("/videos/")
+        if not stream_details["next"]:
+            return [self._data_factory("video", video) for video in stream_details["results"]]
+
+        return self._get_more_videos(stream_details)
+
 
 class LiveCodingAuthClient:
 
@@ -87,8 +105,8 @@ class LiveCodingAuthClient:
         payload = self.payload
         if self.refresh:
             token = ApiAccessToken.objects.get(user=user)
-            payload = self.payload_body.format(
-                self.code,
+            payload_body = "grant_type={}&redirect_uri={}&client_id={}&client_secret={}"
+            payload = payload_body.format(
                 "refresh_token",
                 self.key.redirect_url,
                 self.key.client_id,

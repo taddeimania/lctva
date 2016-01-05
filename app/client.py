@@ -64,7 +64,8 @@ class LiveCodingClient:
         yield get_videos(self, stream_details)
         while stream_details["next"]:
             next_params = stream_details["next"][stream_details["next"].index("?"):]
-            yield get_videos(self, self._make_request("/videos/{}".format(next_params)))
+            stream_details = self._make_request("/videos/{}".format(next_params))
+            yield get_videos(self, stream_details)
 
     def get_all_videos(self):
         stream_details = self._make_request("/videos/")

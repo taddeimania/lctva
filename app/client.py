@@ -60,15 +60,11 @@ class LiveCodingClient:
         return self._data_factory("stream", stream_details)
 
     def _get_more_videos(self, stream_details):
-        api_calls = 0
-        yield [self._data_factory("video", video) for video in stream_details["results"]]
+        get_videos = lambda self, stream_details: [self._data_factory("video", video) for video in stream_details["results"]]
+        yield get_videos(self, stream_details)
         while stream_details["next"]:
-            next_url = stream_details["next"]
-            next_params = next_url[next_url.index("?"):]
-            print(next_params, api_calls)
-            stream_details = self._make_request("/videos/{}".format(next_params))
-            api_calls += 1
-            yield [self._data_factory("video", video) for video in stream_details["results"]]
+            next_params = stream_details["next"][stream_details["next"].index("?"):]
+            yield get_videos(self, self._make_request("/videos/{}".format(next_params)))
 
     def get_all_videos(self):
         stream_details = self._make_request("/videos/")

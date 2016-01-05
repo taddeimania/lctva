@@ -59,20 +59,21 @@ class LiveCodingClient:
         stream_details = self._make_request("/livestreams/onair/")
         return self._data_factory("stream", stream_details)
 
-    def _get_more_videos(self, stream_details):
-        get_videos = lambda self, stream_details: [self._data_factory("video", video) for video in stream_details["results"]]
-        yield get_videos(self, stream_details)
+    def _get_paginated_data(self, data_class, url, stream_details):
+        get_data = lambda self, stream_details: [self._data_factory(data_class, obj) for obj in stream_details["results"]]
+        yield get_data(self, stream_details)
         while stream_details["next"]:
             next_params = stream_details["next"][stream_details["next"].index("?"):]
-            stream_details = self._make_request("/videos/{}".format(next_params))
-            yield get_videos(self, stream_details)
+            stream_details = self._make_request("{}{}".format(url, next_params))
+            yield get_data(self, stream_details)
 
     def get_all_videos(self):
-        stream_details = self._make_request("/videos/")
+        url = "/videos/"
+        stream_details = self._make_request(url)
         if not stream_details["next"]:
             return [self._data_factory("video", video) for video in stream_details["results"]]
 
-        return self._get_more_videos(stream_details)
+        return self._get_paginated_data("video", url, stream_details)
 
 
 class LiveCodingAuthClient:

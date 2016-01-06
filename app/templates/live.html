@@ -1,28 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'dashboard.html' %}
 {% load staticfiles %}
 
 {% block content %}
-    <div class="row">
-    <div class="card">
-      <div class="card-content">
-        <div class="card-title">
-          Read
-        </div>
-        <p>Since livecoding.tv's API is in beta they are encountering a number
-        of little bugs that we have to work through.  One of those bugs is
-        currently affecting our ability to authenticate with their service.  I
-        have filled a support ticket and hope it is taken care of quicky.
-        Thanks for your patience.</p>
-        <br>
-
-        <p class="red-text">If you have already verified in the old "token=" way, you shouldn't see any issues - but if you're a new user who has not authenticated with livecoding.tv's API - you may have to wait a few hours.</p>
+  <div class="card">
+    <div class="card-content">
+      <div class="card-title">
+        Read
       </div>
+      <p>Since livecoding.tv's API is in beta they are encountering a number
+      of little bugs that we have to work through.  One of those bugs is
+      currently affecting our ability to authenticate with their service.  I
+      have filled a support ticket and hope it is taken care of quicky.
+      Thanks for your patience.</p>
+      <br>
+
+      <p class="red-text">If you have already verified in the old "token=" way, you shouldn't see any issues - but if you're a new user who has not authenticated with livecoding.tv's API - you may have to wait a few hours.</p>
     </div>
   </div>
 
   {% if request.user.userprofile.verified %}
     {% if not request.user.userprofile.is_authorized %}
-      <div class="row">
         <div class="card">
           <div class="card-content">
             <div class="card-title">
@@ -35,35 +32,31 @@
             <p class="red-text">If you see a 502 Cloudflare error when trying to integrate, it's because Livecoding.tv is having issues. Not me!!!</p>
           </div>
         </div>
-      </div>
       {% endif %}
-    <div class="row">
       <div class="card">
         <div class="card-content">
           <div class="card-title">
-          {{ request.user.userprofile.livetvusername }} live analytics:
+            {{ request.user.userprofile.livetvusername }}
           </div>
           {% if request.user.userprofile.active %}
-                <ul class="collection">
-                  <li class="collection-item">
-                    Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
-                  </li>
-                  <li class="collection-item">
-                    Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
-                  </li>
-                  <li class="collection-item">
-                    Trending Up? <span class="trending">{{ trending }}</span>
-                  </li>
-                </ul>
-              </div>
-            <div id="frontpaged" class="center"></div>
-            <div id="myDiv"></div>
-            <div id="percentPieGraph" class="center"></div>
+            <ul class="collection">
+              <li class="collection-item">
+                Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
+              </li>
+              <li class="collection-item">
+                Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
+              </li>
+              <li class="collection-item">
+                Trending Up? <span class="trending">{{ trending }}</span>
+              </li>
+            </ul>
+          </div>
+          <div id="frontpaged" class="center"></div>
+          <div id="myDiv"></div>
+          <div id="percentPieGraph" class="center"></div>
           {% else %}
             <p>You aren't currently streaming. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
-            {% include 'includes/daily_breakdown_table.html' %}
           {% endif %}
-            </div>
           </div>
         </div>
       </div>

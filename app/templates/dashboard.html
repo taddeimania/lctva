@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extracss %}
+  <style>
+    header, main, footer {
+      padding-left: 200px;
+    }
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+      #nav-mobile {
+        width: 0px;
+      }
+    }
+    ul.side-nav.fixed li a {
+        font-size: 13px;
+        line-height: 44px;
+        height: 44px;
+    }
+    ul.side-nav.fixed li.logo {
+        background: #607D8B;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    }
+    .side-nav {
+        box-shadow: none;
+    }
+    .container {
+      width: 90%;
+    }
+    ul.side-nav.fixed li.logo {
+      text-align: center;
+      padding-top: 4px;
+    }
+    #logo-container {
+        height: 60px;
+        margin-bottom: 32px;
+    }
+  </style>
+{% endblock %}
+
+{% block sidebar %}
+    <ul id="nav-mobile" class="side-nav fixed " style="width: 200px; left: 0px;">
+      <li class="logo"><a id="logo-container" href="/" class="brand-logo white-text"><i class="material-icons medium">insert_chart</i></a></li>
+      <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black">Live</a></li>
+      <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black">History</a></li>
+      <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black">Followers</a></li>
+      <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black">Notifications</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li class="bold"><a class="collapsible-header waves-effect waves-black">Profile</a>
+            <div class="collapsible-body" style="">
+              <ul>
+                <li><a href="color.html">Change Password</a></li>
+                <li><a href="color.html">Edit Profile Details</a></li>
+                <li><a href="{% url 'account_verify' %}">API Link</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="bold"><a href="{% url 'logout' %}" class="waves-effect waves-black">Logout</a></li>
+    </ul>
+{% endblock %}
+
+{% block dashboardscript %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.collapsible').collapsible();
+    $(".button-collapse").sideNav()
+    });
+
+  </script>
+{% endblock %}

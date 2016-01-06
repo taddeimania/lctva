@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'dashboard.html' %}
 {% load staticfiles %}
 
 {% block content %}
@@ -11,6 +11,7 @@
     {% else %}
       <a href="{% url 'history_list_view' %}">Back to History</a>
     {% endif %}
+
     <div id="historyGraph"></div>
     <table>
       <thead>
@@ -27,6 +28,25 @@
           <td>{{ breakdown.max }}</td>
           <td>{{ breakdown.minutes }}</td>
         </tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Viewers Overall</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for vid in videos %}
+        <tr>
+          <td><a href="https://livecoding.tv/video/{{ vid.slug }}" target="_blank">{{ vid.title }}</a></td>
+          <td>{{ vid.duration }}s</td>
+          <td>{{ vid.viewers_overall }}</td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>

@@ -9,6 +9,7 @@ from app.models import ApiKey, ApiAccessToken
 
 
 class AuthorizeAPIView(RedirectView):
+    permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
         if ApiAccessToken.objects.filter(user=self.request.user):

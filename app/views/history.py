@@ -3,6 +3,7 @@ import datetime
 
 from django.views.generic import TemplateView
 
+from app.client import LiveCodingClient
 from app.models import Node, Friends
 from app.utils import daily_aggregator, unzip_data, prepare_data_for_plot
 
@@ -29,11 +30,13 @@ class HistoryDetailView(TemplateView):
 
     def get_context_data(self, datestamp):
         context = super().get_context_data()
+        day = datetime.datetime.strptime(datestamp, "%Y-%m-%d").date()
         livetvusername = self.request.user.userprofile.livetvusername
-        day_nodes = Node.objects.filter(livetvusername=livetvusername, timestamp__contains=datetime.datetime.strptime(datestamp, "%Y-%m-%d").date())
+        day_nodes = Node.objects.filter(livetvusername=livetvusername, timestamp__contains=day)
         x_data, y_data = unzip_data(prepare_data_for_plot(day_nodes.values_list("timestamp", "current_total")))
         context["breakdown"] = daily_aggregator(day_nodes)[0]
         context["y_data"] = y_data
         context["x_data"] = x_data
+        context["videos"] = [vid for vid in LiveCodingClient(livetvusername).get_user_videos() if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
         context["max_y"] = max(y_data)
         return context

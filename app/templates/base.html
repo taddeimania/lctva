@@ -6,27 +6,39 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <link href='https://fonts.googleapis.com/css?family=Montserrat|Open+Sans' rel='stylesheet' type='text/css'>
+  <style>
+  .dropdown-content li>a, .dropdown-content li>span {
+    color: black;
+  }
+  </style>
+  {% block extracss %}
+  {% endblock %}
 </head>
 <body class="dark-primary-color">
+  <ul id="profileDropdown" class="dropdown-content">
+    <li><a href="{% url 'about_view' %}">About</a></li>
+    <li><a href="{% url 'live_view' %}">Dashboard</a></li>
+    <li class="divider"></li>
+    <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
+  </ul>
   <header>
     <nav class="default-primary-color">
       <div class="container">
-      <div class="nav-wrapper">
-        <a href="{% url 'index_view' %}" class="brand-logo title">LCTVA</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          {% if request.user.id %}
-            <li><a href="{% url 'live_view' %}">Live</a></li>
-            <li><a href="{% url 'history_list_view' %}">History</a></li>
-            <li><a href="{% url 'account_verify' %}">Setup</a></li>
-            <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
-          {% else %}
-            <li><a href="{% url 'about_view' %}">About</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-          {% endif %}
-        </ul>
-      </div>
+        <div class="nav-wrapper">
+          <a href="{% url 'index_view' %}" class="brand-logo title">LCTVA</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if request.user.id %}
+              <li><a class="dropdown-button" href="#!" data-activates="profileDropdown">{{ request.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
+            {% else %}
+              <li><a href="{% url 'about_view' %}">About</a></li>
+              <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
     </nav>
+    {% block sidebar %}
+    {% endblock %}
   </header>
 
   <main>
@@ -76,6 +88,8 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js"></script>
+  {% block dashboardscript %}
+  {% endblock %}
   {% block script %}
   {% endblock %}
 </body>

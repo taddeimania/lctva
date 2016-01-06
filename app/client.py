@@ -67,8 +67,10 @@ class LiveCodingClient:
             stream_details = self._make_request("{}{}".format(url, next_params))
             yield get_data(self, stream_details)
 
-    def get_all_videos(self):
-        url = "/videos/"
+    def get_user_videos(self):
+        return self.get_videos(url="/user/videos/")
+
+    def get_videos(self, url="/videos/"):
         stream_details = self._make_request(url)
         if not stream_details["next"]:
             return [self._data_factory("video", video) for video in stream_details["results"]]

@@ -1,5 +1,9 @@
 {% extends 'dashboard.html' %}
 
+{% block collapsible %}
+  <li class="bold"><a class="collapsible-header active waves-effect waves-black">Profile</a>
+{% endblock %}
+
 {% block content %}
 
   {% if request.GET.api_error %}

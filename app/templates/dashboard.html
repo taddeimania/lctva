@@ -41,34 +41,36 @@
 {% endblock %}
 
 {% block sidebar %}
-    <ul id="nav-mobile" class="side-nav fixed " style="width: 200px; left: 0px;">
-      <li class="logo"><a id="logo-container" href="/" class="brand-logo white-text"><i class="material-icons medium">insert_chart</i></a></li>
-      <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black">Live</a></li>
-      <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black">History</a></li>
-      <li class="bold"><a href="{% url 'history_followers_view' %}" class="waves-effect waves-black">Followers</a></li>
-      <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black">Notifications</a></li>
-      <li class="no-padding">
-        <ul class="collapsible collapsible-accordion">
-          <li class="bold"><a class="collapsible-header waves-effect waves-black">Profile</a>
-            <div class="collapsible-body" style="">
-              <ul>
+  <ul id="nav-mobile" class="side-nav fixed " style="width: 200px; left: 0px;">
+    <li class="logo"><a id="logo-container" href="/" class="brand-logo white-text"><i class="material-icons medium">insert_chart</i></a></li>
+    <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">videocam</i> Live</a></li>
+    <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">library_books</i> History</a></li>
+    <li class="bold"><a href="{% url 'history_followers_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">person_pin</i> Followers</a></li>
+    <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">announcement</i> Alerts <span class="new badge default-primary-color" id="alertSpan">4</span></a></li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        {% block collapsible %}
+        <li class="bold"><a class="collapsible-header waves-effect waves-black">Profile</a>
+        {% endblock %}
+          <div class="collapsible-body" style="">
+            <ul>
                 <li><a href="color.html">Change Password</a></li>
                 <li><a href="color.html">Edit Profile Details</a></li>
                 <li><a href="{% url 'account_verify' %}">API Link</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <li class="bold"><a href="{% url 'logout' %}" class="waves-effect waves-black">Logout</a></li>
-    </ul>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="bold"><a href="{% url 'logout' %}" class="waves-effect waves-black">Logout</a></li>
+  </ul>
 {% endblock %}
 
 {% block dashboardscript %}
   <script type="text/javascript">
     $(document).ready(function(){
       $('.collapsible').collapsible();
-    $(".button-collapse").sideNav()
+      $(".button-collapse").sideNav()
     });
 
   </script>

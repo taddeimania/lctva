@@ -54,8 +54,8 @@
         {% endblock %}
           <div class="collapsible-body" style="">
             <ul>
-                <li><a href="color.html">Change Password</a></li>
-                <li><a href="color.html">Edit Profile Details</a></li>
+                <li><a href="{% url 'live_view' %}">Change Password</a></li>
+                <li><a href="{% url 'live_view' %}">Edit Profile Details</a></li>
                 <li><a href="{% url 'account_verify' %}">API Link</a></li>
             </ul>
           </div>

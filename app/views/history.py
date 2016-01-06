@@ -40,3 +40,18 @@ class HistoryDetailView(TemplateView):
         context["videos"] = [vid for vid in LiveCodingClient(livetvusername).get_user_videos() if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
         context["max_y"] = max(y_data)
         return context
+
+
+class HistoryFollowersView(TemplateView):
+    template_name = "history/followers.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        livetvusername = self.request.user.userprofile.livetvusername
+        friend_info = Friends.objects.get_all_plottable_user_nodes(livetvusername)
+        if friend_info:
+            dataX, dataY = unzip_data(friend_info)
+            context["friendDataX"] = dataX
+            context["friendDataY"] = dataY
+            context["friendMaxY"] = max(dataY)
+        return context

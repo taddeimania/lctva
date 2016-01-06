@@ -1,0 +1,33 @@
+{% extends 'dashboard.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">Your Followers</span>
+    <br>
+    <div id="friends_graph"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/plotly-latest.min.js' %}"></script>
+  <script type="application/javascript">
+    $( document ).ready(function() {
+        var layout = {
+          yaxis: {
+            range: [0, {{ friendMaxY }} * 1.1],
+          }
+        };
+        var data = [{
+          x: {% autoescape off %}{{ friendDataX }}{% endautoescape %},
+          y: {{ friendDataY }},
+          type: 'scatter',
+          name: 'Friends'
+        }];
+
+        Plotly.newPlot('friends_graph', data, layout);
+      });
+  </script>
+{% endblock %}

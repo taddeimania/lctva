@@ -83,23 +83,6 @@
   <script type="application/javascript">
     $( document ).ready(function() {
 
-      var createPieGraph = function() {
-        var data = [{
-          values: [{{ current_node.current_total }}, {{ current_node.total_site_streamers }}],
-          labels: ['You', 'Livecoding.tv'],
-          type: 'pie'
-        }];
-
-        var layout = {
-          height: 400,
-          width: 500
-        };
-
-        Plotly.newPlot('percentPieGraph', data, layout);
-
-      }
-      createPieGraph();
-
       var data = [];
       var layout = {
         yaxis: {

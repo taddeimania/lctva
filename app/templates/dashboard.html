@@ -46,7 +46,7 @@
     <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">videocam</i> Live</a></li>
     <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">library_books</i> History</a></li>
     <li class="bold"><a href="{% url 'history_followers_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">person_pin</i> Followers</a></li>
-    <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">announcement</i> Alerts <span class="new badge default-primary-color" id="alertSpan">4</span></a></li>
+    <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">announcement</i> Alerts <span class="badge default-primary-color white-text" id="alertSpan"></span></a></li>
     <li class="no-padding">
       <ul class="collapsible collapsible-accordion">
         {% block collapsible %}
@@ -70,7 +70,7 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $('.collapsible').collapsible();
-      $(".button-collapse").sideNav()
+      $('.button-collapse').sideNav()
     });
 
   </script>

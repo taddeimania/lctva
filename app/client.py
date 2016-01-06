@@ -70,10 +70,11 @@ class LiveCodingClient:
     def get_user_videos(self):
         return self.get_videos(url="/user/videos/")
 
+    # TODO: testme
     def get_videos(self, url="/videos/"):
         stream_details = self._make_request(url)
         if not stream_details["next"]:
-            return [self._data_factory("video", video) for video in stream_details["results"]]
+            return [[self._data_factory("video", video) for video in stream_details["results"]]]
 
         return self._get_paginated_data("video", url, stream_details)
 

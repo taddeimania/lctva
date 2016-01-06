@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
+from app.client import LiveCodingClient
 from app.models import Node, Friends
 from app.utils import daily_aggregator, unzip_data, prepare_data_for_plot
 
@@ -40,6 +41,7 @@ class AdminPeekDetailView(TemplateView):
 
     def get_context_data(self, user_slug, datestamp):
         context = super().get_context_data()
+        day = datetime.datetime.strptime(datestamp, "%Y-%m-%d").date()
         day_nodes = Node.objects.filter(livetvusername=user_slug, timestamp__contains=datetime.datetime.strptime(datestamp, "%Y-%m-%d").date())
         x_data, y_data = unzip_data(prepare_data_for_plot(day_nodes.values_list("timestamp", "current_total")))
         context["breakdown"] = daily_aggregator(day_nodes)[0]
@@ -48,4 +50,5 @@ class AdminPeekDetailView(TemplateView):
         context["max_y"] = max(y_data)
         context["admin_viewing"] = True
         context["admin_viewing_user"] = user_slug
+        context["videos"] = [vid for generator in LiveCodingClient(user_slug).get_user_videos() for vid in generator if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
         return context

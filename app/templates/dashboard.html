@@ -47,21 +47,9 @@
     <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">library_books</i> History</a></li>
     <li class="bold"><a href="{% url 'history_followers_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">person_pin</i> Followers</a></li>
     <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">announcement</i> Alerts <span class="badge default-primary-color white-text" id="alertSpan"></span></a></li>
-    <li class="no-padding">
-      <ul class="collapsible collapsible-accordion">
-        {% block collapsible %}
-        <li class="bold"><a class="collapsible-header waves-effect waves-black">Profile</a>
-        {% endblock %}
-          <div class="collapsible-body" style="">
-            <ul>
-                <li><a href="{% url 'live_view' %}">Change Password</a></li>
-                <li><a href="{% url 'live_view' %}">Edit Profile Details</a></li>
-                <li><a href="{% url 'account_verify' %}">API Link</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </li>
+    <li class="bold"><a href="{% url 'account_verify' %}">API Link</a></li>
+    <li class="bold"><a href="{% url 'live_view' %}">Change Password</a></li>
+    <li class="bold"><a href="{% url 'live_view' %}">Edit Profile Details</a></li>
     <li class="bold"><a href="{% url 'logout' %}" class="waves-effect waves-black">Logout</a></li>
   </ul>
 {% endblock %}

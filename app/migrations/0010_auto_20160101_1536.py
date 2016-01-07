@@ -3,10 +3,12 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
-from app.models import UserProfile, Node
 
 
 def migrate_nodes_and_profile_livetvusernames(apps, schema_editor):
+    UserProfile = apps.get_model("app", "UserProfile")
+    Node = apps.get_model("app", "Node")
+
     for profile in UserProfile.objects.all():
         profile.livetvusername = profile.livetvusername.lower()
         profile.save()

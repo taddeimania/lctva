@@ -4,10 +4,9 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from app.models import UserProfile
-
 
 def set_tz_info(apps, schema_editor):
+    UserProfile = apps.get_model("app", "UserProfile")
     for profile in UserProfile.objects.all():
         profile.tz = "America/New_York"
         profile.save()

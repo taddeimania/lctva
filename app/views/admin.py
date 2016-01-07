@@ -43,7 +43,7 @@ class AdminPeekDetailView(TemplateView):
         context = super().get_context_data()
         day = datetime.datetime.strptime(datestamp, "%Y-%m-%d").date()
         day_nodes = Node.objects.filter(livetvusername=user_slug, timestamp__contains=datetime.datetime.strptime(datestamp, "%Y-%m-%d").date())
-        x_data, y_data = unzip_data(prepare_data_for_plot(day_nodes.values_list("timestamp", "current_total")))
+        x_data, y_data = unzip_data(prepare_data_for_plot(day_nodes.values_list("timestamp", "current_total"), user_slug))
         context["breakdown"] = daily_aggregator(day_nodes)[0]
         context["y_data"] = y_data
         context["x_data"] = x_data

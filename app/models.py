@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 import requests
+from pytz import timezone
 
 from app.utils import adjust_time, prepare_data_for_plot
 
@@ -22,7 +23,7 @@ class NodeBaseManager(models.Manager):
                 for node in self.get_last_hour(user).values_list('timestamp', 'current_total')]
 
     def get_x_time_ago(self, user, time_diff):
-        time_ago = datetime.datetime.now() - time_diff
+        time_ago = datetime.datetime.now(timezone(UserProfile.objects.get(livetvusername=user).tz)) - time_diff
         return self.get_all_user_nodes(user).filter(timestamp__gt=time_ago)
 
     def get_last_hour(self, user):
@@ -33,7 +34,11 @@ class NodeBaseManager(models.Manager):
 
     def get_all_plottable_user_nodes(self, user):
         nodes = self.get_all_user_nodes(user).values_list('timestamp', 'current_total')
-        return prepare_data_for_plot(nodes)
+        return prepare_data_for_plot(nodes, user)
+
+
+from django.utils import timezone as dj_timezone
+from pytz import timezone as pytz_timezone
 
 
 class NodeAbstract(models.Model):
@@ -49,7 +54,7 @@ class NodeAbstract(models.Model):
 
     @property
     def time(self):
-        return adjust_time(self.timestamp).strftime("%d/%m/%y %H:%M:%S")
+        return adjust_time(self.timestamp, self.livetvusername).strftime("%d/%m/%y %H:%M:%S")
 
     def __str__(self):
         return "{} - {}".format(self.time, self.current_total)

@@ -25,9 +25,9 @@ class AccountActivateView(TemplateView):
 class SetTimezoneView(View):
 
     def get(self, request):
-        return render(self.request, 'timezone.html', {'timezones': pytz.common_timezones, 'TIME_ZONE': self.request.user.userprofile.tz})
+        return render(self.request, 'timezone.html', {'timezones': pytz.common_timezones})
 
     def post(self, request):
         self.request.user.userprofile.tz = self.request.POST['timezone']
         self.request.user.userprofile.save()
-        return render(self.request, 'timezone.html', {'timezones': pytz.common_timezones})
+        return render(self.request, 'timezone.html', {'timezones': pytz.common_timezones, 'success': True})

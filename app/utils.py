@@ -3,6 +3,8 @@ import datetime
 from collections import namedtuple, OrderedDict
 from statistics import mean
 
+from pytz import timezone
+
 
 def daily_aggregator(queryset):
     aggregated_collection = OrderedDict()
@@ -33,10 +35,12 @@ def clean_usernames(usernames):
     return set(map(str.lower, usernames))
 
 
-def adjust_time(timestamp):
-    return timestamp - datetime.timedelta(hours=5)
+def adjust_time(timestamp, tz):
+    return timestamp.astimezone(timezone(tz))
 
 
-def prepare_data_for_plot(nodes):
-    return [(adjust_time(node[0]).strftime("%Y-%m-%d %H:%M:%S"), node[1])
+def prepare_data_for_plot(nodes, user):
+    from app.models import UserProfile
+    tz = UserProfile.objects.get(livetvusername=user).tz
+    return [(adjust_time(node[0], tz).strftime("%Y-%m-%d %H:%M:%S"), node[1])
             for node in nodes]

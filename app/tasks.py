@@ -135,8 +135,8 @@ def get_today():
 
 def lower_resolution():
     today = get_today()
-    two_months_ago = today + datetime.timedelta(days=-60)
-    old_data = Node.objects.filter(timestamp__gte=two_months_ago).values_list('livetvusername', 'current_total')
+    yesterday = today + datetime.timedelta(days=-1)
+    old_data = Node.objects.filter(timestamp__gte=yesterday).values_list('livetvusername', 'current_total')
     data_x, data_y = unzip_data(old_data)
     unique_users = set(data_x)
 

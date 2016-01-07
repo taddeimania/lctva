@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from pytz import timezone
+from django.utils import timezone as django_timezone
 
 from app.utils import adjust_time, prepare_data_for_plot
 
@@ -39,7 +40,7 @@ class NodeBaseManager(models.Manager):
 class NodeAbstract(models.Model):
     livetvusername = models.CharField(max_length=40, db_index=True)
     current_total = models.IntegerField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default=django_timezone.now)
 
     objects = NodeBaseManager()
 

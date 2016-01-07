@@ -40,7 +40,7 @@ class NotificationListView(ListView):
 
     def get_queryset(self):
         qs = Notification.objects.all()
-        for notification in qs:
+        for notification in qs.exclude(readers=self.request.user):
             notification.readers.add(self.request.user)
         return qs
 

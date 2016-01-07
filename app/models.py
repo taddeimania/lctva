@@ -53,13 +53,6 @@ class NodeAbstract(models.Model):
         abstract = True
         ordering = ["timestamp"]
 
-    @property
-    def time(self):
-        return adjust_time(self.timestamp, self.livetvusername).strftime("%d/%m/%y %H:%M:%S")
-
-    def __str__(self):
-        return "{} - {}".format(self.time, self.current_total)
-
 
 class NodeManager(NodeBaseManager):
 

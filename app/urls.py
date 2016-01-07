@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^relink-api/$', login_required(RelinkAPIView.as_view()), name="relink_api_view"),
     url(r'^authorize-api/postback/', AuthorizePostBackAPIView.as_view(), name="authorize_api_postback_view"),
     url(r'^api/graph/$', GraphView.as_view(), name="graph_view"),
-    url(r'^a/(?P<user_slug>[a-z0-9-]+)/$', login_required(AdminPeekListView.as_view()), name="admin_peek_list_view"),
-    url(r'^a/(?P<user_slug>[a-z0-9-]+)/(?P<datestamp>\d{4}-\d{2}-\d{2})/$', login_required(AdminPeekDetailView.as_view()), name="admin_peek_detail_view"),
+    url(r'^a/(?P<user_slug>[a-z0-9-_]+)/$', login_required(AdminPeekListView.as_view()), name="admin_peek_list_view"),
+    url(r'^a/(?P<user_slug>[a-z0-9-_]+)/(?P<datestamp>\d{4}-\d{2}-\d{2})/$', login_required(AdminPeekDetailView.as_view()), name="admin_peek_detail_view"),
 ]

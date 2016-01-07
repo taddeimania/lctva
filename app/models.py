@@ -1,12 +1,10 @@
 import datetime
 import uuid
 
-from bs4 import BeautifulSoup
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-import requests
 from pytz import timezone
 
 from app.utils import adjust_time, prepare_data_for_plot
@@ -36,10 +34,6 @@ class NodeBaseManager(models.Manager):
     def get_all_plottable_user_nodes(self, user):
         nodes = self.get_all_user_nodes(user).values_list('timestamp', 'current_total')
         return prepare_data_for_plot(nodes, user)
-
-
-from django.utils import timezone as dj_timezone
-from pytz import timezone as pytz_timezone
 
 
 class NodeAbstract(models.Model):
@@ -133,3 +127,17 @@ class UserProfile(models.Model):
 def add_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
+
+
+class NotificationManager(models.Manager):
+
+    def get_unread_notifications(self, user):
+        return self.all().exclude(readers=user)
+
+
+class Notification(models.Model):
+    readers = models.ManyToManyField(User)
+    body = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    objects = NotificationManager()

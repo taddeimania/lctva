@@ -109,10 +109,10 @@ def check_friends_and_total_viewers():
             current_total=get_friend_count(profile.livetvusername, url),
             livetvusername=profile.livetvusername
         )
-        Viewers.objects.create(
-            current_total=get_total_viewer_count(profile.livetvusername, url),
-            livetvusername=profile.livetvusername
-        )
+        # Viewers.objects.create(
+        #     current_total=get_total_viewer_count(profile.livetvusername, url),
+        #     livetvusername=profile.livetvusername
+        # )
 
 
 @app.task

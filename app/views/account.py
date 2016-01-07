@@ -14,7 +14,7 @@ class AccountCreateView(CreateView):
     template_name = "registration/create.html"
 
     def get_success_url(self):
-        return reverse("index_view")
+        return reverse("login")
 
 
 class AccountActivateView(TemplateView):

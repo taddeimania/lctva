@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
+
 from app.views.account import AccountCreateView, AccountActivateView
 
 

@@ -7,6 +7,7 @@ from app.views.auth import AuthorizeAPIView, AuthorizePostBackAPIView, RelinkAPI
 from app.views.history import HistoryListView, HistoryDetailView, HistoryFollowersView
 from app.views.live import LiveView
 from app.views.public import IndexView, AboutView
+from app.views.account import SetTimezoneView
 
 
 urlpatterns = [
@@ -16,6 +17,7 @@ urlpatterns = [
     url(r'^history/$', login_required(HistoryListView.as_view()), name="history_list_view"),
     url(r'^history/followers/$', login_required(HistoryFollowersView.as_view()), name="history_followers_view"),
     url(r'^history/(?P<datestamp>\d{4}-\d{2}-\d{2})/$', login_required(HistoryDetailView.as_view()), name="history_detail_view"),
+    url(r'^timezone/$', login_required(SetTimezoneView.as_view()), name="timezone_view"),
     url(r'^authorize-api/$', login_required(AuthorizeAPIView.as_view()), name="authorize_api_view"),
     url(r'^relink-api/$', login_required(RelinkAPIView.as_view()), name="relink_api_view"),
     url(r'^authorize-api/postback/', AuthorizePostBackAPIView.as_view(), name="authorize_api_postback_view"),

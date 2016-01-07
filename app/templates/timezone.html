@@ -1,0 +1,35 @@
+{% extends 'dashboard.html' %}
+{% load staticfiles %}
+{% load tz %}
+
+{% block content %}
+{% get_current_timezone as TIME_ZONE %}
+  <div class="card">
+    <div class="card-content">
+      <div class="card-title">
+        Update Timezone
+      </div>
+      <form action="" method="POST">
+          {% csrf_token %}
+          <label for="timezone">Time zone:</label>
+          <div class="input-field">
+            <select name="timezone">
+                {% for tz in timezones %}
+                <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected="selected"{% endif %}>{{ tz }}</option>
+                {% endfor %}
+            </select>
+          </div>
+          <button class="btn waves-effect waves-light dark-primary-color" type="submit" name="action">Set Timezone</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block script %}
+<script type="application/javascript">
+$(document).ready(function() {
+  $('select').material_select();
+});
+</script>
+{% endblock %}

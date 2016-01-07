@@ -119,6 +119,7 @@ class UserProfile(models.Model):
     verified = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     frontpaged = models.BooleanField(default=False)
+    tz = models.CharField(max_length=100, blank=True, default="America/New_York")
 
     @property
     def is_authorized(self):

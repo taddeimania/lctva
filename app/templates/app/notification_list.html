@@ -1,0 +1,25 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+  {% if object_list %}
+    {% for notification in object_list %}
+      <div class="card">
+          <div class="card-content">
+            <span class="card-title">{{ notification.title }}</span>
+            <p>
+            {{ notification.body }}
+            </p>
+          </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">No Alerts to display</span>
+        <p>
+        It may be, it may be bad - but there is nothing to report.
+        </p>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

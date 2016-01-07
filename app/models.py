@@ -136,7 +136,8 @@ class NotificationManager(models.Manager):
 
 
 class Notification(models.Model):
-    readers = models.ManyToManyField(User)
+    readers = models.ManyToManyField(User, blank=True)
+    title = models.CharField(max_length=40)
     body = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 

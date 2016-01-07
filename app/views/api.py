@@ -4,7 +4,7 @@ import json
 from django.http import HttpResponse
 from django.views.generic import View
 
-from app.models import Node
+from app.models import Node, Notification
 from app.utils import unzip_data
 from app.utils import trending
 
@@ -27,3 +27,10 @@ class GraphView(View):
                    "siteY": siteY,
                    "current_count": current_count}
         return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+class NotificationCountAPIView(View):
+
+    def get(self, request):
+        count = Notification.objects.get_unread_notifications(request.user).count()
+        return HttpResponse(json.dumps(count), content_type="application/json")

@@ -1,12 +1,13 @@
 
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 import pytz
 
-from app.models import UserProfile
+from app.models import UserProfile, Notification
 
 
 class AccountCreateView(CreateView):
@@ -31,3 +32,13 @@ class SetTimezoneView(View):
         self.request.user.userprofile.tz = self.request.POST['timezone']
         self.request.user.userprofile.save()
         return render(self.request, 'timezone.html', {'timezones': pytz.common_timezones, 'success': True})
+
+
+class NotificationListView(ListView):
+    model = Notification
+
+    def get_queryset(self):
+        qs = Notification.objects.all()
+        for notification in qs:
+            notification.readers.add(self.request.user)
+        return qs

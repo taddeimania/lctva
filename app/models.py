@@ -19,7 +19,8 @@ class NodeBaseManager(models.Manager):
         return self.get_plottable_last_hour(user)[-100:]
 
     def get_plottable_last_hour(self, user):
-        return [(adjust_time(node[0]).strftime("%Y-%m-%d %H:%M:%S"), node[1])
+        tz = UserProfile.objects.get(livetvusername=user).tz
+        return [(adjust_time(node[0], tz).strftime("%Y-%m-%d %H:%M:%S"), node[1])
                 for node in self.get_last_hour(user).values_list('timestamp', 'current_total')]
 
     def get_x_time_ago(self, user, time_diff):
@@ -63,7 +64,8 @@ class NodeAbstract(models.Model):
 class NodeManager(NodeBaseManager):
 
     def get_plottable_last_hour(self, user):
-        return [(adjust_time(node[0]).strftime("%Y-%m-%d %H:%M:%S"), node[1], node[2])
+        tz = UserProfile.objects.get(livetvusername=user).tz
+        return [(adjust_time(node[0], tz).strftime("%Y-%m-%d %H:%M:%S"), node[1], node[2])
                 for node in self.get_last_hour(user).values_list('timestamp', 'current_total', 'total_site_streamers')]
 
 

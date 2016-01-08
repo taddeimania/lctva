@@ -110,5 +110,9 @@ CELERYBEAT_SCHEDULE = {
         'task': 'app.tasks.check_friends_and_total_viewers',
         'schedule': (60 * 60) * 24,
     },
+    'create-daily-leaderboard-every-day': {
+        'task': 'app.tasks.create_daily_leaderboard',
+        'schedule': (60 * 60) * 24,
+    },
 }
 LOGIN_REDIRECT_URL = "/live/"

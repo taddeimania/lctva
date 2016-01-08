@@ -143,6 +143,7 @@ def get_today():
 #     unique_users = set(data_x)
 
 
+@app.task
 def create_daily_leaderboard():
     yesterday = (django_timezone.now() + datetime.timedelta(days=-1)).date()
     leaderboard = Leaderboard.objects.create(date=yesterday)

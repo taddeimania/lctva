@@ -21,11 +21,11 @@
               </thead>
 
               <tbody>
-                {% for minutes, user in leaderboard_data.minutes_streamed %}
+                {% for leader in leaderboard_data.minutes_leaders.all %}
                 <tr>
                   <td>{{ forloop.counter }}.</td>
-                  <td>{{ minutes }}</td>
-                  <td><a href="https://livecoding.tv/{{ user }}" target="_blank">{{ user }}</a></td>
+                  <td>{{ leader.minutes }}</td>
+                  <td><a href="https://livecoding.tv/{{ leader.livetvuser }}" target="_blank">{{ leader.livetvusername }}</a></td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -46,11 +46,11 @@
               </thead>
 
               <tbody>
-                {% for minutes, user in leaderboard_data.average_viewers %}
+                {% for leader in leaderboard_data.viewers_leaders.all %}
                 <tr>
                   <td>{{ forloop.counter }}.</td>
-                  <td>{{ minutes }}</td>
-                  <td><a href="https://livecoding.tv/{{ user }}" target="_blank">{{ user }}</a></td>
+                  <td>{{ leader.minutes }}</td>
+                  <td><a href="https://livecoding.tv/{{ leader.livetvusername }}" target="_blank">{{ leader.livetvusername }}</a></td>
                 </tr>
                 {% endfor %}
               </tbody>

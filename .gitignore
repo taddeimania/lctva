@@ -9,3 +9,4 @@ celerybeat-schedule
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 dbpass.py
+watcher/static/

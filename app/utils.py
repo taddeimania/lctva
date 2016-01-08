@@ -44,3 +44,30 @@ def prepare_data_for_plot(nodes, user):
     tz = UserProfile.objects.get(livetvusername=user).tz
     return [(adjust_time(node[0], tz).strftime("%Y-%m-%d %H:%M:%S"), node[1])
             for node in nodes]
+
+
+class LeaderBoardGenerator:
+
+    def __init__(self, nodes):
+        self.node_data = nodes.values_list("livetvusername", "timestamp", "current_total")
+
+    def _minutes_streamed(self, counts):
+        return counts / 5
+
+    def _average_viewers(self, counts):
+        return round(sum(counts) / len(counts))
+
+    def get_data(self):
+        leaderboard_data = {}
+        user_set = {data[0] for data in self.node_data}
+        user_minutes = []
+        viewer_counts = []
+        for user in user_set:
+            user_data = list(filter(lambda x: x[0] == user, self.node_data))
+            username, timestamps, values = unzip_data(user_data)
+            user_minutes.append((self._minutes_streamed(len(values)), user))
+            viewer_counts.append((self._average_viewers(values), user))
+
+        leaderboard_data["minutes_streamed"] = sorted(user_minutes, reverse=True)[:10]
+        leaderboard_data["average_viewers"] = sorted(viewer_counts, reverse=True)[:10]
+        return leaderboard_data

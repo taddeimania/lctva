@@ -146,3 +146,15 @@ class Notification(models.Model):
 
     class Meta:
         ordering = ["-timestamp"]
+
+
+class Leader(models.Model):
+    livetvusername = models.CharField(max_length=40)
+    minutes = models.FloatField(null=True)
+    viewers = models.IntegerField(null=True)
+
+
+class Leaderboard(models.Model):
+    date = models.DateField(db_index=True)  # immutable
+    minutes_leaders = models.ManyToManyField(Leader, related_name="minutes_leaders")
+    viewers_leaders = models.ManyToManyField(Leader, related_name="viewers_leaders")

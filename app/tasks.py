@@ -2,11 +2,12 @@ import datetime
 from statistics import mean
 
 from app.client import LiveCodingClient
-from app.models import Node, UserProfile, Friends, Viewers, ApiKey
-from app.utils import clean_usernames, unzip_data
+from app.models import Node, UserProfile, Friends, Viewers, ApiKey, Leader, Leaderboard
+from app.utils import clean_usernames, unzip_data, LeaderBoardGenerator
 from watcher.celery import app
 
 from bs4 import BeautifulSoup
+from django.utils import timezone as django_timezone
 import requests
 
 
@@ -134,11 +135,29 @@ def get_today():
     return datetime.date.today()
 
 
-def lower_resolution():
-    today = get_today()
-    yesterday = today + datetime.timedelta(days=-1)
-    old_data = Node.objects.filter(timestamp__gte=yesterday).values_list('livetvusername', 'current_total')
-    data_x, data_y = unzip_data(old_data)
-    unique_users = set(data_x)
+# def lower_resolution():
+#     today = get_today()
+#     yesterday = today + datetime.timedelta(days=-1)
+#     old_data = Node.objects.filter(timestamp__gte=yesterday).values_list('livetvusername', 'current_total')
+#     data_x, data_y = unzip_data(old_data)
+#     unique_users = set(data_x)
 
-    pass
+
+def create_daily_leaderboard():
+    yesterday = (django_timezone.now() + datetime.timedelta(days=-1)).date()
+    leaderboard = Leaderboard.objects.create(date=yesterday)
+    yesterday_nodes = Node.objects.filter(timestamp__contains=yesterday)
+    lb_gen = LeaderBoardGenerator(yesterday_nodes)
+    leaderboard_data = lb_gen.get_data()
+    for minute_leader in leaderboard_data["minutes_streamed"]:
+        leader = Leader.objects.create(
+            livetvusername=minute_leader[1],
+            minutes=minute_leader[0]
+        )
+        leaderboard.minutes_leaders.add(leader)
+    for viewer_leader in leaderboard_data["average_viewers"]:
+        leader = Leader.objects.create(
+            livetvusername=viewer_leader[1],
+            minutes=viewer_leader[0]
+        )
+        leaderboard.viewers_leaders.add(leader)

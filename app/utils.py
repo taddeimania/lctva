@@ -52,7 +52,7 @@ class LeaderBoardGenerator:
         self.node_data = nodes.values_list("livetvusername", "timestamp", "current_total")
 
     def _minutes_streamed(self, counts):
-        return counts / 5
+        return round((counts / 60) * 5, 2)
 
     def _average_viewers(self, counts):
         return round(sum(counts) / len(counts))

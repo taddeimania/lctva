@@ -32,6 +32,7 @@
               <li><a class="dropdown-button" href="#!" data-activates="profileDropdown">{{ request.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
             {% else %}
               <li><a href="{% url 'about_view' %}">About</a></li>
+              <li><a href="{% url 'leaderboard_daily_view' %}">Leaderboard</a></li>
               <li><a href="{% url 'login' %}">Login</a></li>
             {% endif %}
           </ul>

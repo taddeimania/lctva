@@ -12,9 +12,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='leaderboard',
-            name='date',
-            field=models.DateField(db_index=True, unique=True),
-        ),
+        # migrations.AlterField(
+        #     model_name='leaderboard',
+        #     name='date',
+        #     field=models.DateField(db_index=True, unique=True),
+        # ),
     ]

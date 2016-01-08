@@ -24,6 +24,12 @@ class LiveCodingClient:
             'cache-control': "no-cache",
         }
 
+    @staticmethod
+    def get_redirect_url():
+        api_key = ApiKey.objects.get(provider="livecodingtv")
+        base_redirect_url = "https://www.livecoding.tv/o/authorize/?scope=read&state={}&redirect_uri={}&response_type=code&client_id={}"
+        return base_redirect_url.format(api_key.state, api_key.redirect_url, api_key.client_id)
+
     def _data_factory(self, name, data):
         return namedtuple(name, data.keys())(**data)
 

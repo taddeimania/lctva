@@ -10,7 +10,9 @@ class LeaderBoardDailyView(TemplateView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        leaderboard = Leaderboard.objects.filter(date=datetime.date.today() + datetime.timedelta(days=-1))
+        yesterday = datetime.date.today() + datetime.timedelta(days=-1)
+        leaderboard = Leaderboard.objects.filter(date=yesterday)
         if leaderboard:
             context["leaderboard_data"] = leaderboard.get()
+        context["yesterday"] = yesterday
         return context

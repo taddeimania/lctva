@@ -65,6 +65,7 @@ def watch_viewers():
             current_total=viewer_count,
             total_site_streamers=total_viewers,
             livetvusername=livetvusername)
+    set_frontpaged_user(get_verified_usernames())
 
 
 def get_frontpaged_streamer():

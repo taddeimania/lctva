@@ -158,10 +158,6 @@ class DailyLeaderboard(models.Model):
     date = models.DateField(db_index=True)  # immutable
     minutes_leaders = models.ManyToManyField(Leader, related_name="minutes_leaders")
     viewers_leaders = models.ManyToManyField(Leader, related_name="viewers_leaders")
-    monthly = models.BooleanField(default=False)
 
     def __str__(self):
         return self.date.strftime("%m/%d/%Y")
-
-    class Meta:
-        unique_together = ["date", "monthly"]

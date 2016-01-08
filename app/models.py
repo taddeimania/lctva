@@ -155,6 +155,6 @@ class Leader(models.Model):
 
 
 class Leaderboard(models.Model):
-    date = models.DateField(db_index=True)  # immutable
+    date = models.DateField(db_index=True, unique=True)  # immutable
     minutes_leaders = models.ManyToManyField(Leader, related_name="minutes_leaders")
     viewers_leaders = models.ManyToManyField(Leader, related_name="viewers_leaders")

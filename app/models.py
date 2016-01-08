@@ -161,7 +161,7 @@ class DailyLeaderboard(models.Model):
     monthly = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.date
+        return self.date.strftime("%m/%d/%Y")
 
     class Meta:
         unique_together = ["date", "monthly"]

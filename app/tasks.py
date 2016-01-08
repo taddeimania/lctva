@@ -2,7 +2,7 @@ import datetime
 from statistics import mean
 
 from app.client import LiveCodingClient
-from app.models import Node, UserProfile, Friends, Viewers, ApiKey, Leader, Leaderboard
+from app.models import Node, UserProfile, Friends, Viewers, ApiKey, Leader, DailyLeaderboard
 from app.utils import clean_usernames, unzip_data, LeaderBoardGenerator
 from watcher.celery import app
 
@@ -146,7 +146,7 @@ def get_today():
 @app.task
 def create_daily_leaderboard():
     yesterday = (django_timezone.now() + datetime.timedelta(days=-1)).date()
-    leaderboard = Leaderboard.objects.create(date=yesterday)
+    leaderboard = DailyLeaderboard.objects.create(date=yesterday)
     yesterday_nodes = Node.objects.filter(timestamp__contains=yesterday)
     lb_gen = LeaderBoardGenerator(yesterday_nodes)
     leaderboard_data = lb_gen.get_data()

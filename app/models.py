@@ -154,8 +154,8 @@ class Leader(models.Model):
     viewers = models.IntegerField(null=True)
 
 
-class Leaderboard(models.Model):
-    date = models.DateField(db_index=True, unique=True)  # immutable
+class DailyLeaderboard(models.Model):
+    date = models.DateField(db_index=True)  # immutable
     minutes_leaders = models.ManyToManyField(Leader, related_name="minutes_leaders")
     viewers_leaders = models.ManyToManyField(Leader, related_name="viewers_leaders")
     monthly = models.BooleanField(default=False)

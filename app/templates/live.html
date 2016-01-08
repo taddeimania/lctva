@@ -2,22 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-  <div class="card">
-    <div class="card-content">
-      <div class="card-title">
-        Read
-      </div>
-      <p>Since livecoding.tv's API is in beta they are encountering a number
-      of little bugs that we have to work through.  One of those bugs is
-      currently affecting our ability to authenticate with their service.  I
-      have filled a support ticket and hope it is taken care of quicky.
-      Thanks for your patience.</p>
-      <br>
-
-      <p class="red-text">If you have already verified in the old "token=" way, you shouldn't see any issues - but if you're a new user who has not authenticated with livecoding.tv's API - you may have to wait a few hours.</p>
-    </div>
-  </div>
-
   {% if request.user.userprofile.verified %}
     {% if not request.user.userprofile.is_authorized %}
         <div class="card">
@@ -38,7 +22,7 @@
           <div class="card-title">
             {{ request.user.userprofile.livetvusername }}
           </div>
-          {% if request.user.userprofile.active %}
+          {% if max_viewer_count %}
             <ul class="collection">
               <li class="collection-item">
                 Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
@@ -55,7 +39,8 @@
           <div id="myDiv"></div>
           <div id="percentPieGraph" class="center"></div>
           {% else %}
-            <p>You aren't currently streaming. Start streaming and the app will find you in a minute. (refresh a few times maybe)</p>
+            <p>You don't appear to be streaming right now. If you begin streaming, give this page a refresh
+            and you should start seeing your live numbers stream in.</p>
           {% endif %}
           </div>
         </div>
@@ -78,7 +63,7 @@
 {% endblock %}
 
 {% block script %}
-  {% if request.user.userprofile.active %}
+  {% if max_viewer_count %}
   <script src="{% static 'js/plotly-latest.min.js' %}"></script>
   <script type="application/javascript">
     $( document ).ready(function() {

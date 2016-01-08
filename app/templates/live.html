@@ -91,11 +91,10 @@
             name: 'User Counts',
             showLink: false
           }];
-          // max Y should be toggleable between maxSiteY and maxY
           if (hideSiteViewers){
             var yLimit = inData.maxY;
           } else {
-            var yLimit = inData.siteY;
+            var yLimit = inData.maxSiteY;
             data.push({
               x: inData.dataX,
               y: inData.siteY,

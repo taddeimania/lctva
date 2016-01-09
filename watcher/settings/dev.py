@@ -110,11 +110,11 @@ CELERYBEAT_SCHEDULE = {
     # },
     'check-friends-every-day': {
         'task': 'app.tasks.check_friends_and_total_viewers',
-        'schedule': crontab(minute=0, hour=0),
+        'schedule': crontab(minute=0, hour=3),
     },
     'create-daily-leaderboard-every-day': {
         'task': 'app.tasks.create_daily_leaderboard',
-        'schedule': crontab(minute=0, hour=0),
+        'schedule': crontab(minute=0, hour=3),
     },
 }
 LOGIN_REDIRECT_URL = "/live/"

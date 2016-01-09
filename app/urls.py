@@ -6,7 +6,7 @@ from app.views.admin import AdminPeekListView, AdminPeekDetailView
 from app.views.api import GraphView, NotificationCountAPIView
 from app.views.auth import AuthorizeAPIView, AuthorizePostBackAPIView, RelinkAPIView
 from app.views.history import HistoryListView, HistoryDetailView, HistoryFollowersView
-from app.views.leaderboard import LeaderBoardDailyView
+from app.views.leaderboard import LeaderBoardDailyView, LeaderBoardSpecificDayView
 from app.views.live import LiveView
 from app.views.public import IndexView, AboutView
 
@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(), name="index_view"),
     url(r'^about/$', AboutView.as_view(), name="about_view"),
     url(r'^leaderboards/$', LeaderBoardDailyView.as_view(), name="leaderboard_daily_view"),
+    url(r'^leaderboards/(?P<datestamp>\d{4}-\d{2}-\d{2})/$', LeaderBoardSpecificDayView.as_view(), name="leaderboard_specific_day_view"),
     url(r'^live/$', login_required(LiveView.as_view()), name="live_view"),
     url(r'^history/$', login_required(HistoryListView.as_view()), name="history_list_view"),
     url(r'^history/followers/$', login_required(HistoryFollowersView.as_view()), name="history_followers_view"),

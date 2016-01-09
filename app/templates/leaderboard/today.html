@@ -4,17 +4,17 @@
 {% block content %}
   <div class="card">
     <div class="card-content">
+      <span class="left">
+        <a href="{% url 'leaderboard_specific_day_view' yesterday %}"><i class="material-icons tiny">fast_rewind</i> Previous</a>
+      </span>
+      <span class="right">
+        <a href="{% url 'leaderboard_specific_day_view' tomorrow %}">Next <i class="material-icons tiny">fast_forward</i></a>
+      </span>
+      <br>
       {% if leaderboard_data %}
       <div class="card-title title center">
         Leaderboard for {{ leaderboard_data.date }}
       </div>
-      <span class="left">
-        <a href="{% url 'leaderboard_specific_day_view' yesterday %}">Yesterday</a>
-      </span>
-      <span class="right">
-        <a href="{% url 'leaderboard_specific_day_view' tomorrow %}">Tomorrow</a>
-      </span>
-      <br>
 
       <div class="row">
         <div class="col s6">
@@ -75,13 +75,6 @@
       <div class="card-title title center">
         No leaderboard data for requested day
       </div>
-      <span class="left">
-        <a href="{% url 'leaderboard_specific_day_view' yesterday %}">Yesterday</a>
-      </span>
-      <span class="right">
-        <a href="{% url 'leaderboard_specific_day_view' tomorrow %}">Tomorrow</a>
-      </span>
-      <br>
       {% endif %}
     </div>
   </div>

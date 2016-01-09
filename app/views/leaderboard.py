@@ -12,9 +12,7 @@ def get_daily_leaderboard_data(date):
     if leaderboard:
         data = leaderboard.first()
         leaderboard_data = data
-    yesterday = date + datetime.timedelta(days=-1)
-    tomorrow = date + datetime.timedelta(days=1)
-    return leaderboard_data, yesterday, tomorrow
+    return leaderboard_data, date + datetime.timedelta(days=-1), date + datetime.timedelta(days=1)
 
 
 class LeaderBoardDailyView(TemplateView):
@@ -28,7 +26,6 @@ class LeaderBoardDailyView(TemplateView):
         context["yesterday"] = yesterday
         context["tomorrow"] = tomorrow
         return context
-
 
 
 class LeaderBoardSpecificDayView(TemplateView):

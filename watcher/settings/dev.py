@@ -93,6 +93,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + '/static'
 
 
+from celery.schedules import crontab
+
 CELERYBEAT_SCHEDULE = {
     'watch-viewers-every-5-seconds': {
         'task': 'app.tasks.watch_viewers',
@@ -108,11 +110,11 @@ CELERYBEAT_SCHEDULE = {
     # },
     'check-friends-every-day': {
         'task': 'app.tasks.check_friends_and_total_viewers',
-        'schedule': (60 * 60) * 24,
+        'schedule': crontab(minute=0, hour=0),
     },
     'create-daily-leaderboard-every-day': {
         'task': 'app.tasks.create_daily_leaderboard',
-        'schedule': (60 * 60) * 24,
+        'schedule': crontab(minute=0, hour=0),
     },
 }
 LOGIN_REDIRECT_URL = "/live/"

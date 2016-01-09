@@ -153,6 +153,9 @@ class Leader(models.Model):
     minutes = models.FloatField(null=True)
     viewers = models.IntegerField(null=True)
 
+    def __str__(self):
+        return self.livetvusername
+
 
 class DailyLeaderboard(models.Model):
     date = models.DateField(db_index=True)  # immutable

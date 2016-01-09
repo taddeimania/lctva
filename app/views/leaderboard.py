@@ -1,6 +1,7 @@
 import datetime
 
 from django.views.generic import TemplateView
+from django.utils import timezone
 
 from app.models import DailyLeaderboard
 
@@ -10,9 +11,9 @@ class LeaderBoardDailyView(TemplateView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        yesterday = datetime.date.today() + datetime.timedelta(days=-1)
+        yesterday = timezone.now().date() + datetime.timedelta(days=-1)
         leaderboard = DailyLeaderboard.objects.filter(date=yesterday)
         if leaderboard:
-            context["leaderboard_data"] = leaderboard.get()
+            context["leaderboard_data"] = leaderboard.first()
         context["yesterday"] = yesterday
         return context

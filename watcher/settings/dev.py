@@ -117,3 +117,7 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 LOGIN_REDIRECT_URL = "/live/"
+
+# Celery settings
+BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'amqp://guest:guest@localhost:5672')
+

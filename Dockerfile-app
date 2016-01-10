@@ -1,0 +1,9 @@
+FROM watcher_base
+
+EXPOSE 8000
+
+CMD gunicorn \
+    watcher.wsgi:application \
+    -c=gunicorn_config.py \
+    --pid=/tmp/gunicorn.pid
+

@@ -1,0 +1,31 @@
+FROM debian:jessie
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    LCTVADBPASS=""
+
+RUN apt-get update -qq && \
+    apt-get install -y -qq \
+        python3-pip \
+        python-psycopg2 \
+        libpq-dev \
+        python-dev && \
+        # Clean up after apt and builds
+        apt-get autoremove -y && \
+        rm -rf /tmp/* /var/tmp/* && \
+        apt-get clean -y && \
+        rm -rf /var/lib/apt/lists/*
+
+WORKDIR /var/www/lctva/current
+
+COPY gunicorn_config.py \
+     manage.py \
+     ./
+COPY requirements/ requirements/
+
+RUN pip3 install -r requirements/base.txt
+
+COPY watcher/ watcher/
+COPY app/ app/
+
+CMD tail -f /dev/null
+

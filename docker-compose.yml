@@ -1,0 +1,29 @@
+base:
+    dockerfile: Dockerfile-base
+    build: .
+
+app:
+    dockerfile: Dockerfile-app
+    build: .
+    ports:
+        - "8000:8000"
+
+celery:
+    dockerfile: Dockerfile-celery
+    build: .
+    links:
+        - rabbit
+
+celerybeat:
+    dockerfile: Dockerfile-celerybeat
+    build: .
+    links:
+        - rabbit
+
+nginx:
+    image: nginx
+
+rabbit:
+    image: rabbitmq
+
+

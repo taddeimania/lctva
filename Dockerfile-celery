@@ -1,0 +1,6 @@
+FROM watcher_base
+
+ENV CELERY_BROKER_URL amqp://guest:guest@rabbit:5672//
+ENV C_FORCE_ROOT 1
+
+CMD tail -f /dev/null

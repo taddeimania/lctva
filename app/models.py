@@ -1,5 +1,6 @@
 import datetime
 import uuid
+from statistics import stdev, mean
 
 from django.db import models
 from django.db.models.signals import post_save
@@ -55,6 +56,11 @@ class NodeManager(NodeBaseManager):
         tz = UserProfile.objects.get(livetvusername=user).tz
         return [(adjust_time(node[0], tz).strftime("%Y-%m-%d %H:%M:%S"), node[1], node[2])
                 for node in self.get_last_hour(user).values_list('timestamp', 'current_total', 'total_site_streamers')]
+
+    def find_outliers(self, nodes):
+        data_dict = dict(nodes.values_list("id", "current_total"))
+        outlier_pks = [outlier[0] for outlier in filter(lambda item: item[1] >= 80, data_dict.items())]
+        return nodes.filter(pk__in=list(outlier_pks))
 
 
 class Node(NodeAbstract):

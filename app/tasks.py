@@ -146,8 +146,14 @@ def get_today():
 @app.task
 def create_daily_leaderboard():
     yesterday = (django_timezone.now() + datetime.timedelta(days=-1)).date()
-    leaderboard = DailyLeaderboard.objects.create(date=yesterday)
     yesterday_nodes = Node.objects.filter(timestamp__contains=yesterday)
+    users = set(yesterday_nodes.values_list("livetvusername", flat=True))
+    for user in users:
+        to_clean_nodes = yesterday_nodes.filter(livetvusername=user)
+        Node.objects.find_outliers(to_clean_nodes).delete()
+
+    yesterday_nodes = Node.objects.filter(timestamp__contains=yesterday)
+    leaderboard = DailyLeaderboard.objects.create(date=yesterday)
     lb_gen = LeaderBoardGenerator(yesterday_nodes)
     leaderboard_data = lb_gen.get_data()
     for minute_leader in leaderboard_data["minutes_streamed"]:

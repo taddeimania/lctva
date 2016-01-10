@@ -74,13 +74,8 @@
     $( document ).ready(function() {
 
       var data = [];
-      var layout = {
-        yaxis: {
-          range: [0, 20],
-        }
-      };
 
-      var graphDiv = Plotly.newPlot('myDiv', data);
+      var graphDiv = Plotly.newPlot('myDiv', data, {}, {displayModeBar: false});
       var getData = function(graphDiv){
         var hideSiteViewers = $('#toggleTotalSiteViewers').is(":checked");
         $.get( "/api/graph/", function(inData) {
@@ -107,8 +102,8 @@
           }
           var graphDiv = document.getElementById('myDiv');
           graphDiv.data = data;
-          graphDiv.layout = {yaxis: { range: [0, yLimit * 1.1], autorange: false }};
           Plotly.redraw(graphDiv);
+          Plotly.relayout(graphDiv, {yaxis: { range: [0, yLimit * 1.1], autorange: false }});
           $(".current_viewers").html(inData.current_count);
           $(".max_viewer_count").html(inData.maxY);
           $(".trending").html(inData.trending);

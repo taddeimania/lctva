@@ -41,7 +41,11 @@ def adjust_time(timestamp, tz):
 
 def prepare_data_for_plot(nodes, user):
     from app.models import UserProfile
-    tz = UserProfile.objects.get(livetvusername=user).tz
+    try:
+        tz = UserProfile.objects.get(livetvusername=user).tz
+    except UserProfile.DoesNotExist:
+        tz = "America/New_York"
+
     return [(adjust_time(node[0], tz).strftime("%Y-%m-%d %H:%M:%S"), node[1])
             for node in nodes]
 

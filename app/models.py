@@ -164,3 +164,6 @@ class DailyLeaderboard(models.Model):
 
     def __str__(self):
         return self.date.strftime("%m/%d/%Y")
+
+    class Meta:
+        ordering = ["-date"]

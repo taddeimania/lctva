@@ -8,7 +8,8 @@ from app.views.account import AccountCreateView, AccountActivateView
 urlpatterns = [
     url(r'^', include('app.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^accounts/create/', AccountCreateView.as_view(), name="account_create"),
-    url(r'^accounts/verify/', AccountActivateView.as_view(), name="account_verify"),
+    # url(r'^accounts/password_change/$', password_change, {}, name="password_change"),
+    url(r'^accounts/create/$', AccountCreateView.as_view(), name="account_create"),
+    url(r'^accounts/verify/$', AccountActivateView.as_view(), name="account_verify"),
     url(r'^admin/', include(admin.site.urls)),
 ]

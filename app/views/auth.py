@@ -30,16 +30,12 @@ class AuthorizePostBackAPIView(View):
             user.save()
         except User.DoesNotExist:
             user = User.objects.create_user(livetvuser.username, '', access_code)
-            user.userprofile.livetvusername = livetvuser.username
+            user.userprofile.livetvusername = livetvuser.username.lower()
             user.userprofile.user = user
             user.userprofile.oauth_token = token
             user.userprofile.save()
 
         if user.is_superuser:
-            # user = models.OneToOneField(User, related_name="token")
-            # access_code = models.TextField()
-            # access_token = models.TextField()
-            # refresh_token = models.TextField()
             try:
                 access_token = ApiAccessToken.objects.get(user=user)
             except ApiAccessToken.DoesNotExist:

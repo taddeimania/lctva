@@ -14,7 +14,6 @@ class LiveView(TemplateView):
         context = super().get_context_data()
         livetvusername = self.request.user.userprofile.livetvusername
         last_node = Node.objects.get_all_user_nodes(livetvusername).last()
-        # 3964
         if last_node:
             if last_node.timestamp < django_timezone.now() + datetime.timedelta(minutes=-1):
                 return context

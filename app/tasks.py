@@ -12,7 +12,7 @@ import requests
 
 
 def get_verified_usernames():
-    return set(UserProfile.objects.filter(verified=True).values_list("livetvusername", flat=True))
+    return set(UserProfile.objects.all().values_list("livetvusername", flat=True))
 
 
 def get_frontpaged_streamer():

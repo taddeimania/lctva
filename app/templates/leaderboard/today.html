@@ -4,13 +4,17 @@
 {% block content %}
   <div class="card">
     <div class="card-content">
+      {% if yesterday %}
       <span class="left">
         <a href="{% url 'leaderboard_specific_day_view' yesterday %}"><i class="material-icons tiny">fast_rewind</i> Previous</a>
       </span>
+      {% endif %}
+      {% if tomorrow %}
       <span class="right">
         <a href="{% url 'leaderboard_specific_day_view' tomorrow %}">Next <i class="material-icons tiny">fast_forward</i></a>
       </span>
       <br>
+      {% endif %}
       {% if leaderboard_data %}
       <div class="card-title title center">
         Leaderboard for {{ leaderboard_data.date }}

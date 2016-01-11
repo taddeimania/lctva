@@ -14,9 +14,7 @@
         {% if request.user.id %}
           <a href="{% url 'live_view' %}" id="live-button" class="btn-large waves-effect default-primary-color">Live Dashboard</a>
         {% else %}
-          <a href="{% url 'login' %}" id="login-button" class="btn-large waves-effect default-primary-color">Login</a>
-          <br><br>
-          or <a href="{% url 'account_create' %}">Sign Up</a>
+        <a href="{% url 'authorize_api_view' %}" id="login-button" style="height: 104px;" class="btn-large waves-effect default-primary-color">Login with Livecoding.tv <br/><img src="{% static 'lctv-logo.png' %}" alt="lctv-logo"></a>
         {% endif %}
       </div>
       <br>

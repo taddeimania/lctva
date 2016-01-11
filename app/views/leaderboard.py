@@ -19,10 +19,11 @@ class LeaderBoardDailyView(TemplateView):
     def get_context_data(self):
         context = super().get_context_data()
         data = DailyLeaderboard.objects.first()
-        date = data.date
-        context["leaderboard_data"] = data
-        context["yesterday"] = date + datetime.timedelta(days=-1)
-        context["tomorrow"] = date + datetime.timedelta(days=1)
+        if data:
+            date = data.date
+            context["leaderboard_data"] = data
+            context["yesterday"] = date + datetime.timedelta(days=-1)
+            context["tomorrow"] = date + datetime.timedelta(days=1)
         return context
 
 

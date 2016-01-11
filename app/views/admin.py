@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
 from app.client import LiveCodingClient
-from app.models import Node, Friends, ApiAccessToken
+from app.models import Node, Friends
 from app.utils import daily_aggregator, unzip_data, prepare_data_for_plot
 
 
@@ -52,8 +52,8 @@ class AdminPeekDetailView(TemplateView):
         context["admin_viewing_user"] = user_slug
 
         # Won't work if someone hasn't authenticated with API. Fail gracefully?
-        try:
-            context["videos"] = [vid for generator in LiveCodingClient(user_slug).get_user_videos() for vid in generator if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
-        except ApiAccessToken.DoesNotExist:
-            pass
+        # try:
+        #     context["videos"] = [vid for generator in LiveCodingClient(user_slug).get_user_videos() for vid in generator if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
+        # except ApiAccessToken.DoesNotExist:
+        #     pass
         return context

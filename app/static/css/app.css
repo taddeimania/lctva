@@ -32,3 +32,10 @@ main {
     font-family: 'Montserrat', sans-serif;
 }
 
+.logo-link {
+    background: url(/logo-top.png) center no-repeat;
+    background-size: contain;
+    display: block;
+    height: 44px;
+    width: 39px;
+}

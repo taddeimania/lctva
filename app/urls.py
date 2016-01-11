@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from app.views.account import SetTimezoneView, NotificationListView
 from app.views.admin import AdminPeekListView, AdminPeekDetailView
 from app.views.api import GraphView, NotificationCountAPIView
-from app.views.auth import AuthorizeAPIView, AuthorizePostBackAPIView, RelinkAPIView
+from app.views.auth import AuthorizeAPIView, AuthorizePostBackAPIView
 from app.views.history import HistoryListView, HistoryDetailView, HistoryFollowersView
 from app.views.leaderboard import LeaderBoardDailyView, LeaderBoardSpecificDayView
 from app.views.live import LiveView
@@ -23,8 +23,7 @@ urlpatterns = [
     url(r'^timezone/$', login_required(SetTimezoneView.as_view()), name="timezone_view"),
     url(r'^alerts/$', login_required(NotificationListView.as_view()), name="notification_list_view"),
 
-    url(r'^authorize-api/$', login_required(AuthorizeAPIView.as_view()), name="authorize_api_view"),
-    url(r'^relink-api/$', login_required(RelinkAPIView.as_view()), name="relink_api_view"),
+    url(r'^authorize-api/$', AuthorizeAPIView.as_view(), name="authorize_api_view"),
     url(r'^authorize-api/postback/', AuthorizePostBackAPIView.as_view(), name="authorize_api_postback_view"),
 
     url(r'^api/graph/$', login_required(GraphView.as_view()), name="graph_view"),

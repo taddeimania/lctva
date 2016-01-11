@@ -81,6 +81,20 @@ class Viewers(NodeAbstract):
     pass
 
 
+class ApiAccessToken(models.Model):
+    user = models.OneToOneField(User, related_name="token")
+    access_code = models.TextField()
+    access_token = models.TextField()
+    refresh_token = models.TextField()
+
+    @property
+    def state(self):
+        return str(uuid.uuid1())
+
+    def __str__(self):
+        return "{}'s API Token".format(self.user)
+
+
 class ApiKey(models.Model):
     client_id = models.TextField()
     client_secret = models.TextField()
@@ -100,33 +114,12 @@ class ApiKey(models.Model):
         return str(uuid.uuid1())
 
 
-class ApiAccessToken(models.Model):
-    user = models.OneToOneField(User, related_name="token")
-    access_code = models.TextField()
-    access_token = models.TextField()
-    refresh_token = models.TextField()
-
-    @property
-    def state(self):
-        return str(uuid.uuid1())
-
-    def __str__(self):
-        return "{}'s API Token".format(self.user)
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     livetvusername = models.CharField(max_length=40, blank=True)
-    verified = models.BooleanField(default=False)
     frontpaged = models.BooleanField(default=False)
+    oauth_token = models.TextField()
     tz = models.CharField(max_length=100, blank=True, default="America/New_York")
-
-    @property
-    def is_authorized(self):
-        try:
-            return bool(self.user.token)
-        except ApiAccessToken.DoesNotExist:
-            return False
 
 
 @receiver(post_save, sender=User)

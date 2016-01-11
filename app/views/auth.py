@@ -1,5 +1,7 @@
 
 from django.core.urlresolvers import reverse
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.base import RedirectView
@@ -12,34 +14,41 @@ class AuthorizeAPIView(RedirectView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
-        if ApiAccessToken.objects.filter(user=self.request.user):
-            return reverse("live_view")
         return LiveCodingClient.get_redirect_url()
-
-
-class RelinkAPIView(AuthorizeAPIView):
-
-    def get_redirect_url(self, *args, **kwargs):
-        ApiAccessToken.objects.filter(user=self.request.user).delete()
-        return super().get_redirect_url(*args, **kwargs)
 
 
 class AuthorizePostBackAPIView(View):
 
     def get(self, request):
-        token = LiveCodingAuthClient(request.GET.get('code')).get_auth_token(request.user)
+        access_code = request.GET.get('code')
+        token, refresh = LiveCodingAuthClient(access_code).get_auth_token(request.user)
         livetvuser = LiveCodingClient.get_user_from_token(token)
 
-        if not request.user.id:
-            # No logged in user, either find a userprofile in the DB that matches the livetvuser
-            # and log them in, or make a new user/profile and set the livetvuser to the profile attr
-            pass
-        else:
-            user = request.user
+        try:
+            user = User.objects.get(username=livetvuser.username)
+            user.set_password(access_code)
+            user.save()
+        except User.DoesNotExist:
+            user = User.objects.create_user(livetvuser.username, '', access_code)
+            user.userprofile.livetvusername = livetvuser.username
+            user.userprofile.user = user
+            user.userprofile.oauth_token = token
+            user.userprofile.save()
+
+        if user.is_superuser:
+            # user = models.OneToOneField(User, related_name="token")
+            # access_code = models.TextField()
+            # access_token = models.TextField()
+            # refresh_token = models.TextField()
             try:
-                user.userprofile.livetvusername = livetvuser.username.lower()
-                user.userprofile.verified = True
-                user.userprofile.save()
-            except AttributeError:
-                return HttpResponseRedirect("{}?api_error={}".format(reverse("account_verify"), livetvuser.detail))
+                access_token = ApiAccessToken.objects.get(user=user)
+            except ApiAccessToken.DoesNotExist:
+                access_token = ApiAccessToken(user=user)
+            access_token.access_code = access_code
+            access_token.access_token = token
+            access_token.refresh_token = refresh
+            access_token.save()
+
+        user = authenticate(username=livetvuser.username, password=access_code)
+        login(request, user)
         return HttpResponseRedirect(reverse("live_view"))

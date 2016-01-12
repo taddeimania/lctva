@@ -57,7 +57,7 @@ def get_friend_count(username, url):
 @app.task
 def check_friends_and_total_viewers():
     url = "https://www.livecoding.tv/{}/"
-    for profile in UserProfile.objects.filter(verified=True):
+    for profile in UserProfile.objects.all():
         Friends.objects.create(
             current_total=get_friend_count(profile.livetvusername, url),
             livetvusername=profile.livetvusername

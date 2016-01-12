@@ -1,27 +1,11 @@
 
-from django.contrib.auth.forms import UserCreationForm
-from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.utils import timezone
-from django.views.generic import TemplateView, View
-from django.views.generic.edit import CreateView
+from django.views.generic import View
 from django.views.generic.list import ListView
 import pytz
 
-from app.models import UserProfile, Notification
-
-
-class AccountCreateView(CreateView):
-    form_class = UserCreationForm
-    template_name = "registration/create.html"
-
-    def get_success_url(self):
-        return reverse("login")
-
-
-class AccountActivateView(TemplateView):
-    model = UserProfile
-    template_name = "app/userprofile_form.html"
+from app.models import Notification
 
 
 class SetTimezoneView(View):

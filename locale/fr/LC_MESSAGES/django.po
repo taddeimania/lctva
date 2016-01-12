@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-11 22:35-0500\n"
+"POT-Creation-Date: 2016-01-11 22:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,15 +54,48 @@ msgid "Your Viewer History"
 msgstr ""
 
 #: app/templates/index.html:11
-#: google translate again
 msgid "Analytics Dashboard for Livecoding.tv"
 msgstr "Dashboard Analytics pour Livecoding.tv"
 
 #: app/templates/index.html:16
-#: <--- google translate
 msgid "Live Dashboard"
 msgstr "Tableau de bord en direct"
 
 #: app/templates/index.html:18
 msgid "Login with Livecoding.tv"
 msgstr "Connexion avec livecoding.tv"
+
+#: app/templates/index.html:29
+msgid "Real Time Analytics"
+msgstr ""
+
+#: app/templates/index.html:31
+msgid ""
+"After you're verified the app will automatically pick up your stream and "
+"start displaying your user counts on your dashboard (barring a few page "
+"refreshes)."
+msgstr ""
+
+#: app/templates/index.html:38
+msgid "Browse Historic Data"
+msgstr ""
+
+#: app/templates/index.html:40
+msgid ""
+"Your viewer counts are stored for further analysis. What kind of analysis? "
+"That hasn't been decided yet - but you can count on the fact that you'll be "
+"able to learn something from your viewer numbers!"
+msgstr ""
+
+#: app/templates/index.html:47
+#, fuzzy
+#| msgid "Livecoding.tv Analytics"
+msgid "Livecoding.tv API Integrated"
+msgstr "Livecoding.tv Analytique"
+
+#: app/templates/index.html:49
+msgid ""
+"You are just a few clicks away from tracking your stream. No crazy forms to "
+"fill out, don't give us permission to your first born - just authorize the "
+"app to track your stream with livecoding.tv and you're set!"
+msgstr ""

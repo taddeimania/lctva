@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-11 22:53-0500\n"
+"POT-Creation-Date: 2016-01-11 22:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,6 +47,30 @@ msgstr ""
 
 #: app/templates/about.html:22
 msgid "I'm an instructor and a developer."
+msgstr ""
+
+#: app/templates/base.html:10
+msgid "Livecoding Analytics"
+msgstr ""
+
+#: app/templates/base.html:21 app/templates/base.html.py:35
+msgid "About"
+msgstr ""
+
+#: app/templates/base.html:22
+msgid "Dashboard"
+msgstr ""
+
+#: app/templates/base.html:24
+msgid "Logout"
+msgstr ""
+
+#: app/templates/base.html:36
+msgid "Leaderboard"
+msgstr ""
+
+#: app/templates/base.html:37
+msgid "Login"
 msgstr ""
 
 #: app/templates/history/list.html:7

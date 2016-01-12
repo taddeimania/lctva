@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <html>
 
 <head>
@@ -6,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <link href='https://fonts.googleapis.com/css?family=Montserrat|Open+Sans' rel='stylesheet' type='text/css'>
-  <title>Livecoding Analytics</title>
+  <title>{% trans "Livecoding Analytics" %}</title>
   <style>
   .dropdown-content li>a, .dropdown-content li>span {
     color: black;
@@ -17,10 +18,10 @@
 </head>
 <body class="dark-primary-color">
   <ul id="profileDropdown" class="dropdown-content">
-    <li><a href="{% url 'about_view' %}">About</a></li>
-    <li><a href="{% url 'live_view' %}">Dashboard</a></li>
+    <li><a href="{% url 'about_view' %}">{% trans "About" %}</a></li>
+    <li><a href="{% url 'live_view' %}">{% trans "Dashboard" %}</a></li>
     <li class="divider"></li>
-    <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
+    <li><a href="{% url 'logout' %}?next=/">{% trans "Logout" %}</a></li>
   </ul>
   <header>
     <nav class="default-primary-color">
@@ -31,9 +32,9 @@
             {% if request.user.id %}
               <li><a class="dropdown-button" href="#!" data-activates="profileDropdown">{{ request.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
             {% else %}
-              <li><a href="{% url 'about_view' %}">About</a></li>
-              <li><a href="{% url 'leaderboard_daily_view' %}">Leaderboard</a></li>
-              <li><a href="{% url 'authorize_api_view' %}">Login</a></li>
+              <li><a href="{% url 'about_view' %}">{% trans "About" %}</a></li>
+              <li><a href="{% url 'leaderboard_daily_view' %}">{% trans "Leaderboard" %}</a></li>
+              <li><a href="{% url 'authorize_api_view' %}">{% trans "Login" %}</a></li>
             {% endif %}
           </ul>
         </div>

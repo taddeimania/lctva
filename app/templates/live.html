@@ -1,4 +1,5 @@
 {% extends 'dashboard.html' %}
+{% load i18n %}
 {% load staticfiles %}
 
 {% block content %}
@@ -10,26 +11,25 @@
           {% if max_viewer_count %}
             <ul class="collection">
               <li class="collection-item">
-                Current Viewers: <span class="current_viewers">{{ current_node.current_total }}</span>
+                {% trans "Current Viewers" %}: <span class="current_viewers">{{ current_node.current_total }}</span>
               </li>
               <li class="collection-item">
-                Max Viewers (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
+                {% trans "Max Viewers" %}: (8 min limit): <span class="max_viewer_count">{{ max_viewer_count }}</span>
               </li>
               <li class="collection-item">
-                Trending Up? <span class="trending">{{ trending }}</span>
+                {% trans "Trending Up" %}: <span class="trending">{{ trending }}</span>
               </li>
             </ul>
           </div>
           <div id="frontpaged" class="center"></div>
           <div class="container">
-            <input type="checkbox" id="toggleTotalSiteViewers" checked="checked"/>
-            <label for="toggleTotalSiteViewers">Hide Total Livecoding.tv Viewers</label>
+            <input type="checkbox" id="toggleTotalSiteViewers" />
+            <label for="toggleTotalSiteViewers">{% trans "Hide Total Livecoding.tv Viewers" %}</label>
           </div>
           <div id="myDiv"></div>
 
           {% else %}
-            <p>You don't appear to be streaming right now. If you begin streaming, give this page a refresh
-            and you should start seeing your live numbers stream in.</p>
+          <p>{% blocktrans %}You don't appear to be streaming right now. If you begin streaming, give this page a refresh and you should start seeing your live numbers stream in.{% endblocktrans %}</p>
           {% endif %}
           </div>
         </div>
@@ -56,7 +56,7 @@
             y: inData.dataY,
             type: 'scatter',
             mode: 'lines',
-            name: 'User Counts',
+            name: '{% trans "User Counts" %}',
             showLink: false
           }];
           if (hideSiteViewers){
@@ -68,7 +68,7 @@
               y: inData.siteY,
               type: 'scatter',
               mode: 'lines',
-              name: 'Livecoding.tv Total Users',
+              name: '{% trans "Livecoding.tv Total Users" %}',
               showLink: false
             });
           }
@@ -80,7 +80,7 @@
           $(".max_viewer_count").html(inData.maxY);
           $(".trending").html(inData.trending);
           if (inData.frontpaged) {
-            $("#frontpaged")[0].innerHTML = "Congrats! You're currently on the livecoding.tv front page!";
+            $("#frontpaged")[0].innerHTML = '{% trans "Congrats! You are currently on the livecoding.tv front page!" %}';
           } else {
             $("#frontpaged")[0].innerHTML = "";
           }

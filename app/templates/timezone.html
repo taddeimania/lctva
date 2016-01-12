@@ -1,23 +1,23 @@
 {% extends 'dashboard.html' %}
-{% load staticfiles %}
+{% load i18n %}
 {% load tz %}
 
 {% block content %}
   <div class="card">
     <div class="card-content">
       <div class="card-title">
-        Update Timezone
+        {% trans "Update Timezone" %}
       </div>
       {% if success %}
       <div class="card default-primary-color white-text">
         <div class="card-content">
-          Timezone set to {{ request.user.userprofile.tz }}
+          {% trans "Timezone set to:" %} {{ request.user.userprofile.tz }}
         </div>
       </div>
       {% endif %}
       <form action="" method="POST">
           {% csrf_token %}
-          <label for="timezone">Time zone:</label>
+          <label for="timezone">{% trans "Time zone" %}:</label>
           <div class="input-field">
             <select name="timezone">
                 {% for tz in timezones %}
@@ -26,7 +26,7 @@
             </select>
           </div>
           <br/>
-          <button class="btn waves-effect waves-light dark-primary-color" type="submit" name="action">Set Timezone</button>
+          <button class="btn waves-effect waves-light dark-primary-color" type="submit" name="action">{% trans "Set Timezone" %}</button>
       </form>
     </div>
   </div>

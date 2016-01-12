@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-11 22:57-0500\n"
+"POT-Creation-Date: 2016-01-11 23:28-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,10 @@ msgstr "Moi"
 msgid "I'm an instructor and a developer."
 msgstr ""
 
+#: app/templates/app/notification_list.html:20
+msgid "No Alerts to display"
+msgstr ""
+
 #: app/templates/base.html:10
 #, fuzzy
 #| msgid "Livecoding.tv Analytics"
@@ -79,8 +83,70 @@ msgstr "Tableau de bord en direct"
 msgid "Login"
 msgstr ""
 
+#: app/templates/base.html:61
+msgid ""
+"This app was built with the sole purpose of allowing streamers on livecoding."
+"tv to visualize their viewership counts over time.  I'd really like to see "
+"this kind of feature brought into livecoding.tv itself so I don't have to "
+"maintain this anymore.  So if you're one of the founders... drop me a line :)"
+msgstr ""
+
+#: app/templates/base.html:64
+msgid "Find Joel"
+msgstr ""
+
+#: app/templates/base.html:82
+msgid "*Buy me coffee"
+msgstr ""
+
+#: app/templates/history/detail.html:7
+msgid "Daily Breakdown"
+msgstr ""
+
+#: app/templates/history/detail.html:10 app/templates/history/detail.html:12
+msgid "Back to History"
+msgstr ""
+
+#: app/templates/history/detail.html:19
+#: app/templates/includes/daily_breakdown_table.html:7
+#: app/templates/leaderboard/today.html:51
+msgid "Average Viewers"
+msgstr ""
+
+#: app/templates/history/detail.html:20
+#: app/templates/includes/daily_breakdown_table.html:8
+#: app/templates/live.html:17
+msgid "Max Viewers"
+msgstr ""
+
+#: app/templates/history/detail.html:21
+#: app/templates/includes/daily_breakdown_table.html:9
+#: app/templates/leaderboard/today.html:26
+msgid "Minutes Streamed"
+msgstr ""
+
+#: app/templates/history/detail.html:36
+msgid "Title"
+msgstr ""
+
+#: app/templates/history/detail.html:37
+msgid "Duration"
+msgstr ""
+
+#: app/templates/history/detail.html:38
+msgid "Viewers Overall"
+msgstr ""
+
+#: app/templates/history/followers.html:7
+msgid "Your Followers"
+msgstr ""
+
 #: app/templates/history/list.html:7
 msgid "Your Viewer History"
+msgstr ""
+
+#: app/templates/includes/daily_breakdown_table.html:6
+msgid "Date"
 msgstr ""
 
 #: app/templates/index.html:11
@@ -128,4 +194,85 @@ msgid ""
 "You are just a few clicks away from tracking your stream. No crazy forms to "
 "fill out, don't give us permission to your first born - just authorize the "
 "app to track your stream with livecoding.tv and you're set!"
+msgstr ""
+
+#: app/templates/leaderboard/today.html:9
+msgid "Previous"
+msgstr ""
+
+#: app/templates/leaderboard/today.html:14
+msgid "Next"
+msgstr ""
+
+#: app/templates/leaderboard/today.html:20
+#, fuzzy
+#| msgid "Live Dashboard"
+msgid "Leaderboard for"
+msgstr "Tableau de bord en direct"
+
+#: app/templates/leaderboard/today.html:31
+msgid "Minutes"
+msgstr ""
+
+#: app/templates/leaderboard/today.html:32
+#: app/templates/leaderboard/today.html:57
+msgid "Streamer"
+msgstr ""
+
+#: app/templates/leaderboard/today.html:56
+msgid "Avg Viewers"
+msgstr ""
+
+#: app/templates/leaderboard/today.html:80
+msgid "No leaderboard data for requested day"
+msgstr ""
+
+#: app/templates/live.html:14
+msgid "Current Viewers"
+msgstr ""
+
+#: app/templates/live.html:20
+msgid "Trending Up"
+msgstr ""
+
+#: app/templates/live.html:27
+#, fuzzy
+#| msgid "Login with Livecoding.tv"
+msgid "Hide Total Livecoding.tv Viewers"
+msgstr "Connexion avec livecoding.tv"
+
+#: app/templates/live.html:32
+msgid ""
+"You don't appear to be streaming right now. If you begin streaming, give "
+"this page a refresh and you should start seeing your live numbers stream in."
+msgstr ""
+
+#: app/templates/live.html:59
+msgid "User Counts"
+msgstr ""
+
+#: app/templates/live.html:71
+#, fuzzy
+#| msgid "Livecoding.tv Analytics"
+msgid "Livecoding.tv Total Users"
+msgstr "Livecoding.tv Analytique"
+
+#: app/templates/live.html:83
+msgid "Congrats! You are currently on the livecoding.tv front page!"
+msgstr ""
+
+#: app/templates/timezone.html:9
+msgid "Update Timezone"
+msgstr ""
+
+#: app/templates/timezone.html:14
+msgid "Timezone set to:"
+msgstr ""
+
+#: app/templates/timezone.html:20
+msgid "Time zone"
+msgstr ""
+
+#: app/templates/timezone.html:29
+msgid "Set Timezone"
 msgstr ""

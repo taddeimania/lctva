@@ -1,35 +1,35 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load i18n %}
 
 {% block content %}
   <div class="card">
     <div class="card-content">
       {% if yesterday %}
       <span class="left">
-        <a href="{% url 'leaderboard_specific_day_view' yesterday %}"><i class="material-icons tiny">fast_rewind</i> Previous</a>
+        <a href="{% url 'leaderboard_specific_day_view' yesterday %}"><i class="material-icons tiny">fast_rewind</i> {% trans "Previous" %}</a>
       </span>
       {% endif %}
       {% if tomorrow %}
       <span class="right">
-        <a href="{% url 'leaderboard_specific_day_view' tomorrow %}">Next <i class="material-icons tiny">fast_forward</i></a>
+        <a href="{% url 'leaderboard_specific_day_view' tomorrow %}">{% trans "Next" %} <i class="material-icons tiny">fast_forward</i></a>
       </span>
       <br>
       {% endif %}
       {% if leaderboard_data %}
       <div class="card-title title center">
-        Leaderboard for {{ leaderboard_data.date }}
+        {% trans "Leaderboard for" %} {{ leaderboard_data.date }}
       </div>
 
       <div class="row">
         <div class="col s6">
           <div class="card-title">
-            Minutes Streamed:
+            {% trans "Minutes Streamed" %}:
             <table class="highlight">
               <thead>
                 <tr>
-                    <th data-field="index"> </th>
-                    <th data-field="minutes">Minutes</th>
-                    <th data-field="streamer">Streamer</th>
+                  <th data-field="index"> </th>
+                  <th data-field="minutes">{% trans "Minutes" %}</th>
+                  <th data-field="streamer">{% trans "Streamer" %}</th>
                 </tr>
               </thead>
 
@@ -48,13 +48,13 @@
         </div>
         <div class="col s6">
           <div class="card-title">
-            Average Viewers:
+            {% trans "Average Viewers" %}:
             <table class="highlight">
               <thead>
                 <tr>
                     <th data-field="index"> </th>
-                    <th data-field="minutes">Avg Viewers</th>
-                    <th data-field="streamer">Streamer</th>
+                    <th data-field="minutes">{% trans "Avg Viewers" %}</th>
+                    <th data-field="streamer">{% trans "Streamer" %}</th>
                 </tr>
               </thead>
 
@@ -77,7 +77,7 @@
       </div>
       {% else %}
       <div class="card-title title center">
-        No leaderboard data for requested day
+        {% trans "No leaderboard data for requested day" %}
       </div>
       {% endif %}
     </div>

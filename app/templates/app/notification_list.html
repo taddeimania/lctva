@@ -1,4 +1,5 @@
 {% extends 'dashboard.html' %}
+{% load i18n %}
 
 {% block content %}
   {% if object_list %}
@@ -7,7 +8,6 @@
           <div class="card-content">
             <span class="card-title">{{ notification.title }}</span>
             <p>
-
             <small>{{ notification.timestamp|date:"D d M Y - h:m:s" }} - @taddeimania ({{ notification.timestamp|timesince:current_time }} ago)</small><br/><br/>
             {{ notification.body }}
             </p>
@@ -17,10 +17,7 @@
   {% else %}
     <div class="card">
       <div class="card-content">
-        <span class="card-title">No Alerts to display</span>
-        <p>
-        It may be, it may be bad - but there is nothing to report.
-        </p>
+        <span class="card-title">{% trans "No Alerts to display" %}</span>
       </div>
     </div>
   {% endif %}

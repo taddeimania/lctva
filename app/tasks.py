@@ -1,9 +1,8 @@
 import datetime
-from statistics import mean
 
 from app.client import LiveCodingClient
-from app.models import Node, UserProfile, Friends, Viewers, ApiKey, Leader, DailyLeaderboard
-from app.utils import clean_usernames, unzip_data, LeaderBoardGenerator
+from app.models import Node, UserProfile, Friends, ApiKey, Leader, DailyLeaderboard
+from app.utils import LeaderBoardGenerator
 from watcher.celery import app
 
 from bs4 import BeautifulSoup

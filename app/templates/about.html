@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="card">
@@ -10,25 +11,15 @@
     <br>
     <hr/>
     <div class="card-title title">
-      Livecoding.tv Analytics
+      {% trans "Livecoding.tv Analytics"  %}
     </div>
-    <p>Simply put, this site was created to fill a void that was created by
-    curiosity.  I was interested in not just how I was doing at the moment I
-    was streaming, but how I had been doing over time - and the tools around
-    this kind of information were not in place at livecoding.tv.  So I got to
-    work and created a quick prototype version of this site and realized that
-    by capturing the amount of data that I was, the streamers could see their
-    data in many ways. I decided to become serious and actually build something
-    that users can signup for, integrate with their channel, and utilize.</p>
-    <br>
-    <p>I hope you enjoy using this site and if you have any ideas or what to
-    contribute, please drop me a line. If you REALLY like using the site,
-    please donate a few bucks with the "Donate" button below.</p>
+    <p>{% blocktrans %}Simply put, this site was created to fill a void that was created by curiosity.  I was interested in not just how I was doing at the moment I was streaming, but how I had been doing over time - and the tools around this kind of information were not in place at livecoding.tv.  So I got to work and created a quick prototype version of this site and realized that by capturing the amount of data that I was, the streamers could see their data in many ways. I decided to become serious and actually build something that users can signup for, integrate with their channel, and utilize.{% endblocktrans %}</p> <br>
+    <p>{% blocktrans %}I hope you enjoy using this site and if you have any ideas or what to contribute, please drop me a line. If you REALLY like using the site, please donate a few bucks with the "Donate" button below.{% endblocktrans %}</p>
     <br>
     <div class="card-title title">
-      Me
+      {% trans "Me" %}
     </div>
-    <p>I'm an instructor and a developer.</p>
+    <p>{% trans "I'm an instructor and a developer." %}</p>
   </div>
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 
 {% block content %}
   <div class="card">
@@ -7,14 +8,14 @@
       <br><br>
       <h1 class="header center title">LCTVA</h1>
       <div class="row center">
-        <h5 class="header col s12 light">Analytics Dashboard for Livecoding.tv</h5>
+        <h5 class="header col s12 light">{% trans "Analytics Dashboard for Livecoding.tv" %}</h5>
       </div>
       <br>
       <div class="row center">
         {% if request.user.id %}
-          <a href="{% url 'live_view' %}" id="live-button" class="btn-large waves-effect default-primary-color">Live Dashboard</a>
+        <a href="{% url 'live_view' %}" id="live-button" class="btn-large waves-effect default-primary-color">{% trans "Live Dashboard" %}</a>
         {% else %}
-        <a href="{% url 'authorize_api_view' %}" id="login-button" style="height: 104px;" class="btn-large waves-effect default-primary-color">Login with Livecoding.tv <br/><img src="{% static 'lctv-logo.png' %}" alt="lctv-logo"></a>
+        <a href="{% url 'authorize_api_view' %}" id="login-button" style="height: 104px;" class="btn-large waves-effect default-primary-color">{% trans "Login with Livecoding.tv" %} <br/><img src="{% static 'lctv-logo.png' %}" alt="lctv-logo"></a>
         {% endif %}
       </div>
       <br>
@@ -25,10 +26,10 @@
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center primary-text-color"><i class="material-icons">flash_on</i></h2>
-            <h5 class="center">Real Time Analytics</h5>
+            <h5 class="center">{% trans "Real Time Analytics" %}</h5>
 
-            <p class="light">After you're verified the app will automatically pick up your stream and start displaying
-            your user counts on your dashboard (barring a few page refreshes).</p>
+            <p class="light">{% blocktrans %}After you're verified the app will automatically pick up your stream and start displaying
+            your user counts on your dashboard (barring a few page refreshes).{% endblocktrans %}</p>
           </div>
         </div>
 

@@ -10,3 +10,4 @@ celerybeat-schedule
 !.elasticbeanstalk/*.global.yml
 dbpass.py
 watcher/static/
+*.mo

@@ -6,6 +6,7 @@ set :django_settings_dir, 'watcher/settings'
 set :pip_requirements, 'requirements/base.txt'
 set :keep_releases, 5
 set :nginx, true
+set :compilemessages, true
 set :deploy_to, '/var/www/lctva'
 set :wsgi_file, 'watcher.wsgi'
 set :stage, :production

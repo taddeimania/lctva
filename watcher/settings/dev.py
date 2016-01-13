@@ -118,6 +118,7 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 LOGIN_REDIRECT_URL = "/live/"
+LOGIN_URL = "/authorize-api/"
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, "..", "locale")
 ]

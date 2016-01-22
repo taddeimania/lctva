@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-22 15:46-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Tadeu Caldas <tadeucaldas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -190,11 +190,11 @@ msgstr ""
 
 #: app/templates/leaderboard/today.html:9
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: app/templates/leaderboard/today.html:14
 msgid "Next"
-msgstr ""
+msgstr "Próximo"
 
 #: app/templates/leaderboard/today.html:20
 msgid "Leaderboard for"
@@ -202,7 +202,7 @@ msgstr ""
 
 #: app/templates/leaderboard/today.html:31
 msgid "Minutes"
-msgstr ""
+msgstr "Minutos"
 
 #: app/templates/leaderboard/today.html:32
 #: app/templates/leaderboard/today.html:57

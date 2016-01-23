@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-22 22:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: randombyte-developer <apps.randombyte@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,13 @@ msgid ""
 "in many ways. I decided to become serious and actually build something that "
 "users can signup for, integrate with their channel, and utilize."
 msgstr ""
+"Einfach gesagt, habe ich diese Seite nur gemacht, um meine Neugier zu stillen."
+"Ich war nicht nur daran interessiert, wieviele Zuschauer ich während meines Streams hatte, "
+"sondern auch, wie sich die Zahlen mit der Zeit entwickelten. Es gab keinerlei Tools von Livecoding.tv, "
+"die sich mit diesen Daten befassten. "
+"Also hab ich mich an die Arbeit gemacht und schnell einen Prototypen fertiggestellt. "
+"Ich habe sofort festgestellt, dass Streamer ihre Daten auf verschiedenste Art und Weise darstellen könnten. Ich habe mich dafür entschieden, "
+"dieses Projekt ernst zu nehmen und es weiterzuentwickeln, sodass es für jeden Streamer zugänglich ist."
 
 #: app/templates/about.html:17
 msgid ""
@@ -40,18 +47,20 @@ msgid ""
 "contribute, please drop me a line. If you REALLY like using the site, please "
 "donate a few bucks with the \"Donate\" button below."
 msgstr ""
+"Ich hoffe, dir gefällt diese Seite. Falls du Ideen hast oder zu dieser Seite etwas beitragen kannst, schreib mich kurz an."
+"Wenn du diese Seite WIRKLICH magst, spende mir doch bitte einen kleinen Betrag mit dem \"Donate\"-Button unten."
 
 #: app/templates/about.html:20
 msgid "Me"
-msgstr ""
+msgstr "Der Entwickler"
 
 #: app/templates/about.html:22
 msgid "I'm an instructor and a developer."
-msgstr ""
+msgstr "Ich bin Lehrer und Entwickler."
 
 #: app/templates/app/notification_list.html:20
 msgid "No Alerts to display"
-msgstr ""
+msgstr "Keine Ankündigungen"
 
 #: app/templates/base.html:10
 msgid "Livecoding Analytics"
@@ -59,7 +68,7 @@ msgstr ""
 
 #: app/templates/base.html:21 app/templates/base.html.py:35
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: app/templates/base.html:22
 msgid "Dashboard"
@@ -67,15 +76,15 @@ msgstr ""
 
 #: app/templates/base.html:24 app/templates/dashboard.html.py:52
 msgid "Logout"
-msgstr ""
+msgstr "Abmelden"
 
 #: app/templates/base.html:36 app/templates/dashboard.html.py:51
 msgid "Leaderboard"
-msgstr ""
+msgstr "Rangliste"
 
 #: app/templates/base.html:37
 msgid "Login"
-msgstr ""
+msgstr "Anmelden"
 
 #: app/templates/base.html:61
 msgid ""
@@ -84,14 +93,17 @@ msgid ""
 "this kind of feature brought into livecoding.tv itself so I don't have to "
 "maintain this anymore.  So if you're one of the founders... drop me a line :)"
 msgstr ""
+"Diese Seite habe ich für den alleinigen Zweck gemacht, um Livecoding.tv-Streamern zu ermöglichen, "
+"ihre Zuschauerzahlen zu visualisieren. Ich würde gerne diese Funktion in Livecoding.tv integriert sehen, "
+"damit ich das hier nicht mehr aufrecht erhalten muss. Falls du also einer der Gründer bist... schreib mich kurz an :)"
 
 #: app/templates/base.html:64
 msgid "Find Joel"
-msgstr ""
+msgstr "Finde Joel"
 
 #: app/templates/base.html:82
 msgid "*Buy me coffee"
-msgstr ""
+msgstr "*Kauf mir einen Kaffee"
 
 #: app/templates/dashboard.html:46
 msgid "Live"
@@ -99,73 +111,73 @@ msgstr ""
 
 #: app/templates/dashboard.html:47
 msgid "History"
-msgstr ""
+msgstr "Chronik"
 
 #: app/templates/dashboard.html:48
 msgid "Followers"
-msgstr ""
+msgstr "Follower"
 
 #: app/templates/dashboard.html:49
 msgid "Change Timezone"
-msgstr ""
+msgstr "Zeitzone ändern"
 
 #: app/templates/dashboard.html:50
 msgid "Alerts"
-msgstr ""
+msgstr "Ankündigungen"
 
 #: app/templates/history/detail.html:7
 msgid "Daily Breakdown"
-msgstr ""
+msgstr "Tagesübersicht"
 
 #: app/templates/history/detail.html:10 app/templates/history/detail.html:12
 msgid "Back to History"
-msgstr ""
+msgstr "Zurück zur Chronik"
 
 #: app/templates/history/detail.html:19
 #: app/templates/includes/daily_breakdown_table.html:7
 #: app/templates/leaderboard/today.html:51
 msgid "Average Viewers"
-msgstr ""
+msgstr "Durchschnittliche Zuschauer"
 
 #: app/templates/history/detail.html:20
 #: app/templates/includes/daily_breakdown_table.html:8
 #: app/templates/live.html:17
 msgid "Max Viewers"
-msgstr ""
+msgstr "Max. Zuschauer gleichzeitig"
 
 #: app/templates/history/detail.html:21
 #: app/templates/includes/daily_breakdown_table.html:9
 #: app/templates/leaderboard/today.html:26
 msgid "Minutes Streamed"
-msgstr ""
+msgstr "Streamdauer in min"
 
 #: app/templates/history/detail.html:36
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: app/templates/history/detail.html:37
 msgid "Duration"
-msgstr ""
+msgstr "Dauer"
 
 #: app/templates/history/detail.html:38
 msgid "Viewers Overall"
-msgstr ""
+msgstr "Zuschauer insgesamt"
 
 #: app/templates/history/followers.html:7
 msgid "Your Followers"
-msgstr ""
+msgstr "Deine Follower"
 
 #: app/templates/history/list.html:7
 msgid "Your Viewer History"
-msgstr ""
+msgstr "Deine Zuschauer-Chronik"
 
 #: app/templates/includes/daily_breakdown_table.html:6
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: app/templates/index.html:11
 msgid "Analytics Dashboard for Livecoding.tv"
-msgstr ""
+msgstr "Analytics Dashboard für Livecoding.tv"
 
 #: app/templates/index.html:16
 msgid "Live Dashboard"
@@ -173,22 +185,22 @@ msgstr ""
 
 #: app/templates/index.html:18
 msgid "Login with Livecoding.tv"
-msgstr ""
+msgstr "Anmelden mit Livecoding.tv"
 
 #: app/templates/index.html:32
 msgid "Real Time Analytics"
-msgstr ""
+msgstr "Echtzeit-Analytics"
 
 #: app/templates/index.html:34
 msgid ""
 "After you're verified the app will automatically pick up your stream and "
 "start displaying your user counts on your dashboard (barring a few page "
 "refreshes)."
-msgstr ""
+msgstr "Nachdem du diese Website autorisiert hast, wird sie automatisch beginnen, die Statistiken (nach ein paar Seitenaktualisierungen) in deinem Dashboard anzuzeigen."
 
 #: app/templates/index.html:41
 msgid "Browse Historic Data"
-msgstr ""
+msgstr "Alte Daten durchstöbern"
 
 #: app/templates/index.html:43
 msgid ""
@@ -196,10 +208,13 @@ msgid ""
 "That hasn't been decided yet - but you can count on the fact that you'll be "
 "able to learn something from your viewer numbers!"
 msgstr ""
+"Deine Zuschauerdaten werden für spätere Analysen gespeichert. Aber welche Analysen? "
+"Das steht noch nicht fest - du kannst dir aber sicher sein, dass es weitere Möglichkeiten geben wird, "
+"etwas von den Daten zu lernen!"
 
 #: app/templates/index.html:50
 msgid "Livecoding.tv API Integrated"
-msgstr ""
+msgstr "Livecoding.tv API integriert"
 
 #: app/templates/index.html:52
 msgid ""
@@ -207,78 +222,80 @@ msgid ""
 "fill out, don't give us permission to your first born - just authorize the "
 "app to track your stream with livecoding.tv and you're set!"
 msgstr ""
+"Du bist nur ein paar Klicks weit weg, deine Streams zu analysieren. Keine verrückten Formulare, "
+"bei denen du dein Erstgeborenenrecht abgeben musst - einfach nur diese Seite autorisieren, deine Streams zu verfolgen und fertig!"
 
 #: app/templates/index.html:81 app/templates/live.html.py:59
 msgid "User Counts"
-msgstr ""
+msgstr "User-Anzahl"
 
 #: app/templates/leaderboard/today.html:9
 msgid "Previous"
-msgstr ""
+msgstr "Vorheriger"
 
 #: app/templates/leaderboard/today.html:14
 msgid "Next"
-msgstr ""
+msgstr "Nächster"
 
 #: app/templates/leaderboard/today.html:20
 msgid "Leaderboard for"
-msgstr ""
+msgstr "Rangliste für"
 
 #: app/templates/leaderboard/today.html:31
 msgid "Minutes"
-msgstr ""
+msgstr "Minuten"
 
 #: app/templates/leaderboard/today.html:32
 #: app/templates/leaderboard/today.html:57
 msgid "Streamer"
-msgstr ""
+msgstr "Streamer"
 
 #: app/templates/leaderboard/today.html:56
 msgid "Avg Viewers"
-msgstr ""
+msgstr "Durchschnittliche Zuschauer"
 
 #: app/templates/leaderboard/today.html:80
 msgid "No leaderboard data for requested day"
-msgstr ""
+msgstr "Keine Ranglistendaten für diesen Tag verfügbar"
 
 #: app/templates/live.html:14
 msgid "Current Viewers"
-msgstr ""
+msgstr "Aktuelle Zuschauer"
 
 #: app/templates/live.html:20
 msgid "Trending Up"
-msgstr ""
+msgstr "Im Trend"
 
 #: app/templates/live.html:27
 msgid "Hide Total Livecoding.tv Viewers"
-msgstr ""
+msgstr "Ausblenden der gesamten Livecoding.tv-Zuschauer"
 
 #: app/templates/live.html:32
 msgid ""
 "You don't appear to be streaming right now. If you begin streaming, give "
 "this page a refresh and you should start seeing your live numbers stream in."
-msgstr ""
+msgstr "Du scheinst zur Zeit nicht zu streamen. Wenn dein Stream beginnt, aktualisiere diese Seite, um deine Statistiken zu sehen."
 
 #: app/templates/live.html:71
 msgid "Livecoding.tv Total Users"
-msgstr ""
+msgstr "Livecoding.tv gesamte User"
 
 #: app/templates/live.html:83
 msgid "Congrats! You are currently on the livecoding.tv front page!"
-msgstr ""
+msgstr "Gratulation! Du bist zur Zeit auf der Livecoding.tv-Startseite!"
 
 #: app/templates/timezone.html:9
 msgid "Update Timezone"
-msgstr ""
+msgstr "Zeitzone aktualisieren"
 
 #: app/templates/timezone.html:14
 msgid "Timezone set to:"
-msgstr ""
+msgstr "Zeitzone festgelegt auf:"
 
 #: app/templates/timezone.html:20
 msgid "Time zone"
-msgstr ""
+msgstr "Zeitzone"
 
 #: app/templates/timezone.html:29
 msgid "Set Timezone"
-msgstr ""
+msgstr "Zeitzone festlegen"

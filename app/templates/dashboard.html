@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load i18n %}
 
 {% block extracss %}
   <style>
@@ -43,13 +43,13 @@
 {% block sidebar %}
   <ul id="nav-mobile" class="side-nav fixed " style="width: 200px; left: 0px;">
     <li class="logo"><a id="logo-container" href="/" class="brand-logo white-text"><i class="material-icons medium">insert_chart</i></a></li>
-    <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">videocam</i> Live</a></li>
-    <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">library_books</i> History</a></li>
-    <li class="bold"><a href="{% url 'history_followers_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">person_pin</i> Followers</a></li>
-    <li class="bold"><a href="{% url 'timezone_view' %}"><i class="tiny material-icons">query_builder</i> Change Timezone</a></li>
-    <li class="bold"><a href="{% url 'notification_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">announcement</i> Alerts <span class="badge default-primary-color white-text" id="alertSpan"></span></a></li>
-    <li class="bold"><a href="{% url 'leaderboard_daily_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">trending_up</i> Leaderboard</a></li>
-    <li class="bold"><a href="{% url 'logout' %}?next=/" class="waves-effect waves-black"><i class="tiny material-icons">replay</i> Logout</a></li>
+    <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">videocam</i> {% trans "Live" %}</a></li>
+    <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">library_books</i> {% trans "History" %}</a></li>
+    <li class="bold"><a href="{% url 'history_followers_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">person_pin</i> {% trans "Followers" %}</a></li>
+    <li class="bold"><a href="{% url 'timezone_view' %}"><i class="tiny material-icons">query_builder</i> {% trans "Change Timezone" %}</a></li>
+    <li class="bold"><a href="{% url 'notification_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">announcement</i> {% trans "Alerts" %} <span class="badge default-primary-color white-text" id="alertSpan"></span></a></li>
+    <li class="bold"><a href="{% url 'leaderboard_daily_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">trending_up</i> {% trans "Leaderboard" %}</a></li>
+    <li class="bold"><a href="{% url 'logout' %}?next=/" class="waves-effect waves-black"><i class="tiny material-icons">replay</i> {% trans "Logout" %}</a></li>
   </ul>
 {% endblock %}
 

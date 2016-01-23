@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-13 08:09-0500\n"
+"POT-Creation-Date: 2016-01-22 22:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,11 +77,11 @@ msgstr "Acerca de"
 msgid "Dashboard"
 msgstr "Panel de Control"
 
-#: app/templates/base.html:24
+#: app/templates/base.html:24 app/templates/dashboard.html.py:52
 msgid "Logout"
 msgstr "Cerrar Sesión"
 
-#: app/templates/base.html:36
+#: app/templates/base.html:36 app/templates/dashboard.html.py:51
 msgid "Leaderboard"
 msgstr "Tabla de Líderes"
 
@@ -109,6 +109,32 @@ msgstr "Encontrar a Joel"
 #: app/templates/base.html:82
 msgid "*Buy me coffee"
 msgstr "*Comprarme un café"
+
+#: app/templates/dashboard.html:46
+msgid "Live"
+msgstr ""
+
+#: app/templates/dashboard.html:47
+#, fuzzy
+#| msgid "Back to History"
+msgid "History"
+msgstr "De Regreso a la Historia"
+
+#: app/templates/dashboard.html:48
+#, fuzzy
+#| msgid "Your Followers"
+msgid "Followers"
+msgstr "Sus Seguidores"
+
+#: app/templates/dashboard.html:49
+#, fuzzy
+#| msgid "Set Timezone"
+msgid "Change Timezone"
+msgstr "Ajustar la Zona Horaria"
+
+#: app/templates/dashboard.html:50
+msgid "Alerts"
+msgstr ""
 
 #: app/templates/history/detail.html:7
 msgid "Daily Breakdown"
@@ -172,11 +198,11 @@ msgstr "Panel de Control en Vivo"
 msgid "Login with Livecoding.tv"
 msgstr "Ingresar con Livecoding.tv"
 
-#: app/templates/index.html:29
+#: app/templates/index.html:32
 msgid "Real Time Analytics"
 msgstr "Análisis en Tiempo Real"
 
-#: app/templates/index.html:31
+#: app/templates/index.html:34
 msgid ""
 "After you're verified the app will automatically pick up your stream and "
 "start displaying your user counts on your dashboard (barring a few page "
@@ -186,11 +212,11 @@ msgstr ""
 "su transmisión y empezará a mostrar en su panel de control el conteo de "
 "usuarios (salvo un par de actualizaciones de página)."
 
-#: app/templates/index.html:38
+#: app/templates/index.html:41
 msgid "Browse Historic Data"
 msgstr "Revisar Datos Históricos"
 
-#: app/templates/index.html:40
+#: app/templates/index.html:43
 msgid ""
 "Your viewer counts are stored for further analysis. What kind of analysis? "
 "That hasn't been decided yet - but you can count on the fact that you'll be "
@@ -200,11 +226,11 @@ msgstr ""
 "análisis? Eso no aun está por decidirse; pero, ¡tenga la certeza que podrá "
 "aprender algo de la cantidad de visitantes!"
 
-#: app/templates/index.html:47
+#: app/templates/index.html:50
 msgid "Livecoding.tv API Integrated"
 msgstr "API Integreada de Livecoding.tv"
 
-#: app/templates/index.html:49
+#: app/templates/index.html:52
 msgid ""
 "You are just a few clicks away from tracking your stream. No crazy forms to "
 "fill out, don't give us permission to your first born - just authorize the "
@@ -214,6 +240,10 @@ msgstr ""
 "formatos extraños que llenar; no tiene que darnos permisos sobre su "
 "primogénito, ¡solo autorice a la aplicación para hacer seguimiento de su "
 "transmisión con livecoding.tv y está listo! "
+
+#: app/templates/index.html:81 app/templates/live.html.py:59
+msgid "User Counts"
+msgstr "Conteo de Usuarios"
 
 #: app/templates/leaderboard/today.html:9
 msgid "Previous"
@@ -264,10 +294,6 @@ msgstr ""
 "Parece que no está transmitiendo en este momento. Si comienza la transmisión "
 "actualice esta página y debería empezar a ver el movimiento en tiempo real "
 "de los números de la transmisión en vivo."
-
-#: app/templates/live.html:59
-msgid "User Counts"
-msgstr "Conteo de Usuarios"
 
 #: app/templates/live.html:71
 msgid "Livecoding.tv Total Users"

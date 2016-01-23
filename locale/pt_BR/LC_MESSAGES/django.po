@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-22 15:46-0500\n"
+"POT-Creation-Date: 2016-01-22 22:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Tadeu Caldas <tadeucaldas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,11 +65,11 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: app/templates/base.html:24
+#: app/templates/base.html:24 app/templates/dashboard.html.py:52
 msgid "Logout"
 msgstr ""
 
-#: app/templates/base.html:36
+#: app/templates/base.html:36 app/templates/dashboard.html.py:51
 msgid "Leaderboard"
 msgstr ""
 
@@ -91,6 +91,26 @@ msgstr ""
 
 #: app/templates/base.html:82
 msgid "*Buy me coffee"
+msgstr ""
+
+#: app/templates/dashboard.html:46
+msgid "Live"
+msgstr ""
+
+#: app/templates/dashboard.html:47
+msgid "History"
+msgstr ""
+
+#: app/templates/dashboard.html:48
+msgid "Followers"
+msgstr ""
+
+#: app/templates/dashboard.html:49
+msgid "Change Timezone"
+msgstr ""
+
+#: app/templates/dashboard.html:50
+msgid "Alerts"
 msgstr ""
 
 #: app/templates/history/detail.html:7
@@ -155,37 +175,41 @@ msgstr ""
 msgid "Login with Livecoding.tv"
 msgstr ""
 
-#: app/templates/index.html:29
+#: app/templates/index.html:32
 msgid "Real Time Analytics"
 msgstr ""
 
-#: app/templates/index.html:31
+#: app/templates/index.html:34
 msgid ""
 "After you're verified the app will automatically pick up your stream and "
 "start displaying your user counts on your dashboard (barring a few page "
 "refreshes)."
 msgstr ""
 
-#: app/templates/index.html:38
+#: app/templates/index.html:41
 msgid "Browse Historic Data"
 msgstr ""
 
-#: app/templates/index.html:40
+#: app/templates/index.html:43
 msgid ""
 "Your viewer counts are stored for further analysis. What kind of analysis? "
 "That hasn't been decided yet - but you can count on the fact that you'll be "
 "able to learn something from your viewer numbers!"
 msgstr ""
 
-#: app/templates/index.html:47
+#: app/templates/index.html:50
 msgid "Livecoding.tv API Integrated"
 msgstr ""
 
-#: app/templates/index.html:49
+#: app/templates/index.html:52
 msgid ""
 "You are just a few clicks away from tracking your stream. No crazy forms to "
 "fill out, don't give us permission to your first born - just authorize the "
 "app to track your stream with livecoding.tv and you're set!"
+msgstr ""
+
+#: app/templates/index.html:81 app/templates/live.html.py:59
+msgid "User Counts"
 msgstr ""
 
 #: app/templates/leaderboard/today.html:9
@@ -233,10 +257,6 @@ msgstr ""
 msgid ""
 "You don't appear to be streaming right now. If you begin streaming, give "
 "this page a refresh and you should start seeing your live numbers stream in."
-msgstr ""
-
-#: app/templates/live.html:59
-msgid "User Counts"
 msgstr ""
 
 #: app/templates/live.html:71

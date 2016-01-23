@@ -56,7 +56,7 @@ msgstr "Der Entwickler"
 
 #: app/templates/about.html:22
 msgid "I'm an instructor and a developer."
-msgstr ""
+msgstr "Ich bin Lehrer und Entwickler."
 
 #: app/templates/app/notification_list.html:20
 msgid "No Alerts to display"
@@ -143,13 +143,13 @@ msgstr "Durchschnittliche Zuschauer"
 #: app/templates/includes/daily_breakdown_table.html:8
 #: app/templates/live.html:17
 msgid "Max Viewers"
-msgstr "Max. Zuschauer"
+msgstr "Max. Zuschauer gleichzeitig"
 
 #: app/templates/history/detail.html:21
 #: app/templates/includes/daily_breakdown_table.html:9
 #: app/templates/leaderboard/today.html:26
 msgid "Minutes Streamed"
-msgstr "Minuten gestreamt"
+msgstr "Streamdauer in min"
 
 #: app/templates/history/detail.html:36
 msgid "Title"
@@ -214,7 +214,7 @@ msgstr ""
 
 #: app/templates/index.html:50
 msgid "Livecoding.tv API Integrated"
-msgstr "Livecoding.tv API integeriert"
+msgstr "Livecoding.tv API integriert"
 
 #: app/templates/index.html:52
 msgid ""
@@ -274,7 +274,7 @@ msgstr "Ausblenden der gesamten Livecoding.tv-Zuschauer"
 msgid ""
 "You don't appear to be streaming right now. If you begin streaming, give "
 "this page a refresh and you should start seeing your live numbers stream in."
-msgstr "Du scheinst zur Zeit nicht zustreamen. Wenn dein Stream beginnt, aktualisiere diese Seite, um deine Statistiken zu sehen."
+msgstr "Du scheinst zur Zeit nicht zu streamen. Wenn dein Stream beginnt, aktualisiere diese Seite, um deine Statistiken zu sehen."
 
 #: app/templates/live.html:71
 msgid "Livecoding.tv Total Users"

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from app.views.account import SetTimezoneView, NotificationListView
 from app.views.admin import AdminPeekListView, AdminPeekDetailView
-from app.views.api import GraphView, NotificationCountAPIView
+from app.views.api import GraphView, NotificationCountAPIView, ViewerGraphView
 from app.views.auth import AuthorizeAPIView, AuthorizePostBackAPIView
 from app.views.history import HistoryListView, HistoryDetailView, HistoryFollowersView
 from app.views.leaderboard import LeaderBoardDailyView, LeaderBoardSpecificDayView
@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^authorize-api/$', AuthorizeAPIView.as_view(), name="authorize_api_view"),
     url(r'^authorize-api/postback/', AuthorizePostBackAPIView.as_view(), name="authorize_api_postback_view"),
 
+    url(r'^api/viewer_graph/$', ViewerGraphView.as_view(), name="viewer_graph_view"),
     url(r'^api/graph/$', login_required(GraphView.as_view()), name="graph_view"),
     url(r'^api/notifications/$', login_required(NotificationCountAPIView.as_view()), name="notification_count_api_view"),
 

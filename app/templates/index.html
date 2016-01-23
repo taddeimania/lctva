@@ -20,6 +20,9 @@
       </div>
       <br>
 
+    <div id="myDiv"></div>
+
+
     <div class="section">
 
       <div class="row">
@@ -59,4 +62,36 @@
     </div>
     </div>
   </div>
+{% endblock %}
+
+{% block script %}
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <script type="application/javascript">
+    $( document ).ready(function() {
+
+      var data = [];
+      var graphDiv = Plotly.newPlot('myDiv', data, {title: "Total Viewers on livecoding.tv (UTC)"}, {displayModeBar: false});
+      var getData = function(graphDiv){
+        $.get( "/api/viewer_graph/", function(inData) {
+          var data = [{
+            x: inData.dataX,
+            y: inData.dataY,
+            mode: 'bar',
+            name: '{% trans "User Counts" %}',
+            showLink: false
+          }];
+          var yLimit = inData.maxY;
+          var graphDiv = document.getElementById('myDiv');
+          graphDiv.data = data;
+          Plotly.redraw(graphDiv);
+          Plotly.relayout(graphDiv, {yaxis: { range: [0, yLimit * 1.1], autorange: false }});
+          setTimeout(function(){
+            getData(graphDiv);
+          }, 10000);
+        });
+      }
+      getData(graphDiv);
+    });
+  </script>
 {% endblock %}

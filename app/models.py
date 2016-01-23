@@ -37,6 +37,11 @@ class NodeBaseManager(models.Manager):
         nodes = self.get_all_user_nodes(user).values_list('timestamp', 'current_total')
         return prepare_data_for_plot(nodes, user)
 
+    def get_eight_minutes_of_total_viewers(self):
+        time_ago = django_timezone.now() - datetime.timedelta(minutes=8)
+        qs = self.filter(timestamp__gte=time_ago).order_by('timestamp').values_list('timestamp', 'total_site_streamers')
+        return sorted(set([(item[0].strftime("%Y-%m-%d %H:%M:%S"), item[1]) for item in qs]))
+
 
 class NodeAbstract(models.Model):
     livetvusername = models.CharField(max_length=40, db_index=True)

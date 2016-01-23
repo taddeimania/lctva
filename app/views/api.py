@@ -9,6 +9,18 @@ from app.utils import unzip_data
 from app.utils import trending
 
 
+class ViewerGraphView(View):
+
+    def get(self, request):
+        dataX, dataY = unzip_data(Node.objects.get_eight_minutes_of_total_viewers())
+        context = {
+            "dataX": dataX,
+            "dataY": dataY,
+            "maxY": max(dataY)
+        }
+        return HttpResponse(json.dumps(context), content_type="application/json")
+
+
 class GraphView(View):
 
     def get(self, request):

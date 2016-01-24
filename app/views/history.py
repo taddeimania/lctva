@@ -37,7 +37,7 @@ class HistoryDetailView(TemplateView):
         context["breakdown"] = daily_aggregator(day_nodes)[0]
         context["y_data"] = y_data
         context["x_data"] = x_data
-        # context["videos"] = [vid for generator in LiveCodingClient(livetvusername).get_user_videos() for vid in generator if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
+        context["videos"] = [vid for generator in LiveCodingClient(livetvusername).get_user_videos() for vid in generator if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
         context["max_y"] = max(y_data)
         return context
 

@@ -20,7 +20,7 @@ msgstr ""
 
 #: app/templates/about.html:8
 msgid "Watch me work"
-msgstr ""
+msgstr "Schau mir bei der Arbeit zu"
 
 #: app/templates/about.html:14
 msgid "Livecoding.tv Analytics"
@@ -60,7 +60,7 @@ msgstr ""
 
 #: app/templates/about.html:20
 msgid "Me"
-msgstr "Der Entwickler"
+msgstr "Über mich"
 
 #: app/templates/about.html:22
 msgid "I'm an instructor and a developer."
@@ -173,16 +173,12 @@ msgid "Viewers Overall"
 msgstr "Zuschauer insgesamt"
 
 #: app/templates/history/detail.html:72 app/templates/index.html.py:81
-#, fuzzy
-#| msgid "Max Viewers"
 msgid "Viewers"
-msgstr "Max. Zuschauer gleichzeitig"
+msgstr "Zuschauer"
 
 #: app/templates/history/detail.html:77
-#, fuzzy
-#| msgid "Average Viewers"
 msgid "Average"
-msgstr "Durchschnittliche Zuschauer"
+msgstr "Mittelwert"
 
 #: app/templates/history/followers.html:7
 msgid "Your Followers"
@@ -246,13 +242,13 @@ msgid ""
 "fill out, don't give us permission to your first born - just authorize the "
 "app to track your stream with livecoding.tv and you're set!"
 msgstr ""
-"Du bist nur ein paar Klicks weit weg, deine Streams zu analysieren. Keine "
+"Du bist nur ein paar Klicks davon entfernt, deine Streams zu analysieren. Keine "
 "verrückten Formulare, bei denen du dein Erstgeborenenrecht abgeben musst - "
 "einfach nur diese Seite autorisieren, deine Streams zu verfolgen und fertig!"
 
 #: app/templates/index.html:74
 msgid "Total Viewers on livecoding.tv (UTC)"
-msgstr ""
+msgstr "Alle Zuschauer auf Livecoding.tv (UTC)"
 
 #: app/templates/leaderboard/today.html:9
 msgid "Previous"
@@ -289,7 +285,7 @@ msgstr "Aktuelle Zuschauer"
 
 #: app/templates/live.html:17
 msgid "Max Viewers: (8 min limit)"
-msgstr ""
+msgstr "Max. Zuschauer: (8 min Limit)"
 
 #: app/templates/live.html:24
 msgid "Hide Total Livecoding.tv Viewers"

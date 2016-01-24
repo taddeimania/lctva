@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-22 22:16-0500\n"
+"POT-Creation-Date: 2016-01-23 21:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: app/templates/about.html:8
+msgid "Watch me work"
+msgstr ""
 
 #: app/templates/about.html:14
 msgid "Livecoding.tv Analytics"
@@ -152,7 +156,6 @@ msgstr "Promedio de Visitantes"
 
 #: app/templates/history/detail.html:20
 #: app/templates/includes/daily_breakdown_table.html:8
-#: app/templates/live.html:17
 msgid "Max Viewers"
 msgstr "Número Máximo de Visitantes"
 
@@ -173,6 +176,18 @@ msgstr "Duración"
 #: app/templates/history/detail.html:38
 msgid "Viewers Overall"
 msgstr "Total de Visitantes"
+
+#: app/templates/history/detail.html:72 app/templates/index.html.py:81
+#, fuzzy
+#| msgid "Max Viewers"
+msgid "Viewers"
+msgstr "Número Máximo de Visitantes"
+
+#: app/templates/history/detail.html:77
+#, fuzzy
+#| msgid "Average Viewers"
+msgid "Average"
+msgstr "Promedio de Visitantes"
 
 #: app/templates/history/followers.html:7
 msgid "Your Followers"
@@ -241,9 +256,9 @@ msgstr ""
 "primogénito, ¡solo autorice a la aplicación para hacer seguimiento de su "
 "transmisión con livecoding.tv y está listo! "
 
-#: app/templates/index.html:81 app/templates/live.html.py:59
-msgid "User Counts"
-msgstr "Conteo de Usuarios"
+#: app/templates/index.html:74
+msgid "Total Viewers on livecoding.tv (UTC)"
+msgstr ""
 
 #: app/templates/leaderboard/today.html:9
 msgid "Previous"
@@ -278,6 +293,10 @@ msgstr "No hay datos del tablero de líderes para el día solicitado"
 msgid "Current Viewers"
 msgstr "Visitantes Ahora"
 
+#: app/templates/live.html:17
+msgid "Max Viewers: (8 min limit)"
+msgstr ""
+
 #: app/templates/live.html:20
 msgid "Trending Up"
 msgstr "Tendencia en Ascenso"
@@ -294,6 +313,10 @@ msgstr ""
 "Parece que no está transmitiendo en este momento. Si comienza la transmisión "
 "actualice esta página y debería empezar a ver el movimiento en tiempo real "
 "de los números de la transmisión en vivo."
+
+#: app/templates/live.html:59
+msgid "User Counts"
+msgstr "Conteo de Usuarios"
 
 #: app/templates/live.html:71
 msgid "Livecoding.tv Total Users"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-22 22:16-0500\n"
+"POT-Creation-Date: 2016-01-23 21:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: randombyte-developer <apps.randombyte@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/templates/about.html:8
+msgid "Watch me work"
+msgstr ""
 
 #: app/templates/about.html:14
 msgid "Livecoding.tv Analytics"
@@ -33,13 +37,15 @@ msgid ""
 "in many ways. I decided to become serious and actually build something that "
 "users can signup for, integrate with their channel, and utilize."
 msgstr ""
-"Einfach gesagt, habe ich diese Seite nur gemacht, um meine Neugier zu stillen."
-"Ich war nicht nur daran interessiert, wieviele Zuschauer ich während meines Streams hatte, "
-"sondern auch, wie sich die Zahlen mit der Zeit entwickelten. Es gab keinerlei Tools von Livecoding.tv, "
-"die sich mit diesen Daten befassten. "
-"Also hab ich mich an die Arbeit gemacht und schnell einen Prototypen fertiggestellt. "
-"Ich habe sofort festgestellt, dass Streamer ihre Daten auf verschiedenste Art und Weise darstellen könnten. Ich habe mich dafür entschieden, "
-"dieses Projekt ernst zu nehmen und es weiterzuentwickeln, sodass es für jeden Streamer zugänglich ist."
+"Einfach gesagt, habe ich diese Seite nur gemacht, um meine Neugier zu "
+"stillen.Ich war nicht nur daran interessiert, wieviele Zuschauer ich während "
+"meines Streams hatte, sondern auch, wie sich die Zahlen mit der Zeit "
+"entwickelten. Es gab keinerlei Tools von Livecoding.tv, die sich mit diesen "
+"Daten befassten. Also hab ich mich an die Arbeit gemacht und schnell einen "
+"Prototypen fertiggestellt. Ich habe sofort festgestellt, dass Streamer ihre "
+"Daten auf verschiedenste Art und Weise darstellen könnten. Ich habe mich "
+"dafür entschieden, dieses Projekt ernst zu nehmen und es weiterzuentwickeln, "
+"sodass es für jeden Streamer zugänglich ist."
 
 #: app/templates/about.html:17
 msgid ""
@@ -47,8 +53,10 @@ msgid ""
 "contribute, please drop me a line. If you REALLY like using the site, please "
 "donate a few bucks with the \"Donate\" button below."
 msgstr ""
-"Ich hoffe, dir gefällt diese Seite. Falls du Ideen hast oder zu dieser Seite etwas beitragen kannst, schreib mich kurz an."
-"Wenn du diese Seite WIRKLICH magst, spende mir doch bitte einen kleinen Betrag mit dem \"Donate\"-Button unten."
+"Ich hoffe, dir gefällt diese Seite. Falls du Ideen hast oder zu dieser Seite "
+"etwas beitragen kannst, schreib mich kurz an.Wenn du diese Seite WIRKLICH "
+"magst, spende mir doch bitte einen kleinen Betrag mit dem \"Donate\"-Button "
+"unten."
 
 #: app/templates/about.html:20
 msgid "Me"
@@ -93,9 +101,11 @@ msgid ""
 "this kind of feature brought into livecoding.tv itself so I don't have to "
 "maintain this anymore.  So if you're one of the founders... drop me a line :)"
 msgstr ""
-"Diese Seite habe ich für den alleinigen Zweck gemacht, um Livecoding.tv-Streamern zu ermöglichen, "
-"ihre Zuschauerzahlen zu visualisieren. Ich würde gerne diese Funktion in Livecoding.tv integriert sehen, "
-"damit ich das hier nicht mehr aufrecht erhalten muss. Falls du also einer der Gründer bist... schreib mich kurz an :)"
+"Diese Seite habe ich für den alleinigen Zweck gemacht, um Livecoding.tv-"
+"Streamern zu ermöglichen, ihre Zuschauerzahlen zu visualisieren. Ich würde "
+"gerne diese Funktion in Livecoding.tv integriert sehen, damit ich das hier "
+"nicht mehr aufrecht erhalten muss. Falls du also einer der Gründer bist... "
+"schreib mich kurz an :)"
 
 #: app/templates/base.html:64
 msgid "Find Joel"
@@ -141,7 +151,6 @@ msgstr "Durchschnittliche Zuschauer"
 
 #: app/templates/history/detail.html:20
 #: app/templates/includes/daily_breakdown_table.html:8
-#: app/templates/live.html:17
 msgid "Max Viewers"
 msgstr "Max. Zuschauer gleichzeitig"
 
@@ -162,6 +171,18 @@ msgstr "Dauer"
 #: app/templates/history/detail.html:38
 msgid "Viewers Overall"
 msgstr "Zuschauer insgesamt"
+
+#: app/templates/history/detail.html:72 app/templates/index.html.py:81
+#, fuzzy
+#| msgid "Max Viewers"
+msgid "Viewers"
+msgstr "Max. Zuschauer gleichzeitig"
+
+#: app/templates/history/detail.html:77
+#, fuzzy
+#| msgid "Average Viewers"
+msgid "Average"
+msgstr "Durchschnittliche Zuschauer"
 
 #: app/templates/history/followers.html:7
 msgid "Your Followers"
@@ -196,7 +217,10 @@ msgid ""
 "After you're verified the app will automatically pick up your stream and "
 "start displaying your user counts on your dashboard (barring a few page "
 "refreshes)."
-msgstr "Nachdem du diese Website autorisiert hast, wird sie automatisch beginnen, die Statistiken (nach ein paar Seitenaktualisierungen) in deinem Dashboard anzuzeigen."
+msgstr ""
+"Nachdem du diese Website autorisiert hast, wird sie automatisch beginnen, "
+"die Statistiken (nach ein paar Seitenaktualisierungen) in deinem Dashboard "
+"anzuzeigen."
 
 #: app/templates/index.html:41
 msgid "Browse Historic Data"
@@ -208,9 +232,9 @@ msgid ""
 "That hasn't been decided yet - but you can count on the fact that you'll be "
 "able to learn something from your viewer numbers!"
 msgstr ""
-"Deine Zuschauerdaten werden für spätere Analysen gespeichert. Aber welche Analysen? "
-"Das steht noch nicht fest - du kannst dir aber sicher sein, dass es weitere Möglichkeiten geben wird, "
-"etwas von den Daten zu lernen!"
+"Deine Zuschauerdaten werden für spätere Analysen gespeichert. Aber welche "
+"Analysen? Das steht noch nicht fest - du kannst dir aber sicher sein, dass "
+"es weitere Möglichkeiten geben wird, etwas von den Daten zu lernen!"
 
 #: app/templates/index.html:50
 msgid "Livecoding.tv API Integrated"
@@ -222,12 +246,13 @@ msgid ""
 "fill out, don't give us permission to your first born - just authorize the "
 "app to track your stream with livecoding.tv and you're set!"
 msgstr ""
-"Du bist nur ein paar Klicks weit weg, deine Streams zu analysieren. Keine verrückten Formulare, "
-"bei denen du dein Erstgeborenenrecht abgeben musst - einfach nur diese Seite autorisieren, deine Streams zu verfolgen und fertig!"
+"Du bist nur ein paar Klicks weit weg, deine Streams zu analysieren. Keine "
+"verrückten Formulare, bei denen du dein Erstgeborenenrecht abgeben musst - "
+"einfach nur diese Seite autorisieren, deine Streams zu verfolgen und fertig!"
 
-#: app/templates/index.html:81 app/templates/live.html.py:59
-msgid "User Counts"
-msgstr "User-Anzahl"
+#: app/templates/index.html:74
+msgid "Total Viewers on livecoding.tv (UTC)"
+msgstr ""
 
 #: app/templates/leaderboard/today.html:9
 msgid "Previous"
@@ -262,6 +287,10 @@ msgstr "Keine Ranglistendaten für diesen Tag verfügbar"
 msgid "Current Viewers"
 msgstr "Aktuelle Zuschauer"
 
+#: app/templates/live.html:17
+msgid "Max Viewers: (8 min limit)"
+msgstr ""
+
 #: app/templates/live.html:20
 msgid "Trending Up"
 msgstr "Im Trend"
@@ -274,7 +303,13 @@ msgstr "Ausblenden der gesamten Livecoding.tv-Zuschauer"
 msgid ""
 "You don't appear to be streaming right now. If you begin streaming, give "
 "this page a refresh and you should start seeing your live numbers stream in."
-msgstr "Du scheinst zur Zeit nicht zu streamen. Wenn dein Stream beginnt, aktualisiere diese Seite, um deine Statistiken zu sehen."
+msgstr ""
+"Du scheinst zur Zeit nicht zu streamen. Wenn dein Stream beginnt, "
+"aktualisiere diese Seite, um deine Statistiken zu sehen."
+
+#: app/templates/live.html:59
+msgid "User Counts"
+msgstr "User-Anzahl"
 
 #: app/templates/live.html:71
 msgid "Livecoding.tv Total Users"

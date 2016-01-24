@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-22 22:16-0500\n"
+"POT-Creation-Date: 2016-01-23 21:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/templates/about.html:8
+msgid "Watch me work"
+msgstr ""
 
 #: app/templates/about.html:14
 msgid "Livecoding.tv Analytics"
@@ -135,7 +139,6 @@ msgstr ""
 
 #: app/templates/history/detail.html:20
 #: app/templates/includes/daily_breakdown_table.html:8
-#: app/templates/live.html:17
 msgid "Max Viewers"
 msgstr ""
 
@@ -155,6 +158,14 @@ msgstr ""
 
 #: app/templates/history/detail.html:38
 msgid "Viewers Overall"
+msgstr ""
+
+#: app/templates/history/detail.html:72 app/templates/index.html.py:81
+msgid "Viewers"
+msgstr ""
+
+#: app/templates/history/detail.html:77
+msgid "Average"
 msgstr ""
 
 #: app/templates/history/followers.html:7
@@ -216,8 +227,8 @@ msgid ""
 "app to track your stream with livecoding.tv and you're set!"
 msgstr ""
 
-#: app/templates/index.html:81 app/templates/live.html.py:59
-msgid "User Counts"
+#: app/templates/index.html:74
+msgid "Total Viewers on livecoding.tv (UTC)"
 msgstr ""
 
 #: app/templates/leaderboard/today.html:9
@@ -255,6 +266,10 @@ msgstr ""
 msgid "Current Viewers"
 msgstr ""
 
+#: app/templates/live.html:17
+msgid "Max Viewers: (8 min limit)"
+msgstr ""
+
 #: app/templates/live.html:20
 msgid "Trending Up"
 msgstr ""
@@ -269,6 +284,10 @@ msgstr "Connexion avec livecoding.tv"
 msgid ""
 "You don't appear to be streaming right now. If you begin streaming, give "
 "this page a refresh and you should start seeing your live numbers stream in."
+msgstr ""
+
+#: app/templates/live.html:59
+msgid "User Counts"
 msgstr ""
 
 #: app/templates/live.html:71

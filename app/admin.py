@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
 
 
-from app.models import Node, UserProfile, ApiKey, ApiAccessToken, Notification, DailyLeaderboard
+from app.models import Node, UserProfile, ApiKey, Notification, DailyLeaderboard
 
 
 @admin.register(Node)
@@ -25,6 +25,5 @@ class UserAdmin(AuthUserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(ApiKey)
-admin.site.register(ApiAccessToken)
 admin.site.register(Notification)
 admin.site.register(DailyLeaderboard)

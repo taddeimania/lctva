@@ -85,20 +85,6 @@ class Viewers(NodeAbstract):
     pass
 
 
-class ApiAccessToken(models.Model):
-    user = models.OneToOneField(User, related_name="token")
-    access_code = models.TextField()
-    access_token = models.TextField()
-    refresh_token = models.TextField()
-
-    @property
-    def state(self):
-        return str(uuid.uuid1())
-
-    def __str__(self):
-        return "{}'s API Token".format(self.user)
-
-
 class ApiKey(models.Model):
     client_id = models.TextField()
     client_secret = models.TextField()
@@ -122,7 +108,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     livetvusername = models.CharField(max_length=40, blank=True)
     frontpaged = models.BooleanField(default=False)
+    oauth_access_code = models.TextField()
     oauth_token = models.TextField()
+    oauth_refresh_token = models.TextField()
     tz = models.CharField(max_length=100, blank=True, default="America/New_York")
 
 

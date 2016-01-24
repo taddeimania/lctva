@@ -50,10 +50,4 @@ class AdminPeekDetailView(TemplateView):
         context["max_y"] = max(y_data)
         context["admin_viewing"] = True
         context["admin_viewing_user"] = user_slug
-
-        # Won't work if someone hasn't authenticated with API. Fail gracefully?
-        # try:
-        #     context["videos"] = [vid for generator in LiveCodingClient(user_slug).get_user_videos() for vid in generator if datetime.datetime.strptime(vid.creation_time, "%Y-%m-%dT%H:%M:%S.%fZ").date() == day]
-        # except ApiAccessToken.DoesNotExist:
-        #     pass
         return context

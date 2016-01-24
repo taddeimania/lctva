@@ -3,7 +3,7 @@ import requests
 from base64 import b64encode
 from collections import namedtuple
 
-from app.models import ApiKey, ApiAccessToken
+from app.models import ApiKey, UserProfile
 
 
 class LiveCodingClient:
@@ -13,14 +13,12 @@ class LiveCodingClient:
 
     def __init__(self, livetvusername):
         self.livetvusername = livetvusername
-        self.access = ApiAccessToken.objects.get(user__username=livetvusername)
+        self.access = UserProfile.objects.get(livetvusername=livetvusername)
         self.key = ApiKey.objects.get(provider="livecodingtv")
-        self.headers = self._build_headers(self.access)
+        self.headers = self._build_headers(self.access.oauth_token)
 
     @staticmethod
     def _build_headers(token):
-        if type(token) == ApiAccessToken:
-            token = token.access_token
         return {
             'authorization': "Bearer {}".format(token),
             'cache-control': "no-cache",
@@ -41,7 +39,7 @@ class LiveCodingClient:
         # if 401 (auth not provided, lets get a new token and retry?)
         if response.status_code == 401:
             self.access = LiveCodingAuthClient(
-                code=self.access.access_code, refresh=True).get_auth_token(self.access.user)[0]
+                code=self.access.oauth_access_code, refresh=True).get_auth_token(self.access.user)[0]
             headers = self._build_headers(self.access)
             response = requests.get(request_url, headers=headers)
         self.key.increment()
@@ -113,18 +111,18 @@ class LiveCodingAuthClient:
     def get_auth_token(self, user):
         payload = self.payload
         if self.refresh:
-            token = ApiAccessToken.objects.get(user=user)
+            refresh_token = user.userprofile.oauth_refresh_token
             payload_body = "grant_type={}&redirect_uri={}&client_id={}&client_secret={}"
             payload = payload_body.format(
                 "refresh_token",
                 self.key.redirect_url,
                 self.key.client_id,
                 self.key.client_secret
-            ) + "&refresh_token={}".format(token.refresh_token)
+            ) + "&refresh_token={}".format(refresh_token)
             response = requests.post(self.auth_url, data=payload, headers=self.headers).json()
-            token.access_token = response['access_token']
-            token.refresh_token = response['refresh_token']
-            token.save()
+            user.userprofile.oauth_token = response['access_token']
+            user.userprofile.oauth_refresh_token = response['refresh_token']
+            user.userprofile.save()
             return response['access_token'], response["refresh_token"]
         response = requests.post(self.auth_url, data=payload, headers=self.headers).json()
         return response['access_token'], response["refresh_token"]

@@ -1,6 +1,5 @@
 import datetime
 import uuid
-from statistics import stdev, mean
 
 from django.db import models
 from django.db.models.signals import post_save

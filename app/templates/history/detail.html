@@ -69,12 +69,12 @@
       y: {{ y_data }},
       type: 'bar',
       mode: 'lines',
-      name: 'User Count'
+      name: '{% trans "Viewers" %}'
     }, {
       x: {% autoescape off %}{{ x_data }}{% endautoescape %},
       y: meanYData,
       mode: 'lines',
-      name: "Mean"
+      name: '{% trans "Average" %}'
     }];
     var graphDiv = Plotly.newPlot('historyGraph', data, layout, {displayModeBar: false});
   });

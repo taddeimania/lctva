@@ -71,14 +71,14 @@
     $( document ).ready(function() {
 
       var data = [];
-      var graphDiv = Plotly.newPlot('myDiv', data, {title: "Total Viewers on livecoding.tv (UTC)"}, {displayModeBar: false});
+      var graphDiv = Plotly.newPlot('myDiv', data, {title: '{% trans "Total Viewers on livecoding.tv (UTC)" %}'}, {displayModeBar: false});
       var getData = function(graphDiv){
         $.get( "/api/viewer_graph/", function(inData) {
           var data = [{
             x: inData.dataX,
             y: inData.dataY,
             mode: 'bar',
-            name: '{% trans "User Counts" %}',
+            name: '{% trans "Viewers" %}',
             showLink: false
           }];
           var yLimit = inData.maxY;

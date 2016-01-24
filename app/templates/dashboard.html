@@ -4,7 +4,7 @@
 {% block extracss %}
   <style>
     header, main, footer {
-      padding-left: 200px;
+      padding-left: 240px;
     }
     @media only screen and (max-width : 992px) {
       header, main, footer {
@@ -41,7 +41,7 @@
 {% endblock %}
 
 {% block sidebar %}
-  <ul id="nav-mobile" class="side-nav fixed " style="width: 200px; left: 0px;">
+  <ul class="side-nav fixed" id="nav-mobile">
     <li class="logo"><a id="logo-container" href="/" class="brand-logo white-text"><i class="material-icons medium">insert_chart</i></a></li>
     <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">videocam</i> {% trans "Live" %}</a></li>
     <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"><i class="tiny material-icons">library_books</i> {% trans "History" %}</a></li>
@@ -53,11 +53,21 @@
   </ul>
 {% endblock %}
 
+{% block mobile_sidebar %}
+  <ul id="mobile-demo" class="side-nav">
+    <li class="bold"><a href="{% url 'live_view' %}" class="waves-effect waves-black"> {% trans "Live" %}</a></li>
+    <li class="bold"><a href="{% url 'history_list_view' %}" class="waves-effect waves-black"> {% trans "History" %}</a></li>
+    <li class="bold"><a href="{% url 'history_followers_view' %}" class="waves-effect waves-black"> {% trans "Followers" %}</a></li>
+    <li class="bold"><a href="{% url 'timezone_view' %}"> {% trans "Change Timezone" %}</a></li>
+    <li class="bold"><a href="{% url 'notification_list_view' %}" class="waves-effect waves-black"> {% trans "Alerts" %} <span class="badge default-primary-color white-text" id="alertSpan"></span></a></li>
+    <li class="bold"><a href="{% url 'leaderboard_daily_view' %}" class="waves-effect waves-black"> {% trans "Leaderboard" %}</a></li>
+    <li class="bold"><a href="{% url 'logout' %}?next=/" class="waves-effect waves-black"> {% trans "Logout" %}</a></li>
+  </ul>
+{% endblock %}
+
 {% block dashboardscript %}
   <script type="text/javascript">
     $(document).ready(function(){
-      $('.collapsible').collapsible();
-      $('.button-collapse').sideNav()
       $.getJSON("/api/notifications/", function(response) {
         if (response) {
           $("#alertSpan").text(response);

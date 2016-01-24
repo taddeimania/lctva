@@ -13,8 +13,7 @@
     color: black;
   }
   </style>
-  {% block extracss %}
-  {% endblock %}
+  {% block extracss %}{% endblock %}
 </head>
 <body class="dark-primary-color">
   <ul id="profileDropdown" class="dropdown-content">
@@ -37,11 +36,18 @@
               <li><a href="{% url 'authorize_api_view' %}">{% trans "Login" %}</a></li>
             {% endif %}
           </ul>
-        </div>
-      </div>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            {% block mobile_sidebar %}
+              <ul id="mobile-demo" class="side-nav">
+                <li><a href="{% url 'about_view' %}">{% trans "About" %}</a></li>
+                <li><a href="{% url 'leaderboard_daily_view' %}">{% trans "Leaderboard" %}</a></li>
+                <li><a href="{% url 'authorize_api_view' %}">{% trans "Login" %}</a></li>
+              </ul>
+            {% endblock %}
+            </div>
+          </div>
     </nav>
-    {% block sidebar %}
-    {% endblock %}
+    {% block sidebar %}{% endblock %}
   </header>
 
   <main>
@@ -97,8 +103,10 @@
     ga('send', 'pageview');
 
   </script>
-  <script>
-    console.log("hire me joel@theironyard.com");
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.button-collapse').sideNav()
+    });
   </script>
   {% block dashboardscript %}
   {% endblock %}

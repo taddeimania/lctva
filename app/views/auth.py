@@ -21,7 +21,10 @@ class AuthorizePostBackAPIView(View):
 
     def get(self, request):
         access_code = request.GET.get('code')
-        token, refresh = LiveCodingAuthClient(access_code).get_auth_token(request.user)
+        try:
+            token, refresh = LiveCodingAuthClient(access_code).get_auth_token(request.user)
+        except KeyError:
+            return HttpResponseRedirect(reverse("index_view"))
         livetvuser = LiveCodingClient.get_user_from_token(token)
 
         try:

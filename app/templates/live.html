@@ -16,9 +16,6 @@
               <li class="collection-item">
                 {% trans "Max Viewers: (8 min limit)" %}: <span class="max_viewer_count">{{ max_viewer_count }}</span>
               </li>
-              <li class="collection-item">
-                {% trans "Trending Up" %}: <span class="trending">{{ trending }}</span>
-              </li>
             </ul>
           </div>
           <div id="frontpaged" class="center"></div>
@@ -78,7 +75,6 @@
           Plotly.relayout(graphDiv, {yaxis: { range: [0, yLimit * 1.1], autorange: false }});
           $(".current_viewers").html(inData.current_count);
           $(".max_viewer_count").html(inData.maxY);
-          $(".trending").html(inData.trending);
           if (inData.frontpaged) {
             $("#frontpaged")[0].innerHTML = '{% trans "Congrats! You are currently on the livecoding.tv front page!" %}';
           } else {

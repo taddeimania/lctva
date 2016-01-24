@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-23 21:32-0500\n"
+"POT-Creation-Date: 2016-01-23 21:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -297,15 +297,11 @@ msgstr "Visitantes Ahora"
 msgid "Max Viewers: (8 min limit)"
 msgstr ""
 
-#: app/templates/live.html:20
-msgid "Trending Up"
-msgstr "Tendencia en Ascenso"
-
-#: app/templates/live.html:27
+#: app/templates/live.html:24
 msgid "Hide Total Livecoding.tv Viewers"
 msgstr "Ocultar el Total de Visitantes de Livecoding.tv"
 
-#: app/templates/live.html:32
+#: app/templates/live.html:29
 msgid ""
 "You don't appear to be streaming right now. If you begin streaming, give "
 "this page a refresh and you should start seeing your live numbers stream in."
@@ -314,15 +310,15 @@ msgstr ""
 "actualice esta página y debería empezar a ver el movimiento en tiempo real "
 "de los números de la transmisión en vivo."
 
-#: app/templates/live.html:59
+#: app/templates/live.html:56
 msgid "User Counts"
 msgstr "Conteo de Usuarios"
 
-#: app/templates/live.html:71
+#: app/templates/live.html:68
 msgid "Livecoding.tv Total Users"
 msgstr "Total de Usuarios de Livecoding.tv"
 
-#: app/templates/live.html:83
+#: app/templates/live.html:79
 msgid "Congrats! You are currently on the livecoding.tv front page!"
 msgstr ""
 "¡Felicitaciones! ¡Se encuentra en la página principal de livecoding.tv!"
@@ -342,3 +338,6 @@ msgstr "Zona Horaria"
 #: app/templates/timezone.html:29
 msgid "Set Timezone"
 msgstr "Ajustar la Zona Horaria"
+
+#~ msgid "Trending Up"
+#~ msgstr "Tendencia en Ascenso"

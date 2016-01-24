@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-23 21:32-0500\n"
+"POT-Creation-Date: 2016-01-23 21:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,33 +270,29 @@ msgstr ""
 msgid "Max Viewers: (8 min limit)"
 msgstr ""
 
-#: app/templates/live.html:20
-msgid "Trending Up"
-msgstr ""
-
-#: app/templates/live.html:27
+#: app/templates/live.html:24
 #, fuzzy
 #| msgid "Login with Livecoding.tv"
 msgid "Hide Total Livecoding.tv Viewers"
 msgstr "Connexion avec livecoding.tv"
 
-#: app/templates/live.html:32
+#: app/templates/live.html:29
 msgid ""
 "You don't appear to be streaming right now. If you begin streaming, give "
 "this page a refresh and you should start seeing your live numbers stream in."
 msgstr ""
 
-#: app/templates/live.html:59
+#: app/templates/live.html:56
 msgid "User Counts"
 msgstr ""
 
-#: app/templates/live.html:71
+#: app/templates/live.html:68
 #, fuzzy
 #| msgid "Livecoding.tv Analytics"
 msgid "Livecoding.tv Total Users"
 msgstr "Livecoding.tv Analytique"
 
-#: app/templates/live.html:83
+#: app/templates/live.html:79
 msgid "Congrats! You are currently on the livecoding.tv front page!"
 msgstr ""
 

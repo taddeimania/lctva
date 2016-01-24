@@ -6,7 +6,6 @@ from django.views.generic import View
 
 from app.models import Node, Notification
 from app.utils import unzip_data
-from app.utils import trending
 
 
 class ViewerGraphView(View):
@@ -30,8 +29,7 @@ class GraphView(View):
         current_count = 0
         if last_node:
             current_count = last_node.current_total
-        context = {"trending": trending(dataY),
-                   "frontpaged": request.user.userprofile.frontpaged,
+        context = {"frontpaged": request.user.userprofile.frontpaged,
                    "maxY": max(dataY),
                    "maxSiteY": max(siteY),
                    "dataX": dataX,

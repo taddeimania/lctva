@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.utils import timezone as django_timezone
 
 from app.models import Node
-from app.utils import trending, unzip_data
+from app.utils import unzip_data
 
 
 class LiveView(TemplateView):
@@ -22,9 +22,6 @@ class LiveView(TemplateView):
             if data:
                 dataX, dataY, siteY = unzip_data(data)
                 max_viewer_count = max([_[1] for _ in data])
-                trending_pattern = trending(dataY)
-
-                context["trending"] = trending_pattern
                 context["current_node"] = current_node
                 context["max_viewer_count"] = max_viewer_count
         return context

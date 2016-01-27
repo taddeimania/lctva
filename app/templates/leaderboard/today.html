@@ -34,7 +34,7 @@
               </thead>
 
               <tbody>
-                {% for leader in leaderboard_data.minutes_leaders.all %}
+                {% for leader in leaderboard_data.minutes_leaders.all|dictsortreversed:"minutes" %}
                 <tr>
                   <td>{{ forloop.counter }}.</td>
                   <td>{{ leader.minutes }}</td>

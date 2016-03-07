@@ -8,7 +8,7 @@ from app.views.auth import AuthorizeAPIView, AuthorizePostBackAPIView
 from app.views.history import HistoryListView, HistoryDetailView, HistoryFollowersView
 from app.views.leaderboard import LeaderBoardDailyView, LeaderBoardSpecificDayView
 from app.views.live import LiveView
-from app.views.public import IndexView, AboutView
+from app.views.public import IndexView, AboutView, UserOnlineView
 
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
 
     url(r'^api/viewer_graph/$', ViewerGraphView.as_view(), name="viewer_graph_view"),
     url(r'^api/graph/$', login_required(GraphView.as_view()), name="graph_view"),
+    url(r'^api/online/(?P<username>[a-z0-9-_]+)', UserOnlineView.as_view(), name="user_online_view"),
     url(r'^api/notifications/$', login_required(NotificationCountAPIView.as_view()), name="notification_count_api_view"),
 
     url(r'^a/(?P<user_slug>[a-z0-9-_]+)/$', login_required(AdminPeekListView.as_view()), name="admin_peek_list_view"),

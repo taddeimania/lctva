@@ -125,3 +125,4 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, "..", "locale")
 ]
 CORS_URLS_REGEX = r'^/api/online/.*$'
+CORS_ORIGIN_ALLOW_ALL = True

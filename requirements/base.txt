@@ -8,3 +8,4 @@ celery
 gunicorn
 psycopg2
 flower
+django-cors-headers

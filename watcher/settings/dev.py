@@ -98,9 +98,9 @@ STATIC_ROOT = BASE_DIR + '/static'
 from celery.schedules import crontab
 
 CELERYBEAT_SCHEDULE = {
-    'watch-viewers-every-5-seconds': {
+    'watch-viewers-every-30-seconds': {
         'task': 'app.tasks.watch_viewers',
-        'schedule': 5,
+        'schedule': 60,
     },
     # 'watch-viewers-every-5-seconds': {
     #     'task': 'app.tasks.legacy_watch_viewers',

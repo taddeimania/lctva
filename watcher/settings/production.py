@@ -19,7 +19,7 @@ if not prod_db_pass:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'lctva.cxs4sbhzhwlk.us-east-1.rds.amazonaws.com',
+        'HOST': 'localhost',
         'NAME': 'lctvadb',
         'USER': 'lctvauser',
         'PASSWORD': prod_db_pass

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-23 21:41-0500\n"
+"POT-Creation-Date: 2016-09-01 22:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: randombyte-developer <apps.randombyte@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,27 +74,30 @@ msgstr "Keine Ankündigungen"
 msgid "Livecoding Analytics"
 msgstr ""
 
-#: app/templates/base.html:21 app/templates/base.html.py:35
+#: app/templates/base.html:20 app/templates/base.html:34
+#: app/templates/base.html:42
 msgid "About"
 msgstr "Über"
 
-#: app/templates/base.html:22
+#: app/templates/base.html:21
 msgid "Dashboard"
 msgstr ""
 
-#: app/templates/base.html:24 app/templates/dashboard.html.py:52
+#: app/templates/base.html:23 app/templates/dashboard.html:52
+#: app/templates/dashboard.html:64
 msgid "Logout"
 msgstr "Abmelden"
 
-#: app/templates/base.html:36 app/templates/dashboard.html.py:51
+#: app/templates/base.html:35 app/templates/base.html:43
+#: app/templates/dashboard.html:51 app/templates/dashboard.html:63
 msgid "Leaderboard"
 msgstr "Rangliste"
 
-#: app/templates/base.html:37
+#: app/templates/base.html:36 app/templates/base.html:44
 msgid "Login"
 msgstr "Anmelden"
 
-#: app/templates/base.html:61
+#: app/templates/base.html:67
 msgid ""
 "This app was built with the sole purpose of allowing streamers on livecoding."
 "tv to visualize their viewership counts over time.  I'd really like to see "
@@ -107,31 +110,31 @@ msgstr ""
 "nicht mehr aufrecht erhalten muss. Falls du also einer der Gründer bist... "
 "schreib mich kurz an :)"
 
-#: app/templates/base.html:64
+#: app/templates/base.html:70
 msgid "Find Joel"
 msgstr "Finde Joel"
 
-#: app/templates/base.html:82
+#: app/templates/base.html:88
 msgid "*Buy me coffee"
 msgstr "*Kauf mir einen Kaffee"
 
-#: app/templates/dashboard.html:46
+#: app/templates/dashboard.html:46 app/templates/dashboard.html:58
 msgid "Live"
 msgstr ""
 
-#: app/templates/dashboard.html:47
+#: app/templates/dashboard.html:47 app/templates/dashboard.html:59
 msgid "History"
 msgstr "Chronik"
 
-#: app/templates/dashboard.html:48
+#: app/templates/dashboard.html:48 app/templates/dashboard.html:60
 msgid "Followers"
 msgstr "Follower"
 
-#: app/templates/dashboard.html:49
+#: app/templates/dashboard.html:49 app/templates/dashboard.html:61
 msgid "Change Timezone"
 msgstr "Zeitzone ändern"
 
-#: app/templates/dashboard.html:50
+#: app/templates/dashboard.html:50 app/templates/dashboard.html:62
 msgid "Alerts"
 msgstr "Ankündigungen"
 
@@ -172,7 +175,7 @@ msgstr "Dauer"
 msgid "Viewers Overall"
 msgstr "Zuschauer insgesamt"
 
-#: app/templates/history/detail.html:72 app/templates/index.html.py:81
+#: app/templates/history/detail.html:72 app/templates/index.html:81
 msgid "Viewers"
 msgstr "Zuschauer"
 
@@ -242,9 +245,10 @@ msgid ""
 "fill out, don't give us permission to your first born - just authorize the "
 "app to track your stream with livecoding.tv and you're set!"
 msgstr ""
-"Du bist nur ein paar Klicks davon entfernt, deine Streams zu analysieren. Keine "
-"verrückten Formulare, bei denen du dein Erstgeborenenrecht abgeben musst - "
-"einfach nur diese Seite autorisieren, deine Streams zu verfolgen und fertig!"
+"Du bist nur ein paar Klicks davon entfernt, deine Streams zu analysieren. "
+"Keine verrückten Formulare, bei denen du dein Erstgeborenenrecht abgeben "
+"musst - einfach nur diese Seite autorisieren, deine Streams zu verfolgen und "
+"fertig!"
 
 #: app/templates/index.html:74
 msgid "Total Viewers on livecoding.tv (UTC)"

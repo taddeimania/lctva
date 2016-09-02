@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-23 21:41-0500\n"
+"POT-Creation-Date: 2016-09-01 22:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,27 +73,30 @@ msgstr "No tiene Alertas que mostrar"
 msgid "Livecoding Analytics"
 msgstr "Análisis de Livecoding"
 
-#: app/templates/base.html:21 app/templates/base.html.py:35
+#: app/templates/base.html:20 app/templates/base.html:34
+#: app/templates/base.html:42
 msgid "About"
 msgstr "Acerca de"
 
-#: app/templates/base.html:22
+#: app/templates/base.html:21
 msgid "Dashboard"
 msgstr "Panel de Control"
 
-#: app/templates/base.html:24 app/templates/dashboard.html.py:52
+#: app/templates/base.html:23 app/templates/dashboard.html:52
+#: app/templates/dashboard.html:64
 msgid "Logout"
 msgstr "Cerrar Sesión"
 
-#: app/templates/base.html:36 app/templates/dashboard.html.py:51
+#: app/templates/base.html:35 app/templates/base.html:43
+#: app/templates/dashboard.html:51 app/templates/dashboard.html:63
 msgid "Leaderboard"
 msgstr "Tabla de Líderes"
 
-#: app/templates/base.html:37
+#: app/templates/base.html:36 app/templates/base.html:44
 msgid "Login"
 msgstr "Ingresar"
 
-#: app/templates/base.html:61
+#: app/templates/base.html:67
 msgid ""
 "This app was built with the sole purpose of allowing streamers on livecoding."
 "tv to visualize their viewership counts over time.  I'd really like to see "
@@ -106,37 +109,37 @@ msgstr ""
 "livecoding.tv, con lo que no tendría que continuar manteniendo esta "
 "aplicación. Así que, si usted es uno de los fundadores… escríbame : )"
 
-#: app/templates/base.html:64
+#: app/templates/base.html:70
 msgid "Find Joel"
 msgstr "Encontrar a Joel"
 
-#: app/templates/base.html:82
+#: app/templates/base.html:88
 msgid "*Buy me coffee"
 msgstr "*Comprarme un café"
 
-#: app/templates/dashboard.html:46
+#: app/templates/dashboard.html:46 app/templates/dashboard.html:58
 msgid "Live"
 msgstr ""
 
-#: app/templates/dashboard.html:47
+#: app/templates/dashboard.html:47 app/templates/dashboard.html:59
 #, fuzzy
 #| msgid "Back to History"
 msgid "History"
 msgstr "De Regreso a la Historia"
 
-#: app/templates/dashboard.html:48
+#: app/templates/dashboard.html:48 app/templates/dashboard.html:60
 #, fuzzy
 #| msgid "Your Followers"
 msgid "Followers"
 msgstr "Sus Seguidores"
 
-#: app/templates/dashboard.html:49
+#: app/templates/dashboard.html:49 app/templates/dashboard.html:61
 #, fuzzy
 #| msgid "Set Timezone"
 msgid "Change Timezone"
 msgstr "Ajustar la Zona Horaria"
 
-#: app/templates/dashboard.html:50
+#: app/templates/dashboard.html:50 app/templates/dashboard.html:62
 msgid "Alerts"
 msgstr ""
 
@@ -177,7 +180,7 @@ msgstr "Duración"
 msgid "Viewers Overall"
 msgstr "Total de Visitantes"
 
-#: app/templates/history/detail.html:72 app/templates/index.html.py:81
+#: app/templates/history/detail.html:72 app/templates/index.html:81
 #, fuzzy
 #| msgid "Max Viewers"
 msgid "Viewers"

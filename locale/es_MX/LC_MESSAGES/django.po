@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-23 21:41-0500\n"
+"POT-Creation-Date: 2016-09-01 22:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,27 +61,30 @@ msgstr ""
 msgid "Livecoding Analytics"
 msgstr ""
 
-#: app/templates/base.html:21 app/templates/base.html.py:35
+#: app/templates/base.html:20 app/templates/base.html:34
+#: app/templates/base.html:42
 msgid "About"
 msgstr ""
 
-#: app/templates/base.html:22
+#: app/templates/base.html:21
 msgid "Dashboard"
 msgstr ""
 
-#: app/templates/base.html:24 app/templates/dashboard.html.py:52
+#: app/templates/base.html:23 app/templates/dashboard.html:52
+#: app/templates/dashboard.html:64
 msgid "Logout"
 msgstr ""
 
-#: app/templates/base.html:36 app/templates/dashboard.html.py:51
+#: app/templates/base.html:35 app/templates/base.html:43
+#: app/templates/dashboard.html:51 app/templates/dashboard.html:63
 msgid "Leaderboard"
 msgstr ""
 
-#: app/templates/base.html:37
+#: app/templates/base.html:36 app/templates/base.html:44
 msgid "Login"
 msgstr ""
 
-#: app/templates/base.html:61
+#: app/templates/base.html:67
 msgid ""
 "This app was built with the sole purpose of allowing streamers on livecoding."
 "tv to visualize their viewership counts over time.  I'd really like to see "
@@ -89,31 +92,31 @@ msgid ""
 "maintain this anymore.  So if you're one of the founders... drop me a line :)"
 msgstr ""
 
-#: app/templates/base.html:64
+#: app/templates/base.html:70
 msgid "Find Joel"
 msgstr ""
 
-#: app/templates/base.html:82
+#: app/templates/base.html:88
 msgid "*Buy me coffee"
 msgstr ""
 
-#: app/templates/dashboard.html:46
+#: app/templates/dashboard.html:46 app/templates/dashboard.html:58
 msgid "Live"
 msgstr ""
 
-#: app/templates/dashboard.html:47
+#: app/templates/dashboard.html:47 app/templates/dashboard.html:59
 msgid "History"
 msgstr ""
 
-#: app/templates/dashboard.html:48
+#: app/templates/dashboard.html:48 app/templates/dashboard.html:60
 msgid "Followers"
 msgstr ""
 
-#: app/templates/dashboard.html:49
+#: app/templates/dashboard.html:49 app/templates/dashboard.html:61
 msgid "Change Timezone"
 msgstr ""
 
-#: app/templates/dashboard.html:50
+#: app/templates/dashboard.html:50 app/templates/dashboard.html:62
 msgid "Alerts"
 msgstr ""
 
@@ -154,7 +157,7 @@ msgstr ""
 msgid "Viewers Overall"
 msgstr ""
 
-#: app/templates/history/detail.html:72 app/templates/index.html.py:81
+#: app/templates/history/detail.html:72 app/templates/index.html:81
 msgid "Viewers"
 msgstr ""
 
